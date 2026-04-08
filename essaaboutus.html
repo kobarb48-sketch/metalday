@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Metal Day S.A. - Sobre Nosotros</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Montserrat', sans-serif; background: #ffffff; color: #1a1a1a; line-height: 1.6; }
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+        
+        /* ============================================
+           HEADER DESIGN (GLASS PREMIUM)
+        ============================================ */
+        .header-glass {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(74,222,128,0.2);
+            padding: 0.75rem 1rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1280px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .nav-left, .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-left a, .nav-right a {
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-left a:hover, .nav-right a:hover,
+        .nav-left a.active, .nav-right a.active {
+            color: #4ade80;
+        }
+
+        .logo-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-img:hover {
+            transform: scale(1.02);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+
+        .nav-links-mobile {
+            display: none;
+            width: 100%;
+            flex-direction: column;
+            gap: 0.5rem;
+            padding: 1rem 0;
+            order: 3;
+        }
+
+        .nav-links-mobile.active {
+            display: flex;
+        }
+
+        .nav-links-mobile a {
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 0.5rem 0;
+            transition: color 0.3s;
+        }
+
+        .nav-links-mobile a:hover,
+        .nav-links-mobile a.active {
+            color: #4ade80;
+        }
+
+        .lang-selector {
+            position: relative;
+            z-index: 1001;
+        }
+
+        .lang-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(46,125,50,0.15);
+            border: 1px solid rgba(74,222,128,0.3);
+            border-radius: 2rem;
+            padding: 0.4rem 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn:hover {
+            background: rgba(46,125,50,0.3);
+            border-color: #4ade80;
+        }
+
+        .lang-flag { font-size: 1.1rem; }
+        .lang-name { color: white; font-size: 0.8rem; font-weight: 500; }
+        .lang-arrow { color: #4ade80; font-size: 0.7rem; }
+
+        .lang-dropdown-modern {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 0.5rem;
+            background: #1a1a1a;
+            border: 1px solid rgba(74,222,128,0.3);
+            border-radius: 1rem;
+            min-width: 160px;
+            z-index: 1002;
+            display: none;
+            overflow: hidden;
+            box-shadow: 0 15px 35px -10px rgba(0,0,0,0.5);
+        }
+
+        .lang-dropdown-modern.show {
+            display: block;
+            animation: slideDown 0.25s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .lang-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.7rem 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .lang-item:last-child { border-bottom: none; }
+        .lang-item:hover { background: rgba(74,222,128,0.1); }
+        .lang-item.active { background: rgba(46,125,50,0.2); }
+        .lang-item.active .lang-item-name { color: #4ade80; }
+        .lang-item-flag { font-size: 1.2rem; }
+        .lang-item-name { color: #9ca3af; font-size: 0.85rem; font-weight: 500; }
+        .check-icon { margin-left: auto; color: #4ade80; font-size: 0.8rem; }
+
+        .whatsapp-icon {
+            width: 36px;
+            height: 36px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .whatsapp-icon i { color: white; font-size: 1.2rem; }
+        .whatsapp-icon:hover { transform: scale(1.1); }
+
+        /* ============================================
+           PRICE TICKER
+        ============================================ */
+        .ticker-premium {
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            border-top: 1px solid rgba(74,222,128,0.2);
+            border-bottom: 1px solid rgba(74,222,128,0.2);
+            padding: 0.75rem 0;
+            overflow: hidden;
+            position: fixed;
+            top: 70px;
+            left: 0;
+            right: 0;
+            z-index: 999;
+        }
+
+        .ticker-track-premium {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            animation: scrollPremium 25s linear infinite;
+            padding-left: 2rem;
+        }
+
+        .ticker-premium:hover .ticker-track-premium {
+            animation-play-state: paused;
+        }
+
+        @keyframes scrollPremium {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .ticker-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: rgba(46,125,50,0.12);
+            padding: 0.45rem 1.2rem;
+            border-radius: 2rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(74,222,128,0.15);
+        }
+
+        .ticker-chip:hover {
+            background: rgba(46,125,50,0.3);
+            border-color: rgba(74,222,128,0.4);
+            transform: translateY(-2px);
+        }
+
+        .ticker-symbol { color: #4ade80; font-weight: 800; font-size: 0.9rem; }
+        .ticker-price { color: white; font-weight: 700; font-size: 0.95rem; }
+        .ticker-change {
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.2rem 0.5rem;
+            border-radius: 1rem;
+        }
+        .ticker-change.up { color: #4ade80; background: rgba(74,222,128,0.12); }
+        .ticker-change.down { color: #f87171; background: rgba(248,113,113,0.12); }
+        .ticker-sep { color: #2e7d32; font-size: 0.4rem; opacity: 0.6; }
+
+        /* ============================================
+           MAIN CONTENT & PAGE SPECIFIC STYLES
+        ============================================ */
+        .main-content { margin-top: 110px; }
+        section { padding: 4rem 2rem; }
+        .container { max-width: 1280px; margin: 0 auto; }
+        
+        .hero { position: relative; height: 60vh; min-height: 500px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .hero-bg { position: absolute; inset: 0; z-index: 0; }
+        .hero-bg img { width: 100%; height: 100%; object-fit: cover; }
+        .hero-bg::after { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.5); }
+        .hero-content { position: relative; z-index: 10; text-align: center; color: white; max-width: 800px; padding: 0 2rem; }
+        .hero-content h1 { font-size: 3.5rem; margin-bottom: 1rem; }
+        .hero-content p { font-size: 1.25rem; }
+        
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin: 2rem 0; }
+        .stat-box { background: #f9fafb; padding: 1.5rem; border-radius: 1rem; text-align: center; transition: all 0.3s; }
+        .stat-box:hover { transform: translateY(-5px); box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1); }
+        .stat-number { font-size: 2.5rem; font-weight: 900; color: #2e7d32; }
+        .stat-label { font-size: 0.875rem; color: #6b7280; margin-top: 0.5rem; }
+        
+        .mv-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin: 3rem 0; }
+        .mv-card { padding: 2rem; border-radius: 1rem; color: white; transition: transform 0.3s; }
+        .mv-card:hover { transform: translateY(-5px); }
+        .mv-card.black { background: black; }
+        .mv-card.dark { background: #1f2937; }
+        .mv-card.darker { background: #111827; }
+        .mv-icon { width: 4rem; height: 4rem; background: rgba(255,255,255,0.15); border-radius: 1rem; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; }
+        .mv-icon i { font-size: 1.75rem; }
+        .mv-card h3 { font-size: 1.5rem; margin-bottom: 1rem; font-family: 'Playfair Display', serif; }
+        .mv-card p, .mv-card li { color: #d1d5db; line-height: 1.6; }
+        .mv-card ul { list-style: none; margin-top: 0.5rem; }
+        .mv-card li { margin-bottom: 0.5rem; }
+        
+        .admin-section { background: white; border-radius: 1.5rem; padding: 2rem; margin: 2rem 0; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); }
+        .admin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; }
+        .admin-badge { display: inline-block; background: #2e7d32; color: white; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.7rem; font-weight: 600; margin-bottom: 1rem; }
+        .admin-icons { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+        .admin-icon-card { background: #f9fafb; padding: 1.5rem; border-radius: 1rem; text-align: center; transition: all 0.3s; }
+        .admin-icon-card:hover { background: #2e7d32; color: white; transform: translateY(-5px); }
+        .admin-icon-card:hover i { color: white; }
+        .admin-icon-card i { font-size: 1.5rem; color: #2e7d32; margin-bottom: 0.5rem; transition: color 0.3s; }
+        .admin-icon-card p { font-weight: 600; margin-top: 0.5rem; }
+        
+        /* Fade Slider Styles */
+        .fade-slider {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .slider-container-fade {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            background: #1a1a1a;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            box-shadow: 0 25px 45px -12px rgba(0,0,0,0.3);
+        }
+        
+        .slide-fade {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.8s ease-in-out;
+        }
+        
+        .fade-dots {
+            position: absolute;
+            bottom: 1rem;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+            z-index: 10;
+        }
+        
+        .fade-dot {
+            width: 0.6rem;
+            height: 0.6rem;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.6);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0;
+        }
+        
+        .fade-dot:hover {
+            background: rgba(255,255,255,0.9);
+            transform: scale(1.2);
+        }
+        
+        .fade-dot.active {
+            width: 1.8rem;
+            border-radius: 0.5rem;
+            background: #2E7D32;
+        }
+
+        /* ============================================
+           FOOTER DESIGN - GLASS PREMIUM
+        ============================================ */
+        .footer-glass {
+            background: rgba(10, 10, 10, 0.95);
+            border-top: 1px solid rgba(74,222,128,0.2);
+            padding: 3rem 2rem 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .footer-container { max-width: 1280px; margin: 0 auto; }
+        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1.5fr; gap: 2rem; margin-bottom: 2rem; }
+        .footer-logo img { height: 50px; width: auto; margin-bottom: 1rem; }
+        .footer-tagline { color: #9ca3af; font-size: 0.85rem; line-height: 1.6; }
+        .footer-tagline i { color: #4ade80; margin-right: 0.5rem; }
+        .footer-links h4, .footer-contact h4 { color: white; font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem; }
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 0.6rem; }
+        .footer-links a { color: #9ca3af; text-decoration: none; font-size: 0.85rem; transition: all 0.3s; }
+        .footer-links a:hover { color: #4ade80; transform: translateX(3px); display: inline-block; }
+        .contact-item { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.8rem; color: #9ca3af; font-size: 0.85rem; }
+        .contact-item i { width: 24px; color: #4ade80; font-size: 0.9rem; }
+        .contact-item a { color: #9ca3af; text-decoration: none; }
+        .contact-item a:hover { color: #4ade80; }
+        .social-icons { display: flex; gap: 1rem; margin-top: 1rem; }
+        .social-icons a { width: 36px; height: 36px; background: rgba(255,255,255,0.05); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s; color: #9ca3af; text-decoration: none; }
+        .social-icons a:hover { background: #2e7d32; color: white; transform: translateY(-3px); }
+        .footer-bottom { text-align: center; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.05); color: #6b7280; font-size: 0.75rem; }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 55px;
+            height: 55px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 5px 20px rgba(37,211,102,0.4);
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        .whatsapp-float i { color: white; font-size: 1.8rem; }
+        .whatsapp-float:hover { transform: scale(1.1); }
+
+        /* ============================================
+           RESPONSIVE
+        ============================================ */
+        @media (max-width: 768px) {
+            .nav-left, .nav-right { display: none; }
+            .mobile-menu-btn { display: block; }
+            .nav-container { flex-wrap: wrap; }
+            .logo-wrapper { margin: 0 auto; }
+            .logo-img { height: 45px; }
+            .ticker-chip { padding: 0.3rem 0.8rem; gap: 0.4rem; }
+            .ticker-symbol { font-size: 0.75rem; }
+            .ticker-price { font-size: 0.8rem; }
+            .ticker-change { font-size: 0.6rem; }
+            .footer-grid { grid-template-columns: 1fr; text-align: center; }
+            .footer-links ul { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }
+            .footer-links li { margin-bottom: 0; }
+            .contact-item { justify-content: center; }
+            .social-icons { justify-content: center; }
+            .whatsapp-float { bottom: 1rem; right: 1rem; width: 45px; height: 45px; }
+            .whatsapp-float i { font-size: 1.4rem; }
+            .hero-content h1 { font-size: 2rem; }
+            section { padding: 2rem 1rem; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .mv-grid { grid-template-columns: 1fr; }
+            .admin-grid { grid-template-columns: 1fr; }
+            .fade-dots { bottom: 0.75rem; gap: 0.5rem; }
+            .fade-dot.active { width: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- HEADER SECTION -->
+<header class="header-glass">
+    <div class="nav-container">
+        <div class="nav-left">
+            <a href="essahome.html" data-key="nav_inicio">Inicio</a>
+            <a href="essamaterial.html" data-key="nav_materiales">Materiales</a>
+            <a href="essacatalog.html" data-key="nav_catalogo">Catálogo</a>
+        </div>
+        
+        <div class="logo-wrapper">
+            <img class="logo-img" src="images/team/logo.gif" alt="Metal Day Logo" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 200 50\'%3E%3Ctext x=\'0\' y=\'35\' font-family=\'Playfair Display\' font-size=\'28\' font-weight=\'900\' fill=\'white\'%3EMETAL DAY%3C/text%3E%3Ctext x=\'0\' y=\'48\' font-family=\'Montserrat\' font-size=\'10\' fill=\'%232e7d32\'%3ES.A.%3C/text%3E%3C/svg%3E'">
+        </div>
+        
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+        
+        <div class="nav-right">
+            <a href="essaimport.html" data-key="nav_import">Import/Export</a>
+            <a href="essaaboutus.html" class="active" data-key="nav_nosotros">Nosotros</a>
+            <a href="essacontact.html" data-key="nav_contacto">Contacto</a>
+            
+            <div class="lang-selector">
+                <div class="lang-btn" onclick="toggleLanguageDropdown(event)">
+                    <span class="lang-flag" id="selectedFlag">🇪🇸</span>
+                    <span class="lang-name" id="selectedLanguage">Español</span>
+                    <i class="fas fa-chevron-down lang-arrow"></i>
+                </div>
+                <div class="lang-dropdown-modern" id="langDropdown">
+                    <div class="lang-item active" data-lang="ES" data-flag="🇪🇸" data-name="Español" onclick="selectLanguage(this, 'ES')">
+                        <span class="lang-item-flag">🇪🇸</span>
+                        <span class="lang-item-name">Español</span>
+                        <i class="fas fa-check check-icon"></i>
+                    </div>
+                    <div class="lang-item" data-lang="CA" data-flag="🏴󠁥󠁳󠁣󠁴󠁿" data-name="Català" onclick="selectLanguage(this, 'CA')">
+                        <span class="lang-item-flag">🏴󠁥󠁳󠁣󠁴󠁿</span>
+                        <span class="lang-item-name">Català</span>
+                    </div>
+                    <div class="lang-item" data-lang="EN" data-flag="🇬🇧" data-name="English" onclick="selectLanguage(this, 'EN')">
+                        <span class="lang-item-flag">🇬🇧</span>
+                        <span class="lang-item-name">English</span>
+                    </div>
+                </div>
+            </div>
+
+            <a href="https://wa.me/34635699485" class="whatsapp-icon" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        
+        <div class="nav-links-mobile" id="mobileNav">
+            <a href="essahome.html" data-key="nav_inicio">Inicio</a>
+            <a href="essamaterial.html" data-key="nav_materiales">Materiales</a>
+            <a href="essacatalog.html" data-key="nav_catalogo">Catálogo</a>
+            <a href="essaimport.html" data-key="nav_import">Import/Export</a>
+            <a href="essaaboutus.html" class="active" data-key="nav_nosotros">Nosotros</a>
+            <a href="essacontact.html" data-key="nav_contacto">Contacto</a>
+            <div style="display:flex;align-items:center;gap:1rem;margin-top:1rem;">
+                <div class="lang-selector">
+                    <div class="lang-btn" onclick="toggleLanguageDropdown(event)">
+                        <span class="lang-flag" id="mobileSelectedFlag">🇪🇸</span>
+                        <span class="lang-name" id="mobileSelectedLanguage">Español</span>
+                        <i class="fas fa-chevron-down lang-arrow"></i>
+                    </div>
+                </div>
+                <a href="https://wa.me/34635699485" class="whatsapp-icon" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- PRICE TICKER SECTION -->
+<div class="ticker-premium">
+    <div class="ticker-track-premium" id="tickerTrack"></div>
+</div>
+
+<!-- ORIGINAL MIDDLE CONTENT - UNCHANGED -->
+<main class="main-content">
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg">
+            <img src="images/team/facility-front.jpg.jpg" alt="Metal Day Facility">
+            <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.05);"></div>
+        </div>
+        <div class="hero-content">
+            <h1 data-key="about_title">About Us</h1>
+            <p data-key="about_subtitle">Over 25 years leading metal recycling in Barcelona</p>
+        </div>
+    </section>
+
+    <!-- Warehouse Slider Section -->
+    <section style="background: #f9fafb; padding: 4rem 2rem;">
+        <div class="container">
+            <h2 style="text-align: center; font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 900; margin-bottom: 3rem;" data-key="warehouse_title">Nuestras Instalaciones</h2>
+            
+            <div class="fade-slider">
+                <div class="slider-container-fade">
+                    <img class="slide-fade active" src="images/warehouse slider/slider-1.jpg" alt="Instalaciones 1">
+                    <img class="slide-fade" src="images/warehouse slider/slider-2.jpg" alt="Instalaciones 2">
+                    <img class="slide-fade" src="images/warehouse slider/slider-3.jpg" alt="Instalaciones 3">
+                    <img class="slide-fade" src="images/warehouse slider/slider-4.jpg" alt="Instalaciones 4">
+                    <img class="slide-fade" src="images/warehouse slider/slider-5.jpg" alt="Instalaciones 5">
+                    <img class="slide-fade" src="images/warehouse slider/slider-6.jpg" alt="Instalaciones 6">
+                    <img class="slide-fade" src="images/warehouse slider/slider-7.jpg" alt="Instalaciones 7">
+                    <img class="slide-fade" src="images/warehouse slider/slider-8.jpg" alt="Instalaciones 8">
+                    <img class="slide-fade" src="images/warehouse slider/slider-9.jpg" alt="Instalaciones 9">
+                    <img class="slide-fade" src="images/warehouse slider/slider-10.jpg" alt="Instalaciones 10">
+                    <img class="slide-fade" src="images/warehouse slider/slider-11.jpg" alt="Instalaciones 11">
+                    <img class="slide-fade" src="images/warehouse slider/slider-12.jpg" alt="Instalaciones 12">
+                    <img class="slide-fade" src="images/warehouse slider/slider-13.jpg" alt="Instalaciones 13">
+                    <img class="slide-fade" src="images/warehouse slider/slider-14.jpg" alt="Instalaciones 14">
+                </div>
+                <div class="fade-dots"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Management Team Title -->
+    <div class="container">
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 900; text-align: center; margin-bottom: 3rem;" data-key="management_title">Management Team</h2>
+    </div>
+
+    <!-- CEO Section -->
+    <div class="container">
+        <div style="background: white; border-radius: 1.5rem; box-shadow: 0 20px 35px -10px rgba(0,0,0,0.1); overflow: hidden; margin-bottom: 3rem; display: flex; flex-wrap: wrap;">
+            <div style="flex: 2; padding: 2rem;">
+                <div style="display: inline-block; padding: 0.25rem 1rem; background: black; color: white; font-size: 0.875rem; font-weight: bold; border-radius: 9999px; margin-bottom: 1rem;" data-key="ceo_badge">CEO</div>
+                <h3 style="font-size: 1.875rem; font-weight: 900; margin-bottom: 1rem; font-family: 'Playfair Display', serif;">Mr. Muhammad Mir Sharif Saddiqi</h3>
+                <p style="color: #4b5563; line-height: 1.7; margin-bottom: 1rem;" data-key="ceo_desc_1">Muhammad Mir Sharif Saddiqi leads Metal Day, SA with a vision based on effort, integrity, and continuous improvement. With a solid track record in the recycling sector, he has driven the company's growth by betting on innovation, efficiency, and responsible management.</p>
+                <p style="color: #4b5563; line-height: 1.7;" data-key="ceo_desc_2">His leadership is based on values such as perseverance, transparency, and commitment to people. He firmly believes that true business success is built by generating trust and adding value to society.</p>
+            </div>
+            <div style="flex: 1; min-height: 300px;">
+                <img src="images/team/ceo.jpg" alt="CEO" style="width: 80%; height: 80%; object-fit: contain; display: block; margin: auto;">
+            </div>
+        </div>
+    </div>
+
+    <!-- Quote Section -->
+    <div class="container">
+        <div style="background: black; border-radius: 1.5rem; padding: 2rem; margin-bottom: 3rem; color: white;">
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <div style="font-size: 4rem; color: #6b7280; font-family: serif;">"</div>
+                <div style="flex: 1;">
+                    <p style="font-size: 1.25rem; font-style: italic; line-height: 1.6; margin-bottom: 1rem;" data-key="ceo_quote">I firmly believe that well-done work, perseverance, and honesty are the foundation of any solid project. Our commitment is not only business but also social: actively contributing to a more sustainable environment and leaving a positive legacy for future generations. We will continue to grow responsibly, always keeping our values as a guide.</p>
+                    <p style="font-weight: bold; color: #6b7280;">— Mr. Muhammad Mir Sharif Saddiqi, <span data-key="ceo_title">CEO</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Executive Director Section -->
+    <div class="container">
+        <div style="background: white; border-radius: 1.5rem; box-shadow: 0 20px 35px -10px rgba(0,0,0,0.1); overflow: hidden; margin-bottom: 3rem; display: flex; flex-wrap: wrap;">
+            <div style="flex: 1; min-height: 300px;">
+                <img src="images/team/executive-director.jpg" alt="Executive Director" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+            </div>
+            <div style="flex: 2; padding: 2rem;">
+                <div style="display: inline-block; padding: 0.25rem 1rem; background: #374151; color: white; font-size: 0.875rem; font-weight: bold; border-radius: 9999px; margin-bottom: 1rem;" data-key="exec_badge">Executive Director</div>
+                <h3 style="font-size: 1.875rem; font-weight: 900; margin-bottom: 1rem; font-family: 'Playfair Display', serif;">Mr. Muhammad Ali Carlos</h3>
+                <p style="color: #4b5563; line-height: 1.7; margin-bottom: 1rem;" data-key="exec_desc_1">Muhammad Ali Carlos represents the new generation at the helm of the company. He began his professional career at age 16, joining the operational team, where he acquired a deep and practical understanding of the metal recycling sector.</p>
+                <p style="color: #4b5563; line-height: 1.7; margin-bottom: 1rem;" data-key="exec_desc_2">Trained at a prestigious school in the United Kingdom, where he obtained a Higher Degree in IT, he brought a modern and technological vision to the company, integrating digital solutions that optimized internal processes.</p>
+                <p style="color: #4b5563; line-height: 1.7;" data-key="exec_desc_3">Today, he leads the company with a modern vision, oriented towards efficiency, innovation, and sustainable growth, always maintaining the human focus that characterizes the organization.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Section -->
+    <section style="background: #f9fafb;">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-box"><div class="stat-number">25+</div><div class="stat-label" data-key="stat_years">Años de Experiencia</div></div>
+                <div class="stat-box"><div class="stat-number">5,000</div><div class="stat-label" data-key="stat_facility">m² Instalaciones</div></div>
+                <div class="stat-box"><div class="stat-number">2,000+</div><div class="stat-label" data-key="stat_tons">Toneladas/Año</div></div>
+                <div class="stat-box"><div class="stat-number">15,000+</div><div class="stat-label" data-key="stat_co2">Tons CO₂ Ahorrados</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission, Vision, Values -->
+    <section>
+        <div class="container">
+            <div class="mv-grid">
+                <div class="mv-card black"><div class="mv-icon"><i class="fas fa-bullseye"></i></div><h3 data-key="mission_title">Misión</h3><p data-key="mission_desc">Metal Day S.A. tiene como objetivo principal la recuperación y la valorización máxima de todos los residuos que gestiona. Clasificamos y acondicionamos los materiales para su posterior reciclaje, dando una segunda vida a los residuos que generamos.</p></div>
+                <div class="mv-card dark"><div class="mv-icon"><i class="fas fa-eye"></i></div><h3 data-key="vision_title">Visión</h3><p data-key="vision_desc">Metal Day S.A. busca consolidarse como una empresa líder en su sector, ofreciendo un trato profesional, cordial, personalizado y eficiente a sus proveedores y clientes. Crecemos mediante contacto fluido con instituciones similares en Europa y Asia.</p></div>
+                <div class="mv-card darker"><div class="mv-icon"><i class="fas fa-award"></i></div><h3 data-key="values_title">Valores</h3><ul><li>• <strong>Integridad:</strong> Cumplir las normas y realizar negocios con ética empresarial.</li><li>• <strong>Excelencia:</strong> Profundizar el conocimiento técnico para asegurar desarrollo sustentable.</li><li>• <strong>Compromiso:</strong> Brindar respaldo a las industrias y generar valor en la sociedad.</li></ul></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Administrative Team -->
+    <section style="background: #f9fafb;">
+        <div class="container">
+            <div class="admin-section">
+                <div class="admin-grid">
+                    <div>
+                        <div class="admin-badge" data-key="admin_badge">Equipo Administrativo</div>
+                        <h3 style="font-size: 1.75rem; margin-bottom: 1rem;" data-key="admin_heading">Profesionales dedicados a la excelencia</h3>
+                        <p style="color: #4b5563; line-height: 1.7;" data-key="admin_desc">El equipo administrativo de Metal Day, S.A. desempeña un papel clave en el buen funcionamiento interno de la empresa. Su labor garantiza que cada proceso, desde la gestión documental hasta la atención a proveedores y clientes, se realice con precisión, transparencia y cercanía.</p>
+                    </div>
+                    <div class="admin-icons">
+                        <div class="admin-icon-card"><i class="fas fa-file-alt"></i><p data-key="admin_icon_1">Gestión Documental</p></div>
+                        <div class="admin-icon-card"><i class="fas fa-headset"></i><p data-key="admin_icon_2">Atención al Cliente</p></div>
+                        <div class="admin-icon-card"><i class="fas fa-chart-line"></i><p data-key="admin_icon_3">Contabilidad</p></div>
+                        <div class="admin-icon-card"><i class="fas fa-truck"></i><p data-key="admin_icon_4">Logística</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); padding: 5rem 2rem;">
+        <div class="container">
+            <div style="text-align: center; max-width: 700px; margin: 0 auto 3rem;">
+                <span style="display: inline-block; background: rgba(46,125,50,0.1); color: #2e7d32; font-size: 1.2rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; padding: 0.5rem 1rem; border-radius: 50px; margin-bottom: 1rem;" data-key="faq_badge">FAQ</span>
+                <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 900; color: #0a0a0a; margin-bottom: 1rem;" data-key="faq_heading">Preguntas Frecuentes</h2>
+                <p style="color: #64748b; font-size: 1.1rem;" data-key="faq_subtitle">Resolvemos tus dudas sobre nuestros servicios y procesos de reciclaje</p>
+            </div>
+
+            <div style="max-width: 900px; margin: 0 auto;">
+                <div class="faq-item-simple" style="background: white; border-radius: 1rem; margin-bottom: 1rem; border: 1px solid #eef2ff; overflow: hidden;">
+                    <div class="faq-question-simple" style="padding: 1.25rem 1.5rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 700; background: white;">
+                        <span data-key="faq_q1">What does METAL DAY, S.A. do?</span>
+                        <i class="fas fa-chevron-down" style="color: #2e7d32; transition: transform 0.3s;"></i>
+                    </div>
+                    <div class="faq-answer-simple" style="padding: 0 1.5rem; max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out;">
+                        <p style="color: #64748b; line-height: 1.6; padding-bottom: 1.25rem;" data-key="faq_a1">METAL DAY, S.A. is a leading company in the recyclable waste market with over 25 years of experience. We are dedicated to buying and selling ferrous and non-ferrous metals (scrap) nationally and internationally, importing and exporting worldwide, general consulting, and clearing apartments, premises, warehouses, and factories.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item-simple" style="background: white; border-radius: 1rem; margin-bottom: 1rem; border: 1px solid #eef2ff; overflow: hidden;">
+                    <div class="faq-question-simple" style="padding: 1.25rem 1.5rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 700; background: white;">
+                        <span data-key="faq_q2">Where are they located?</span>
+                        <i class="fas fa-chevron-down" style="color: #2e7d32; transition: transform 0.3s;"></i>
+                    </div>
+                    <div class="faq-answer-simple" style="padding: 0 1.5rem; max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out;">
+                        <p style="color: #64748b; line-height: 1.6; padding-bottom: 1.25rem;" data-key="faq_a2">Our facilities are located on Carrer Cobalto in <strong>L'Hospitalet de Llobregat</strong> (Barcelona). We are only 15 minutes from the Port of Barcelona, which allows us to offer exceptional logistics advantages for imports and exports.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item-simple" style="background: white; border-radius: 1rem; margin-bottom: 1rem; border: 1px solid #eef2ff; overflow: hidden;">
+                    <div class="faq-question-simple" style="padding: 1.25rem 1.5rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 700; background: white;">
+                        <span data-key="faq_q3">How can I contact them?</span>
+                        <i class="fas fa-chevron-down" style="color: #2e7d32; transition: transform 0.3s;"></i>
+                    </div>
+                    <div class="faq-answer-simple" style="padding: 0 1.5rem; max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out;">
+                        <p style="color: #64748b; line-height: 1.6; padding-bottom: 1.25rem;" data-key="faq_a3">Monday to Saturday from 8:30am to 8:30pm, you can also visit us directly at our facilities.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item-simple" style="background: white; border-radius: 1rem; margin-bottom: 1rem; border: 1px solid #eef2ff; overflow: hidden;">
+                    <div class="faq-question-simple" style="padding: 1.25rem 1.5rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 700; background: white;">
+                        <span data-key="faq_q4">Do you sell wholesale or only retail?</span>
+                        <i class="fas fa-chevron-down" style="color: #2e7d32; transition: transform 0.3s;"></i>
+                    </div>
+                    <div class="faq-answer-simple" style="padding: 0 1.5rem; max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out;">
+                        <p style="color: #64748b; line-height: 1.6; padding-bottom: 1.25rem;" data-key="faq_a4">We work both wholesale and retail. For wholesale purchases, we export to destinations such as Pakistan, UAE, India, Turkey, and Egypt with a supply capacity of over 2,000 tons annually. For individual sellers, we offer competitive prices and immediate payment.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item-simple" style="background: white; border-radius: 1rem; margin-bottom: 1rem; border: 1px solid #eef2ff; overflow: hidden;">
+                    <div class="faq-question-simple" style="padding: 1.25rem 1.5rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 700; background: white;">
+                        <span data-key="faq_q5">Do you have a scale to weigh the materials?</span>
+                        <i class="fas fa-chevron-down" style="color: #2e7d32; transition: transform 0.3s;"></i>
+                    </div>
+                    <div class="faq-answer-simple" style="padding: 0 1.5rem; max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out;">
+                        <p style="color: #64748b; line-height: 1.6; padding-bottom: 1.25rem;" data-key="faq_a5">Yes, we have an 18-meter scale for trucks and vans up to 60 tons, and two small scales of 2 tons for individual suppliers and companies with smaller quantities. Weighing is done accurately and transparently.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item-simple" style="background: white; border-radius: 1rem; margin-bottom: 1rem; border: 1px solid #eef2ff; overflow: hidden;">
+                    <div class="faq-question-simple" style="padding: 1.25rem 1.5rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 700; background: white;">
+                        <span data-key="faq_q6">How do I get paid if I sell scrap metal?</span>
+                        <i class="fas fa-chevron-down" style="color: #2e7d32; transition: transform 0.3s;"></i>
+                    </div>
+                    <div class="faq-answer-simple" style="padding: 0 1.5rem; max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out;">
+                        <p style="color: #64748b; line-height: 1.6; padding-bottom: 1.25rem;" data-key="faq_a6">We offer multiple payment options for your convenience: cash payment for smaller amounts, bank transfer for larger amounts, and we also accept payment by bank check. Payment is made immediately once the transaction is completed and the material is verified. For companies, we also offer invoicing options with agreed payment terms.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item-simple" style="background: white; border-radius: 1rem; margin-bottom: 1rem; border: 1px solid #eef2ff; overflow: hidden;">
+                    <div class="faq-question-simple" style="padding: 1.25rem 1.5rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 700; background: white;">
+                        <span data-key="faq_q7">How long does it take them to pay?</span>
+                        <i class="fas fa-chevron-down" style="color: #2e7d32; transition: transform 0.3s;"></i>
+                    </div>
+                    <div class="faq-answer-simple" style="padding: 0 1.5rem; max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out;">
+                        <p style="color: #64748b; line-height: 1.6; padding-bottom: 1.25rem;" data-key="faq_a7">For cash sales, payment is immediate: cash at the time of delivery, or bank transfer that is processed the same day or the next business day. For companies with invoicing, payment terms are agreed upon in advance according to established commercial conditions.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item-simple" style="background: white; border-radius: 1rem; margin-bottom: 1rem; border: 1px solid #eef2ff; overflow: hidden;">
+                    <div class="faq-question-simple" style="padding: 1.25rem 1.5rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 700; background: white;">
+                        <span data-key="faq_q8">Do you provide loading and unloading facilities?</span>
+                        <i class="fas fa-chevron-down" style="color: #2e7d32; transition: transform 0.3s;"></i>
+                    </div>
+                    <div class="faq-answer-simple" style="padding: 0 1.5rem; max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out;">
+                        <p style="color: #64748b; line-height: 1.6; padding-bottom: 1.25rem;" data-key="faq_a8">Yes, we provide loading and unloading facilities for all customers visiting our site to buy or sell materials. Our team is available to assist in handling your goods safely and efficiently.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- FOOTER SECTION - GLASS PREMIUM -->
+<footer class="footer-glass">
+    <div class="footer-container">
+        <div class="footer-grid">
+            <div class="footer-logo">
+                <img src="images/team/logo.gif" alt="Metal Day Logo" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 200 50\'%3E%3Ctext x=\'0\' y=\'35\' font-family=\'Playfair Display\' font-size=\'28\' font-weight=\'900\' fill=\'white\'%3EMETAL DAY%3C/text%3E%3Ctext x=\'0\' y=\'48\' font-family=\'Montserrat\' font-size=\'10\' fill=\'%232e7d32\'%3ES.A.%3C/text%3E%3C/svg%3E'">
+                <p class="footer-tagline" data-key="footer_tagline_1"><i class="fas fa-leaf"></i> Cuidamos del planeta y del futuro de nuestros hijos</p>
+                <p class="footer-tagline" style="margin-top:0.5rem;" data-key="footer_tagline_2">Recicladores profesionales de metales en Barcelona</p>
+            </div>
+            <div class="footer-links">
+                <h4 data-key="footer_quick_links">Enlaces Rápidos</h4>
+                <ul>
+                    <li><a href="essahome.html">Inicio</a></li>
+                    <li><a href="essamaterial.html">Materiales</a></li>
+                    <li><a href="essacatalog.html">Catálogo</a></li>
+                    <li><a href="essaimport.html">Import/Export</a></li>
+                    <li><a href="essaaboutus.html">Nosotros</a></li>
+                    <li><a href="essacontact.html">Contacto</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4 data-key="footer_contact">Contacto</h4>
+                <div class="contact-item"><i class="fas fa-phone"></i><a href="tel:+34681925090">+34 681 92 50 90</a></div>
+                <div class="contact-item"><i class="fas fa-phone"></i><a href="tel:+34699799170">+34 699 79 91 70</a></div>
+                <div class="contact-item"><i class="fas fa-envelope"></i><a href="mailto:info@metalday.es">info@metalday.es</a></div>
+                <div class="contact-item"><i class="fas fa-map-pin"></i><span>C/ del Cobalt, 62-64, 08940 L'Hospitalet de Llobregat, Barcelona</span></div>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 METAL DAY S.A. <span data-key="footer_copyright">Todos los derechos reservados.</span></p>
+        </div>
+    </div>
+</footer>
+
+<!-- Floating WhatsApp Button -->
+<a href="https://wa.me/34635699485" class="whatsapp-float" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+<script>
+    // ============================================
+    // LANGUAGE FUNCTIONS
+    // ============================================
+    function toggleLanguageDropdown(event) {
+        event.stopPropagation();
+        const dropdown = document.getElementById('langDropdown');
+        dropdown.classList.toggle('show');
+    }
+
+    function selectLanguage(element, langCode) {
+        const flag = element.getAttribute('data-flag');
+        const name = element.getAttribute('data-name');
+        
+        document.getElementById('selectedFlag').textContent = flag;
+        document.getElementById('selectedLanguage').textContent = name;
+        document.getElementById('mobileSelectedFlag').textContent = flag;
+        document.getElementById('mobileSelectedLanguage').textContent = name;
+        
+        const allItems = document.querySelectorAll('.lang-item');
+        allItems.forEach(item => {
+            item.classList.remove('active');
+            const checkIcon = item.querySelector('.check-icon');
+            if (checkIcon) checkIcon.remove();
+        });
+        
+        element.classList.add('active');
+        const checkIcon = document.createElement('i');
+        checkIcon.className = 'fas fa-check check-icon';
+        element.appendChild(checkIcon);
+        
+        document.getElementById('langDropdown').classList.remove('show');
+        
+        localStorage.setItem('metalday_language', langCode);
+        applyLanguage(langCode);
+    }
+
+    function toggleMobileMenu() {
+        const menu = document.getElementById('mobileNav');
+        menu.classList.toggle('active');
+    }
+
+    function applyLanguage(lang) {
+        const t = translations[lang.toLowerCase()];
+        if (!t) return;
+        document.querySelectorAll('[data-key]').forEach(el => {
+            const key = el.dataset.key;
+            if (t[key]) el.textContent = t[key];
+        });
+    }
+
+    // ============================================
+    // PRICE TICKER
+    // ============================================
+    const metals = [
+        { symbol: "CU", name: "Cobre", price: "€8.50", change: "+2.3", changeType: "up" },
+        { symbol: "AL", name: "Aluminio", price: "€1.80", change: "+1.1", changeType: "up" },
+        { symbol: "BR", name: "Latón", price: "€5.20", change: "+0.8", changeType: "up" },
+        { symbol: "FE", name: "Hierro", price: "€0.28", change: "-0.5", changeType: "down" },
+        { symbol: "SS", name: "Acero Inox", price: "€1.40", change: "+1.5", changeType: "up" },
+        { symbol: "PB", name: "Plomo", price: "€1.80", change: "+0.3", changeType: "up" },
+        { symbol: "ZN", name: "Zinc", price: "€2.45", change: "+0.7", changeType: "up" },
+        { symbol: "NI", name: "Níquel", price: "€15.30", change: "-1.2", changeType: "down" },
+        { symbol: "SN", name: "Estaño", price: "€24.50", change: "+1.8", changeType: "up" },
+        { symbol: "TI", name: "Titanio", price: "€8.90", change: "+0.4", changeType: "up" }
+    ];
+
+    function createTickerItems() {
+        let itemsHtml = '';
+        const allMetals = [...metals, ...metals];
+        
+        allMetals.forEach((metal, index) => {
+            itemsHtml += `
+                <div class="ticker-chip">
+                    <span class="ticker-symbol">${metal.symbol}</span>
+                    <span class="ticker-price">${metal.price}</span>
+                    <span class="ticker-change ${metal.changeType}">${metal.change > 0 ? '+' : ''}${metal.change}%</span>
+                </div>
+            `;
+            if (index < allMetals.length - 1) {
+                itemsHtml += `<span class="ticker-sep">●</span>`;
+            }
+        });
+        
+        return itemsHtml;
+    }
+
+    // ============================================
+    // COMPLETE TRANSLATIONS OBJECT
+    // ============================================
+    const translations = {
+        es: {
+            // Navigation
+            nav_inicio: "Inicio",
+            nav_materiales: "Materiales",
+            nav_catalogo: "Catálogo",
+            nav_import: "Import/Export",
+            nav_nosotros: "Nosotros",
+            nav_contacto: "Contacto",
+            // Hero Section
+            about_title: "Sobre Nosotros",
+            about_subtitle: "Más de 25 años liderando el reciclaje de metales en Barcelona",
+            // Stats Section
+            stat_years: "Años de Experiencia",
+            stat_facility: "m² Instalaciones",
+            stat_tons: "Toneladas/Año",
+            stat_co2: "Tons CO₂ Ahorrados",
+            // Mission, Vision, Values
+            mission_title: "Misión",
+            mission_desc: "Metal Day S.A. tiene como objetivo principal la recuperación y la valorización máxima de todos los residuos que gestiona. Clasificamos y acondicionamos los materiales para su posterior reciclaje, dando una segunda vida a los residuos que generamos.",
+            vision_title: "Visión",
+            vision_desc: "Metal Day S.A. busca consolidarse como una empresa líder en su sector, ofreciendo un trato profesional, cordial, personalizado y eficiente a sus proveedores y clientes. Crecemos mediante contacto fluido con instituciones similares en Europa y Asia.",
+            values_title: "Valores",
+            // Warehouse & Management
+            warehouse_title: "Nuestras Instalaciones",
+            management_title: "Equipo Directivo",
+            // CEO Section
+            ceo_badge: "CEO",
+            ceo_desc_1: "Muhammad Mir Sharif Saddiqi lidera Metal Day, SA con una visión basada en el esfuerzo, la integridad y la mejora continua. Con una sólida trayectoria en el sector del reciclaje, ha impulsado el crecimiento de la empresa apostando por la innovación, la eficiencia y la gestión responsable.",
+            ceo_desc_2: "Su liderazgo se basa en valores como la perseverancia, la transparencia y el compromiso con las personas. Él cree firmemente que el verdadero éxito empresarial se construye generando confianza y aportando valor a la sociedad.",
+            ceo_quote: "Creo firmemente que el trabajo bien hecho, la perseverancia y la honestidad son la base de cualquier proyecto sólido. Nuestro compromiso no es solo empresarial, sino también social: contribuir activamente a un entorno más sostenible y dejar un legado positivo para las generaciones futuras. Seguiremos creciendo con responsabilidad, manteniendo siempre nuestros valores como guía.",
+            ceo_title: "CEO",
+            // Executive Director Section
+            exec_badge: "Director Ejecutivo",
+            exec_desc_1: "Muhammad Ali Carlos representa a la nueva generación al frente de la empresa. Comenzó su carrera profesional a los 16 años, uniéndose al equipo operativo, donde adquirió un conocimiento profundo y práctico del sector del reciclaje de metales.",
+            exec_desc_2: "Formado en una prestigiosa escuela del Reino Unido, donde obtuvo un título superior en Informática, aportó una visión moderna y tecnológica a la empresa, integrando soluciones digitales que optimizaron los procesos internos.",
+            exec_desc_3: "Hoy dirige la empresa con una visión moderna, orientada a la eficiencia, la innovación y el crecimiento sostenible, manteniendo siempre el enfoque humano que caracteriza a la organización.",
+            // Admin Team Section
+            admin_badge: "Equipo Administrativo",
+            admin_heading: "Profesionales dedicados a la excelencia",
+            admin_desc: "El equipo administrativo de Metal Day, S.A. desempeña un papel clave en el buen funcionamiento interno de la empresa. Su labor garantiza que cada proceso, desde la gestión documental hasta la atención a proveedores y clientes, se realice con precisión, transparencia y cercanía.",
+            admin_icon_1: "Gestión Documental",
+            admin_icon_2: "Atención al Cliente",
+            admin_icon_3: "Contabilidad",
+            admin_icon_4: "Logística",
+            // FAQ Section
+            faq_badge: "FAQ",
+            faq_heading: "Preguntas Frecuentes",
+            faq_subtitle: "Resolvemos tus dudas sobre nuestros servicios y procesos de reciclaje",
+            faq_q1: "¿Qué hace METAL DAY, S.A.?",
+            faq_a1: "METAL DAY, S.A. es una empresa líder en el mercado de residuos reciclables con más de 25 años de experiencia. Nos dedicamos a la compra y venta de metales férricos y no férricos (chatarra) a nivel nacional e internacional, importación y exportación a nivel mundial, asesoría general y vaciado de pisos, locales, almacenes y fábricas.",
+            faq_q2: "¿Dónde están ubicados?",
+            faq_a2: "Nuestras instalaciones están ubicadas en la Calle Cobalto en L'Hospitalet de Llobregat (Barcelona). Estamos a solo 15 minutos del Puerto de Barcelona, lo que nos permite ofrecer ventajas logísticas excepcionales para importaciones y exportaciones.",
+            faq_q3: "¿Cómo puedo contactarlos?",
+            faq_a3: "De lunes a sábado de 8:30 a 20:30 horas, también puede visitarnos directamente en nuestras instalaciones.",
+            faq_q4: "¿Venden al por mayor o solo al por menor?",
+            faq_a4: "Trabajamos tanto al por mayor como al por menor. Para compras al por mayor, exportamos a destinos como Pakistán, EAU, India, Turquía y Egipto con una capacidad de suministro de más de 2.000 toneladas anuales. Para los vendedores particulares, ofrecemos precios competitivos y pago inmediato.",
+            faq_q5: "¿Tienen una báscula para pesar los materiales?",
+            faq_a5: "Sí, disponemos de una báscula de 18 metros para camiones y furgonetas de hasta 60 toneladas, y dos básculas pequeñas de 2 toneladas para proveedores individuales y empresas con cantidades más pequeñas. El pesaje se realiza de forma precisa y transparente.",
+            faq_q6: "¿Cómo me pagan si vendo chatarra?",
+            faq_a6: "Ofrecemos múltiples opciones de pago para su comodidad: pago en efectivo para cantidades pequeñas, transferencia bancaria para cantidades mayores, y también aceptamos el pago mediante cheque bancario. El pago se realiza inmediatamente una vez finalizada la transacción y verificado el material. Para empresas, también ofrecemos opciones de facturación con plazos de pago acordados.",
+            faq_q7: "¿Cuánto tiempo tardan en pagar?",
+            faq_a7: "Para las ventas al contado, el pago es inmediato: efectivo en el momento de la entrega, o transferencia bancaria que se procesa el mismo día o al siguiente día hábil. Para empresas con facturación, los plazos de pago se acuerdan de antemano según las condiciones comerciales establecidas.",
+            faq_q8: "¿Ofrecen servicios de carga y descarga?",
+            faq_a8: "Sí, ofrecemos servicios de carga y descarga para todos los clientes que visitan nuestras instalaciones para comprar o vender materiales. Nuestro equipo está disponible para ayudar en la manipulación de sus mercancías de forma segura y eficiente.",
+            // Footer
+            footer_tagline_1: "Cuidamos del planeta y del futuro de nuestros hijos",
+            footer_tagline_2: "Recicladores profesionales de metales en Barcelona",
+            footer_quick_links: "Enlaces Rápidos",
+            footer_contact: "Contacto",
+            footer_copyright: "Todos los derechos reservados."
+        },
+        ca: {
+            // Navigation
+            nav_inicio: "Inici",
+            nav_materiales: "Materials",
+            nav_catalogo: "Catàleg",
+            nav_import: "Import/Export",
+            nav_nosotros: "Nosaltres",
+            nav_contacto: "Contacte",
+            // Hero Section
+            about_title: "Sobre Nosaltres",
+            about_subtitle: "Més de 25 anys liderant el reciclatge de metalls a Barcelona",
+            // Stats Section
+            stat_years: "Anys d'Experiència",
+            stat_facility: "m² Instal·lacions",
+            stat_tons: "Tones/Any",
+            stat_co2: "Tons CO₂ Estalviats",
+            // Mission, Vision, Values
+            mission_title: "Missió",
+            mission_desc: "Metal Day S.A. té com a objectiu principal la recuperació i la valorització màxima de tots els residus que gestiona. Classifiquem i acondicionem els materials per al seu posterior reciclatge, donant una segona vida als residus que generem.",
+            vision_title: "Visió",
+            vision_desc: "Metal Day S.A. busca consolidar-se com una empresa líder en el seu sector, oferint un tracte professional, cordial, personalitzat i eficient als seus proveïdors i clients. Creixem mitjançant contacte fluid amb institucions similars a Europa i Àsia.",
+            values_title: "Valors",
+            // Warehouse & Management
+            warehouse_title: "Les Nostres Instal·lacions",
+            management_title: "Equip Directiu",
+            // CEO Section
+            ceo_badge: "CEO",
+            ceo_desc_1: "Muhammad Mir Sharif Saddiqi lidera Metal Day, SA amb una visió basada en l'esforç, la integritat i la millora contínua. Amb una sòlida trajectòria en el sector del reciclatge, ha impulsat el creixement de l'empresa apostant per la innovació, l'eficiència i la gestió responsable.",
+            ceo_desc_2: "El seu lideratge es basa en valors com la perseverança, la transparència i el compromís amb les persones. Ell creu fermament que el veritable èxit empresarial es construeix generant confiança i aportant valor a la societat.",
+            ceo_quote: "Crec fermament que la feina ben feta, la perseverança i l'honestedat són la base de qualsevol projecte sòlid. El nostre compromís no és només empresarial, sinó també social: contribuir activament a un entorn més sostenible i deixar un llegat positiu per a les generacions futures. Continuarem creixent amb responsabilitat, mantenint sempre els nostres valors com a guia.",
+            ceo_title: "CEO",
+            // Executive Director Section
+            exec_badge: "Director Executiu",
+            exec_desc_1: "Muhammad Ali Carlos representa la nova generació al capdavant de l'empresa. Va començar la seva carrera professional als 16 anys, unint-se a l'equip operatiu, on va adquirir un coneixement profund i pràctic del sector del reciclatge de metalls.",
+            exec_desc_2: "Format en una prestigiosa escola del Regne Unit, on va obtenir un títol superior en Informàtica, va aportar una visió moderna i tecnològica a l'empresa, integrant solucions digitals que van optimitzar els processos interns.",
+            exec_desc_3: "Avui dirigeix l'empresa amb una visió moderna, orientada a l'eficiència, la innovació i el creixement sostenible, mantenint sempre l'enfocament humà que caracteritza l'organització.",
+            // Admin Team Section
+            admin_badge: "Equip Administratiu",
+            admin_heading: "Professionals dedicats a l'excel·lència",
+            admin_desc: "L'equip administratiu de Metal Day, S.A. té un paper clau en el bon funcionament intern de l'empresa. La seva tasca garanteix que cada procés, des de la gestió documental fins a l'atenció a proveïdors i clients, es realitzi amb precisió, transparència i proximitat.",
+            admin_icon_1: "Gestió Documental",
+            admin_icon_2: "Atenció al Client",
+            admin_icon_3: "Comptabilitat",
+            admin_icon_4: "Logística",
+            // FAQ Section
+            faq_badge: "FAQ",
+            faq_heading: "Preguntes Freqüents",
+            faq_subtitle: "Resolem els teus dubtes sobre els nostres serveis i processos de reciclatge",
+            faq_q1: "Què fa METAL DAY, S.A.?",
+            faq_a1: "METAL DAY, S.A. és una empresa líder en el mercat de residus reciclables amb més de 25 anys d'experiència. Ens dediquem a la compra i venda de metalls fèrrics i no fèrrics (ferralla) a nivell nacional i internacional, importació i exportació a nivell mundial, assessoria general i buidatge de pisos, locals, magatzems i fàbriques.",
+            faq_q2: "On estan ubicats?",
+            faq_a2: "Les nostres instal·lacions estan ubicades al Carrer Cobalt a L'Hospitalet de Llobregat (Barcelona). Estem a només 15 minuts del Port de Barcelona, la qual cosa ens permet oferir avantatges logístiques excepcionals per a importacions i exportacions.",
+            faq_q3: "Com puc contactar-hi?",
+            faq_a3: "De dilluns a dissabte de 8:30 a 20:30 hores, també ens podeu visitar directament a les nostres instal·lacions.",
+            faq_q4: "Veneu a l'engròs o només al detall?",
+            faq_a4: "Treballem tant a l'engròs com al detall. Per a compres a l'engròs, exportem a destinacions com el Pakistan, EAU, Índia, Turquia i Egipte amb una capacitat de subministrament de més de 2.000 tones anuals. Per als venedors particulars, oferim preus competitius i pagament immediat.",
+            faq_q5: "Teniu una bàscula per pesar els materials?",
+            faq_a5: "Sí, disposem d'una bàscula de 18 metres per a camions i furgonetes de fins a 60 tones, i dues bàscules petites de 2 tones per a proveïdors individuals i empreses amb quantitats més petites. El pesatge es realitza de manera precisa i transparent.",
+            faq_q6: "Com em paguen si venc ferralla?",
+            faq_a6: "Oferim múltiples opcions de pagament per a la vostra comoditat: pagament en efectiu per a quantitats petites, transferència bancària per a quantitats més grans, i també acceptem el pagament mitjançant xec bancari. El pagament es realitza immediatament un cop finalitzada la transacció i verificat el material. Per a empreses, també oferim opcions de facturació amb terminis de pagament acordats.",
+            faq_q7: "Quant de temps triguen a pagar?",
+            faq_a7: "Per a les vendes al comptat, el pagament és immediat: efectiu en el moment del lliurament, o transferència bancària que es processa el mateix dia o l'endemà hàbil. Per a empreses amb facturació, els terminis de pagament s'acorden per endavant segons les condicions comercials establertes.",
+            faq_q8: "Oferiu serveis de càrrega i descàrrega?",
+            faq_a8: "Sí, oferim serveis de càrrega i descàrrega per a tots els clients que visiten les nostres instal·lacions per comprar o vendre materials. El nostre equip està disponible per ajudar en la manipulació de les vostres mercaderies de manera segura i eficient.",
+            // Footer
+            footer_tagline_1: "Cuidem del planeta i del futur dels nostres fills",
+            footer_tagline_2: "Recicladors professionals de metalls a Barcelona",
+            footer_quick_links: "Enllaços Ràpids",
+            footer_contact: "Contacte",
+            footer_copyright: "Tots els drets reservats."
+        },
+        en: {
+            // Navigation
+            nav_inicio: "Home",
+            nav_materiales: "Materials",
+            nav_catalogo: "Catalog",
+            nav_import: "Import/Export",
+            nav_nosotros: "About Us",
+            nav_contacto: "Contact",
+            // Hero Section
+            about_title: "About Us",
+            about_subtitle: "Over 25 years leading metal recycling in Barcelona",
+            // Stats Section
+            stat_years: "Years of Experience",
+            stat_facility: "m² Facilities",
+            stat_tons: "Tons/Year",
+            stat_co2: "Tons CO₂ Saved",
+            // Mission, Vision, Values
+            mission_title: "Mission",
+            mission_desc: "Metal Day S.A.'s main objective is the recovery and maximum valorization of all the waste it manages. We classify and condition materials for subsequent recycling, giving a second life to the waste we generate.",
+            vision_title: "Vision",
+            vision_desc: "Metal Day S.A. seeks to consolidate itself as a leading company in its sector, offering professional, cordial, personalized and efficient treatment to its suppliers and clients. We grow through fluid contact with similar institutions in Europe and Asia.",
+            values_title: "Values",
+            // Warehouse & Management
+            warehouse_title: "Our Facilities",
+            management_title: "Management Team",
+            // CEO Section
+            ceo_badge: "CEO",
+            ceo_desc_1: "Muhammad Mir Sharif Saddiqi leads Metal Day, SA with a vision based on effort, integrity, and continuous improvement. With a solid track record in the recycling sector, he has driven the company's growth by betting on innovation, efficiency, and responsible management.",
+            ceo_desc_2: "His leadership is based on values such as perseverance, transparency, and commitment to people. He firmly believes that true business success is built by generating trust and adding value to society.",
+            ceo_quote: "I firmly believe that well-done work, perseverance, and honesty are the foundation of any solid project. Our commitment is not only business but also social: actively contributing to a more sustainable environment and leaving a positive legacy for future generations. We will continue to grow responsibly, always keeping our values as a guide.",
+            ceo_title: "CEO",
+            // Executive Director Section
+            exec_badge: "Executive Director",
+            exec_desc_1: "Muhammad Ali Carlos represents the new generation at the helm of the company. He began his professional career at age 16, joining the operational team, where he acquired a deep and practical understanding of the metal recycling sector.",
+            exec_desc_2: "Trained at a prestigious school in the United Kingdom, where he obtained a Higher Degree in IT, he brought a modern and technological vision to the company, integrating digital solutions that optimized internal processes.",
+            exec_desc_3: "Today, he leads the company with a modern vision, oriented towards efficiency, innovation, and sustainable growth, always maintaining the human focus that characterizes the organization.",
+            // Admin Team Section
+            admin_badge: "Administrative Team",
+            admin_heading: "Professionals dedicated to excellence",
+            admin_desc: "The administrative team of Metal Day, S.A. plays a key role in the smooth internal functioning of the company. Their work ensures that every process, from document management to customer and supplier relations, is carried out with precision, transparency, and a personal touch.",
+            admin_icon_1: "Document Management",
+            admin_icon_2: "Customer Service",
+            admin_icon_3: "Accounting",
+            admin_icon_4: "Logistics",
+            // FAQ Section
+            faq_badge: "FAQ",
+            faq_heading: "Frequently Asked Questions",
+            faq_subtitle: "We answer your questions about our services and recycling processes",
+            faq_q1: "What does METAL DAY, S.A. do?",
+            faq_a1: "METAL DAY, S.A. is a leading company in the recyclable waste market with over 25 years of experience. We are dedicated to buying and selling ferrous and non-ferrous metals (scrap) nationally and internationally, importing and exporting worldwide, general consulting, and clearing apartments, premises, warehouses, and factories.",
+            faq_q2: "Where are they located?",
+            faq_a2: "Our facilities are located on Carrer Cobalto in L'Hospitalet de Llobregat (Barcelona). We are only 15 minutes from the Port of Barcelona, which allows us to offer exceptional logistics advantages for imports and exports.",
+            faq_q3: "How can I contact them?",
+            faq_a3: "Monday to Saturday from 8:30am to 8:30pm, you can also visit us directly at our facilities.",
+            faq_q4: "Do you sell wholesale or only retail?",
+            faq_a4: "We work both wholesale and retail. For wholesale purchases, we export to destinations such as Pakistan, UAE, India, Turkey, and Egypt with a supply capacity of over 2,000 tons annually. For individual sellers, we offer competitive prices and immediate payment.",
+            faq_q5: "Do you have a scale to weigh the materials?",
+            faq_a5: "Yes, we have an 18-meter scale for trucks and vans up to 60 tons, and two small scales of 2 tons for individual suppliers and companies with smaller quantities. Weighing is done accurately and transparently.",
+            faq_q6: "How do I get paid if I sell scrap metal?",
+            faq_a6: "We offer multiple payment options for your convenience: cash payment for smaller amounts, bank transfer for larger amounts, and we also accept payment by bank check. Payment is made immediately once the transaction is completed and the material is verified. For companies, we also offer invoicing options with agreed payment terms.",
+            faq_q7: "How long does it take them to pay?",
+            faq_a7: "For cash sales, payment is immediate: cash at the time of delivery, or bank transfer that is processed the same day or the next business day. For companies with invoicing, payment terms are agreed upon in advance according to established commercial conditions.",
+            faq_q8: "Do you provide loading and unloading facilities?",
+            faq_a8: "Yes, we provide loading and unloading facilities for all customers visiting our site to buy or sell materials. Our team is available to assist in handling your goods safely and efficiently.",
+            // Footer
+            footer_tagline_1: "We care for the planet and the future of our children",
+            footer_tagline_2: "Professional metal recyclers in Barcelona",
+            footer_quick_links: "Quick Links",
+            footer_contact: "Contact",
+            footer_copyright: "All rights reserved."
+        }
+    };
+
+    // ============================================
+    // FAQ ACCORDION (PRESERVED FROM ORIGINAL)
+    // ============================================
+    document.querySelectorAll('.faq-item-simple').forEach(item => {
+        const question = item.querySelector('.faq-question-simple');
+        const answer = item.querySelector('.faq-answer-simple');
+        const icon = question.querySelector('.fa-chevron-down');
+        
+        question.addEventListener('click', () => {
+            const isOpen = answer.style.maxHeight && answer.style.maxHeight !== '0px';
+            
+            document.querySelectorAll('.faq-item-simple').forEach(otherItem => {
+                const otherAnswer = otherItem.querySelector('.faq-answer-simple');
+                const otherIcon = otherItem.querySelector('.fa-chevron-down');
+                if (otherAnswer !== answer) {
+                    otherAnswer.style.maxHeight = '0px';
+                    if (otherIcon) otherIcon.style.transform = 'rotate(0deg)';
+                }
+            });
+            
+            if (!isOpen) {
+                answer.style.maxHeight = answer.scrollHeight + 'px';
+                if (icon) icon.style.transform = 'rotate(180deg)';
+            } else {
+                answer.style.maxHeight = '0px';
+                if (icon) icon.style.transform = 'rotate(0deg)';
+            }
+        });
+    });
+
+    // ============================================
+    // FADE SLIDER (PRESERVED FROM ORIGINAL)
+    // ============================================
+    (function() {
+        const slides = document.querySelectorAll('.slide-fade');
+        const dotsContainer = document.querySelector('.fade-dots');
+        let currentIndex = 0;
+        let slideInterval;
+        const totalSlides = slides.length;
+        
+        if (totalSlides === 0) return;
+        
+        function createDots() {
+            if (!dotsContainer) return;
+            dotsContainer.innerHTML = '';
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('button');
+                dot.className = 'fade-dot';
+                if (i === currentIndex) dot.classList.add('active');
+                dot.onclick = (function(index) {
+                    return function() { goToSlide(index); };
+                })(i);
+                dotsContainer.appendChild(dot);
+            }
+        }
+        
+        function goToSlide(index) {
+            for (let i = 0; i < totalSlides; i++) {
+                slides[i].style.opacity = (i === index) ? '1' : '0';
+            }
+            
+            const dots = document.querySelectorAll('.fade-dot');
+            for (let i = 0; i < dots.length; i++) {
+                if (i === index) {
+                    dots[i].classList.add('active');
+                } else {
+                    dots[i].classList.remove('active');
+                }
+            }
+            
+            currentIndex = index;
+            resetAutoSlide();
+        }
+        
+        function nextSlide() {
+            let nextIndex = currentIndex + 1;
+            if (nextIndex >= totalSlides) nextIndex = 0;
+            goToSlide(nextIndex);
+        }
+        
+        function startAutoSlide() {
+            if (slideInterval) clearInterval(slideInterval);
+            slideInterval = setInterval(nextSlide, 5000);
+        }
+        
+        function resetAutoSlide() {
+            if (slideInterval) clearInterval(slideInterval);
+            startAutoSlide();
+        }
+        
+        const sliderContainer = document.querySelector('.slider-container-fade');
+        if (sliderContainer) {
+            sliderContainer.onmouseenter = function() { if (slideInterval) clearInterval(slideInterval); };
+            sliderContainer.onmouseleave = startAutoSlide;
+        }
+        
+        createDots();
+        startAutoSlide();
+    })();
+
+    // ============================================
+    // INITIALIZATION
+    // ============================================
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('tickerTrack').innerHTML = createTickerItems();
+        
+        const savedLang = localStorage.getItem('metalday_language') || 'ES';
+        const langItem = document.querySelector(`.lang-item[data-lang="${savedLang}"]`);
+        if (langItem) {
+            selectLanguage(langItem, savedLang);
+        }
+    });
+
+    document.addEventListener('click', function(event) {
+        if (!event.target.closest('.lang-selector')) {
+            document.getElementById('langDropdown').classList.remove('show');
+        }
+    });
+</script>
+</body>
+</html>

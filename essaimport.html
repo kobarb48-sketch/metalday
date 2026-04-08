@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metal Day S.A. - Importación y Exportación</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Montserrat', sans-serif; background: #ffffff; color: #1a1a1a; line-height: 1.6; overflow-x: hidden; }
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+        
+        /* ============================================
+           HEADER DESIGN (GLASS PREMIUM)
+        ============================================ */
+        .header-glass {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(74,222,128,0.2);
+            padding: 0.75rem 1rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1280px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .nav-left, .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-left a, .nav-right a {
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-left a:hover, .nav-right a:hover,
+        .nav-left a.active, .nav-right a.active {
+            color: #4ade80;
+        }
+
+        .logo-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-img:hover {
+            transform: scale(1.02);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+
+        .nav-links-mobile {
+            display: none;
+            width: 100%;
+            flex-direction: column;
+            gap: 0.5rem;
+            padding: 1rem 0;
+            order: 3;
+        }
+
+        .nav-links-mobile.active {
+            display: flex;
+        }
+
+        .nav-links-mobile a {
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 0.5rem 0;
+            transition: color 0.3s;
+        }
+
+        .nav-links-mobile a:hover,
+        .nav-links-mobile a.active {
+            color: #4ade80;
+        }
+
+        .lang-selector {
+            position: relative;
+            z-index: 1001;
+        }
+
+        .lang-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(46,125,50,0.15);
+            border: 1px solid rgba(74,222,128,0.3);
+            border-radius: 2rem;
+            padding: 0.4rem 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn:hover {
+            background: rgba(46,125,50,0.3);
+            border-color: #4ade80;
+        }
+
+        .lang-flag { font-size: 1.1rem; }
+        .lang-name { color: white; font-size: 0.8rem; font-weight: 500; }
+        .lang-arrow { color: #4ade80; font-size: 0.7rem; }
+
+        .lang-dropdown-modern {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 0.5rem;
+            background: #1a1a1a;
+            border: 1px solid rgba(74,222,128,0.3);
+            border-radius: 1rem;
+            min-width: 160px;
+            z-index: 1002;
+            display: none;
+            overflow: hidden;
+            box-shadow: 0 15px 35px -10px rgba(0,0,0,0.5);
+        }
+
+        .lang-dropdown-modern.show {
+            display: block;
+            animation: slideDown 0.25s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .lang-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.7rem 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .lang-item:last-child { border-bottom: none; }
+        .lang-item:hover { background: rgba(74,222,128,0.1); }
+        .lang-item.active { background: rgba(46,125,50,0.2); }
+        .lang-item.active .lang-item-name { color: #4ade80; }
+        .lang-item-flag { font-size: 1.2rem; }
+        .lang-item-name { color: #9ca3af; font-size: 0.85rem; font-weight: 500; }
+        .check-icon { margin-left: auto; color: #4ade80; font-size: 0.8rem; }
+
+        .whatsapp-icon {
+            width: 36px;
+            height: 36px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .whatsapp-icon i { color: white; font-size: 1.2rem; }
+        .whatsapp-icon:hover { transform: scale(1.1); }
+
+        /* ============================================
+           PRICE TICKER
+        ============================================ */
+        .ticker-premium {
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            border-top: 1px solid rgba(74,222,128,0.2);
+            border-bottom: 1px solid rgba(74,222,128,0.2);
+            padding: 0.75rem 0;
+            overflow: hidden;
+            position: fixed;
+            top: 70px;
+            left: 0;
+            right: 0;
+            z-index: 999;
+        }
+
+        .ticker-track-premium {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            animation: scrollPremium 25s linear infinite;
+            padding-left: 2rem;
+        }
+
+        .ticker-premium:hover .ticker-track-premium {
+            animation-play-state: paused;
+        }
+
+        @keyframes scrollPremium {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .ticker-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: rgba(46,125,50,0.12);
+            padding: 0.45rem 1.2rem;
+            border-radius: 2rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(74,222,128,0.15);
+        }
+
+        .ticker-chip:hover {
+            background: rgba(46,125,50,0.3);
+            border-color: rgba(74,222,128,0.4);
+            transform: translateY(-2px);
+        }
+
+        .ticker-symbol { color: #4ade80; font-weight: 800; font-size: 0.9rem; }
+        .ticker-price { color: white; font-weight: 700; font-size: 0.95rem; }
+        .ticker-change {
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.2rem 0.5rem;
+            border-radius: 1rem;
+        }
+        .ticker-change.up { color: #4ade80; background: rgba(74,222,128,0.12); }
+        .ticker-change.down { color: #f87171; background: rgba(248,113,113,0.12); }
+        .ticker-sep { color: #2e7d32; font-size: 0.4rem; opacity: 0.6; }
+
+        /* Modal */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 2000; justify-content: center; align-items: center; }
+        .modal-content { max-width: 90%; max-height: 90%; }
+        .modal-content img { width: 100%; height: auto; border-radius: 0.5rem; background-color: white; padding: 20px; object-fit: contain; }
+        .close-modal { position: absolute; top: 20px; right: 40px; color: white; font-size: 40px; cursor: pointer; font-weight: bold; }
+        .close-modal:hover { color: #2e7d32; }
+
+        /* ============================================
+           MAIN CONTENT & PAGE SPECIFIC STYLES
+        ============================================ */
+        .main-content { margin-top: 110px; }
+        section { padding: 5rem 2rem; }
+        .container { max-width: 1280px; margin: 0 auto; }
+        
+        /* Hero Section */
+        .hero { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0d2e0f 100%); color: white; text-align: center; border-radius: 0 0 2rem 2rem; position: relative; overflow: hidden; }
+        .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" opacity="0.05"><path fill="white" d="M0,0 L1000,0 L1000,1000 L0,1000 Z" /></svg>'); background-size: cover; pointer-events: none; }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 1rem; animation: fadeInUp 0.8s ease; }
+        .hero p { font-size: 1.25rem; color: #cbd5e1; animation: fadeInUp 0.8s ease 0.1s both; }
+        .hero .slogan { color: #4ade80; font-style: italic; margin-top: 1rem; animation: fadeInUp 0.8s ease 0.2s both; }
+        
+        /* Stats Section */
+        .stats { background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); }
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+        .stat-card { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-radius: 1.5rem; padding: 2rem; text-align: center; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); transition: all 0.3s; border: 1px solid rgba(0,0,0,0.05); }
+        .stat-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.1); border-color: #2e7d32; }
+        .stat-icon { width: 60px; height: 60px; background: #2e7d32; border-radius: 1rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; }
+        .stat-number { font-size: 2.5rem; font-weight: 800; color: #1a1a1a; }
+        .stat-label { color: #64748b; font-weight: 500; margin-top: 0.5rem; }
+        
+        /* Section Headers */
+        .section-header { text-align: center; margin-bottom: 3rem; }
+        .section-header h2 { font-size: 2.5rem; margin-bottom: 1rem; position: relative; display: inline-block; }
+        .section-header h2::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 60px; height: 3px; background: #2e7d32; border-radius: 2px; }
+        .section-header p { color: #64748b; max-width: 600px; margin: 0 auto; }
+        
+        /* Auth Codes */
+        .auth-codes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        .auth-card { background: white !important; border-radius: 1.5rem; padding: 2rem; text-align: center; transition: all 0.3s; border: 2px solid #2e7d32; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .auth-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(46,125,50,0.2); border-color: #1b5e20; }
+        .auth-card .auth-label, .auth-card .auth-code { color: #1a1a1a; }
+        .auth-card .auth-badge { background: #2e7d32; color: white; }
+        .auth-badge { display: inline-block; background: #2e7d32; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.7rem; font-weight: 600; margin-bottom: 1rem; }
+        .auth-label { color: #94a3b8; font-size: 0.875rem; margin-bottom: 0.5rem; }
+        .auth-code { font-size: 1.5rem; font-family: monospace; font-weight: 700; letter-spacing: 1px; }
+        
+        /* Certificates Grid */
+        .certs-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+        .cert-card { background: white; border-radius: 1rem; overflow: hidden; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); transition: all 0.3s; border: 1px solid #e2e8f0; cursor: pointer; }
+        .cert-card:hover { transform: translateY(-8px); box-shadow: 0 25px 40px -12px rgba(0,0,0,0.15); border-color: #2e7d32; }
+        .cert-image { padding: 2rem; text-align: center; background: #f8fafc; border-bottom: 1px solid #e2e8f0; }
+        .cert-image img { max-height: 70px; max-width: 100%; transition: transform 0.3s; }
+        .cert-card:hover .cert-image img { transform: scale(1.05); }
+        .cert-info { padding: 1.25rem; }
+        .cert-title { font-weight: 700; margin-bottom: 0.5rem; }
+        .cert-badge { display: inline-block; background: #2e7d32; color: white; font-size: 0.7rem; padding: 0.2rem 0.6rem; border-radius: 9999px; margin-bottom: 0.75rem; }
+        .cert-link { color: #2e7d32; font-size: 0.875rem; text-decoration: none; font-weight: 500; display: inline-flex; align-items: center; gap: 0.25rem; }
+        .cert-link:hover { gap: 0.5rem; }
+        
+        /* Destinations */
+        .destinations-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1rem; }
+        .dest-card { background: #f8fafc; border-radius: 1rem; padding: 1.5rem; text-align: center; transition: all 0.3s; cursor: pointer; }
+        .dest-card:hover { background: #2e7d32; transform: translateY(-5px); }
+        .dest-card:hover .dest-name { color: white; }
+        .dest-flag { font-size: 3rem; margin-bottom: 0.5rem; }
+        .dest-name { font-weight: 600; transition: color 0.3s; }
+        
+        /* Logistics Section */
+        .logistics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+
+        /* ============================================
+           FOOTER DESIGN - GLASS PREMIUM
+        ============================================ */
+        .footer-glass {
+            background: rgba(10, 10, 10, 0.95);
+            border-top: 1px solid rgba(74,222,128,0.2);
+            padding: 3rem 2rem 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .footer-container { max-width: 1280px; margin: 0 auto; }
+        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1.5fr; gap: 2rem; margin-bottom: 2rem; }
+        .footer-logo img { height: 50px; width: auto; margin-bottom: 1rem; }
+        .footer-tagline { color: #9ca3af; font-size: 0.85rem; line-height: 1.6; }
+        .footer-tagline i { color: #4ade80; margin-right: 0.5rem; }
+        .footer-links h4, .footer-contact h4 { color: white; font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem; }
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 0.6rem; }
+        .footer-links a { color: #9ca3af; text-decoration: none; font-size: 0.85rem; transition: all 0.3s; }
+        .footer-links a:hover { color: #4ade80; transform: translateX(3px); display: inline-block; }
+        .contact-item { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.8rem; color: #9ca3af; font-size: 0.85rem; }
+        .contact-item i { width: 24px; color: #4ade80; font-size: 0.9rem; }
+        .contact-item a { color: #9ca3af; text-decoration: none; }
+        .contact-item a:hover { color: #4ade80; }
+        .social-icons { display: flex; gap: 1rem; margin-top: 1rem; }
+        .social-icons a { width: 36px; height: 36px; background: rgba(255,255,255,0.05); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s; color: #9ca3af; text-decoration: none; }
+        .social-icons a:hover { background: #2e7d32; color: white; transform: translateY(-3px); }
+        .footer-bottom { text-align: center; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.05); color: #6b7280; font-size: 0.75rem; }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 55px;
+            height: 55px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 5px 20px rgba(37,211,102,0.4);
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        .whatsapp-float i { color: white; font-size: 1.8rem; }
+        .whatsapp-float:hover { transform: scale(1.1); }
+
+        /* Animations */
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* ============================================
+           RESPONSIVE
+        ============================================ */
+        @media (max-width: 768px) {
+            .nav-left, .nav-right { display: none; }
+            .mobile-menu-btn { display: block; }
+            .nav-container { flex-wrap: wrap; }
+            .logo-wrapper { margin: 0 auto; }
+            .logo-img { height: 45px; }
+            .ticker-chip { padding: 0.3rem 0.8rem; gap: 0.4rem; }
+            .ticker-symbol { font-size: 0.75rem; }
+            .ticker-price { font-size: 0.8rem; }
+            .ticker-change { font-size: 0.6rem; }
+            .footer-grid { grid-template-columns: 1fr; text-align: center; }
+            .footer-links ul { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }
+            .footer-links li { margin-bottom: 0; }
+            .contact-item { justify-content: center; }
+            .social-icons { justify-content: center; }
+            .whatsapp-float { bottom: 1rem; right: 1rem; width: 45px; height: 45px; }
+            .whatsapp-float i { font-size: 1.4rem; }
+            .hero h1 { font-size: 2rem; }
+            section { padding: 3rem 1rem; }
+            .certs-grid { grid-template-columns: 1fr; }
+            .destinations-grid { grid-template-columns: repeat(2, 1fr); }
+            .stats-grid { grid-template-columns: 1fr; }
+            .auth-codes { grid-template-columns: 1fr; }
+            .logistics-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 1024px) { 
+            .certs-grid { grid-template-columns: repeat(2, 1fr); } 
+            .destinations-grid { grid-template-columns: repeat(3, 1fr); } 
+            .stats-grid { grid-template-columns: repeat(2, 1fr); } 
+            .auth-codes { grid-template-columns: 1fr; } 
+            .logistics-grid { grid-template-columns: 1fr; } 
+            .footer-grid { grid-template-columns: 1fr; text-align: center; } 
+            .footer-links ul { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; } 
+            .contact-item { justify-content: center; } 
+            .social-icons { justify-content: center; } 
+        }
+    </style>
+</head>
+<body>
+
+<div id="imageModal" class="modal" onclick="closeModal()">
+    <span class="close-modal">&times;</span>
+    <div class="modal-content">
+        <img id="modalImage" src="" alt="Certificado">
+    </div>
+</div>
+
+<!-- HEADER SECTION -->
+<header class="header-glass">
+    <div class="nav-container">
+        <div class="nav-left">
+            <a href="essahome.html" data-key="nav_inicio">Inicio</a>
+            <a href="essamaterial.html" data-key="nav_materiales">Materiales</a>
+            <a href="essacatalog.html" data-key="nav_catalogo">Catálogo</a>
+        </div>
+        
+        <div class="logo-wrapper">
+            <img class="logo-img" src="images/team/logo.gif" alt="Metal Day Logo" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 200 50\'%3E%3Ctext x=\'0\' y=\'35\' font-family=\'Playfair Display\' font-size=\'28\' font-weight=\'900\' fill=\'white\'%3EMETAL DAY%3C/text%3E%3Ctext x=\'0\' y=\'48\' font-family=\'Montserrat\' font-size=\'10\' fill=\'%232e7d32\'%3ES.A.%3C/text%3E%3C/svg%3E'">
+        </div>
+        
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+        
+        <div class="nav-right">
+            <a href="essaimport.html" class="active" data-key="nav_import">Import/Export</a>
+            <a href="essaaboutus.html" data-key="nav_nosotros">Nosotros</a>
+            <a href="essacontact.html" data-key="nav_contacto">Contacto</a>
+            
+            <div class="lang-selector">
+                <div class="lang-btn" onclick="toggleLanguageDropdown(event)">
+                    <span class="lang-flag" id="selectedFlag">🇪🇸</span>
+                    <span class="lang-name" id="selectedLanguage">Español</span>
+                    <i class="fas fa-chevron-down lang-arrow"></i>
+                </div>
+                <div class="lang-dropdown-modern" id="langDropdown">
+                    <div class="lang-item active" data-lang="ES" data-flag="🇪🇸" data-name="Español" onclick="selectLanguage(this, 'ES')">
+                        <span class="lang-item-flag">🇪🇸</span>
+                        <span class="lang-item-name">Español</span>
+                        <i class="fas fa-check check-icon"></i>
+                    </div>
+                    <div class="lang-item" data-lang="CA" data-flag="🏴󠁥󠁳󠁣󠁴󠁿" data-name="Català" onclick="selectLanguage(this, 'CA')">
+                        <span class="lang-item-flag">🏴󠁥󠁳󠁣󠁴󠁿</span>
+                        <span class="lang-item-name">Català</span>
+                    </div>
+                    <div class="lang-item" data-lang="EN" data-flag="🇬🇧" data-name="English" onclick="selectLanguage(this, 'EN')">
+                        <span class="lang-item-flag">🇬🇧</span>
+                        <span class="lang-item-name">English</span>
+                    </div>
+                </div>
+            </div>
+
+            <a href="https://wa.me/34635699485" class="whatsapp-icon" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        
+        <div class="nav-links-mobile" id="mobileNav">
+            <a href="essahome.html" data-key="nav_inicio">Inicio</a>
+            <a href="essamaterial.html" data-key="nav_materiales">Materiales</a>
+            <a href="essacatalog.html" data-key="nav_catalogo">Catálogo</a>
+            <a href="essaimport.html" class="active" data-key="nav_import">Import/Export</a>
+            <a href="essaaboutus.html" data-key="nav_nosotros">Nosotros</a>
+            <a href="essacontact.html" data-key="nav_contacto">Contacto</a>
+            <div style="display:flex;align-items:center;gap:1rem;margin-top:1rem;">
+                <div class="lang-selector">
+                    <div class="lang-btn" onclick="toggleLanguageDropdown(event)">
+                        <span class="lang-flag" id="mobileSelectedFlag">🇪🇸</span>
+                        <span class="lang-name" id="mobileSelectedLanguage">Español</span>
+                        <i class="fas fa-chevron-down lang-arrow"></i>
+                    </div>
+                </div>
+                <a href="https://wa.me/34635699485" class="whatsapp-icon" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- PRICE TICKER SECTION -->
+<div class="ticker-premium">
+    <div class="ticker-track-premium" id="tickerTrack"></div>
+</div>
+
+<!-- ORIGINAL MIDDLE CONTENT - UNCHANGED -->
+<main class="main-content">
+    <section class="hero">
+        <div class="container">
+            <h1 data-key="hero_title">Importación y Exportación</h1>
+            <p data-key="hero_subtitle">Operando desde 1998 con autorización oficial</p>
+            <p class="slogan" data-key="slogan">"Cuidamos del planeta y del futuro de nuestros hijos"</p>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card"><div class="stat-icon"><i class="fas fa-ship fa-2x" style="color:white"></i></div><div class="stat-number">2,000+</div><div class="stat-label" data-key="stat_tons">Toneladas/año</div></div>
+                <div class="stat-card"><div class="stat-icon"><i class="fas fa-globe fa-2x" style="color:white"></i></div><div class="stat-number">6+</div><div class="stat-label" data-key="stat_countries">Países destino</div></div>
+                <div class="stat-card"><div class="stat-icon"><i class="fas fa-chart-line fa-2x" style="color:white"></i></div><div class="stat-number">25+</div><div class="stat-label" data-key="stat_years">Años experiencia</div></div>
+                <div class="stat-card"><div class="stat-icon"><i class="fas fa-map-pin fa-2x" style="color:white"></i></div><div class="stat-number">15min</div><div class="stat-label" data-key="stat_port">Puerto BCN</div></div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="section-header"><h2 data-key="auth_title">Códigos de Autorización</h2><p data-key="auth_subtitle">Verifique nuestras credenciales oficiales</p></div>
+            <div class="auth-codes">
+                <div class="auth-card"><div class="auth-badge" data-key="verified">Verificado</div><div class="auth-label" data-key="auth1_label">Gestor de residuos autorizado</div><div class="auth-code">E-1590.15</div></div>
+                <div class="auth-card"><div class="auth-badge" data-key="verified">Verificado</div><div class="auth-label" data-key="auth2_label">Productor de residuos autorizado</div><div class="auth-code">P-65714.1</div></div>
+                <div class="auth-card"><div class="auth-badge" data-key="verified">Verificado</div><div class="auth-label" data-key="auth3_label">Código Nima de Empresa</div><div class="auth-code">800619394</div></div>
+            </div>
+        </div>
+    </section>
+
+    <section style="background: #f8fafc;">
+        <div class="container">
+            <div class="section-header"><h2 data-key="cert_title">Certificaciones Oficiales</h2><p data-key="cert_subtitle">Entidades que avalan nuestra operación</p></div>
+            <div class="certs-grid" id="certificatesGrid"></div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="section-header"><h2 data-key="dest_title">Destinos de Exportación</h2><p data-key="dest_subtitle">Presencia global en los principales mercados</p></div>
+            <div class="destinations-grid" id="destinationsGrid"></div>
+        </div>
+    </section>
+
+    <section style="padding: 4rem 2rem; background: linear-gradient(135deg, #0a0a0a 0%, #0d2e0f 100%);">
+        <div class="container">
+            <div class="logistics-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;">
+                <div>
+                    <div style="display: inline-block; background: rgba(74,222,128,0.1); padding: 0.5rem 1rem; border-radius: 9999px; margin-bottom: 1.5rem;">
+                        <span style="color: #4ade80; font-size: 0.875rem; font-weight: 600;" data-key="logistics_badge">VENTAJA ESTRATÉGICA</span>
+                    </div>
+                    <h2 style="font-size: 2.5rem; color: white; margin-bottom: 1rem; font-family: 'Playfair Display', serif;" data-key="logistics_heading">Ventaja Logística</h2>
+                    <p style="color: #cbd5e1; margin-bottom: 2rem; line-height: 1.7;" data-key="logistics_desc">Nuestra ubicación estratégica a solo 15 minutos del Puerto de Barcelona nos permite ofrecer tiempos de respuesta rápidos y costes logísticos optimizados.</p>
+                    <div style="display: flex; flex-direction: column; gap: 1rem;">
+                        <div style="display: flex; align-items: center; gap: 1rem; background: rgba(255,255,255,0.05); padding: 1rem 1.5rem; border-radius: 1rem; backdrop-filter: blur(10px);">
+                            <div style="width: 48px; height: 48px; background: rgba(46,125,50,0.2); border-radius: 1rem; display: flex; align-items: center; justify-content: center;"><i class="fas fa-ship" style="color: #4ade80; font-size: 1.5rem;"></i></div>
+                            <div><h4 style="color: white; font-weight: 700;" data-key="logistics_card1_title">Acceso directo al puerto</h4><p style="color: #94a3b8; font-size: 0.875rem;" data-key="logistics_card1_sub">15 minutos de distancia</p></div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 1rem; background: rgba(255,255,255,0.05); padding: 1rem 1.5rem; border-radius: 1rem; backdrop-filter: blur(10px);">
+                            <div style="width: 48px; height: 48px; background: rgba(46,125,50,0.2); border-radius: 1rem; display: flex; align-items: center; justify-content: center;"><i class="fas fa-building" style="color: #4ade80; font-size: 1.5rem;"></i></div>
+                            <div><h4 style="color: white; font-weight: 700;" data-key="logistics_card2_title">Instalaciones de 5,000 m²</h4><p style="color: #94a3b8; font-size: 0.875rem;" data-key="logistics_card2_sub">Tres naves unificadas</p></div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 1rem; background: rgba(255,255,255,0.05); padding: 1rem 1.5rem; border-radius: 1rem; backdrop-filter: blur(10px);">
+                            <div style="width: 48px; height: 48px; background: rgba(46,125,50,0.2); border-radius: 1rem; display: flex; align-items: center; justify-content: center;"><i class="fas fa-truck" style="color: #4ade80; font-size: 1.5rem;"></i></div>
+                            <div><h4 style="color: white; font-weight: 700;" data-key="logistics_card3_title">Capacidad de 2,000+ toneladas/año</h4><p style="color: #94a3b8; font-size: 0.875rem;" data-key="logistics_card3_sub">Para operaciones de gran volumen</p></div>
+                        </div>
+                    </div>
+                </div>
+                <div style="position: relative;">
+                    <div style="border-radius: 1.5rem; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);">
+                        <img src="images/warehouse%20photos/warehouse-10.jpg" alt="Metal Day Warehouse" style="width: 100%; height: auto; display: block;">
+                    </div>
+                    <div style="position: absolute; bottom: -1.5rem; left: -1.5rem; background: #2e7d32; padding: 1rem 2rem; border-radius: 1rem;">
+                        <p style="color: white; font-weight: 700; font-size: 1.5rem;">15min</p>
+                        <p style="color: #bbf7d0; font-size: 0.75rem;" data-key="port_badge">Puerto de Barcelona</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section style="padding: 5rem 2rem; background: #f8fafc;">
+        <div class="container">
+            <div class="section-header" style="text-align: center; margin-bottom: 3rem;">
+                <div style="display: inline-block; background: rgba(46,125,50,0.1); padding: 0.5rem 1rem; border-radius: 9999px; margin-bottom: 1rem;">
+                    <span style="color: #2e7d32; font-size: 0.875rem; font-weight: 600;" data-key="contact_badge">CONTACTO COMERCIAL</span>
+                </div>
+                <h2 style="font-size: 2.5rem; margin-bottom: 1rem; font-family: 'Playfair Display', serif;" data-key="contact_heading">¿Necesita importar o exportar metales?</h2>
+                <p style="color: #64748b; max-width: 600px; margin: 0 auto;" data-key="contact_subtitle">Contáctenos para discutir sus necesidades. Nuestro equipo comercial le atenderá con la mayor profesionalidad.</p>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                <div style="background: white; border-radius: 1.5rem; padding: 2rem; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                        <div style="width: 50px; height: 50px; background: rgba(46,125,50,0.1); border-radius: 1rem; display: flex; align-items: center; justify-content: center;"><i class="fas fa-phone-alt" style="color: #2e7d32; font-size: 1.5rem;"></i></div>
+                        <h3 style="font-size: 1.5rem; font-weight: 700;" data-key="phone_card_title">Teléfonos de Contacto</h3>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 1rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 0; border-bottom: 1px solid #e2e8f0;">
+                            <span style="font-weight: 600;"><i class="fas fa-headset" style="color: #2e7d32; width: 24px; margin-right: 0.5rem;"></i> <span data-key="phone_label_1">Atención al Cliente</span></span>
+                            <a href="tel:+34681925090" style="color: #2e7d32; text-decoration: none; font-family: monospace; font-weight: 600;">+34 681 92 50 90</a>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 0; border-bottom: 1px solid #e2e8f0;">
+                            <span style="font-weight: 600;"><i class="fas fa-globe" style="color: #2e7d32; width: 24px; margin-right: 0.5rem;"></i> <span data-key="phone_label_2">Comercio Internacional</span></span>
+                            <a href="tel:+34699799170" style="color: #2e7d32; text-decoration: none; font-family: monospace; font-weight: 600;">+34 699 79 91 70</a>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 0; border-bottom: 1px solid #e2e8f0;">
+                            <span style="font-weight: 600;"><i class="fas fa-chart-line" style="color: #2e7d32; width: 24px; margin-right: 0.5rem;"></i> <span data-key="phone_label_3">DG/CEO</span></span>
+                            <a href="tel:+34679139699" style="color: #2e7d32; text-decoration: none; font-family: monospace; font-weight: 600;">+34 679 13 96 99</a>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 0;">
+                            <span style="font-weight: 600;"><i class="fas fa-user-tie" style="color: #2e7d32; width: 24px; margin-right: 0.5rem;"></i> <span data-key="phone_label_4">MD</span></span>
+                            <a href="tel:+34673369664" style="color: #2e7d32; text-decoration: none; font-family: monospace; font-weight: 600;">+34 673 36 96 64</a>
+                        </div>
+                    </div>
+                </div>
+                <div style="background: white; border-radius: 1.5rem; padding: 2rem; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                        <div style="width: 50px; height: 50px; background: rgba(46,125,50,0.1); border-radius: 1rem; display: flex; align-items: center; justify-content: center;"><i class="fas fa-info-circle" style="color: #2e7d32; font-size: 1.5rem;"></i></div>
+                        <h3 style="font-size: 1.5rem; font-weight: 700;" data-key="info_card_title">Información General</h3>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                        <div style="display: flex; gap: 1rem;"><i class="fas fa-envelope" style="color: #2e7d32; font-size: 1.25rem; width: 24px;"></i><div><p style="font-weight: 600; margin-bottom: 0.25rem;" data-key="email_label">Email</p><a href="mailto:info@metalday.es" style="color: #2e7d32; text-decoration: none;">info@metalday.es</a></div></div>
+                        <div style="display: flex; gap: 1rem;"><i class="fas fa-map-pin" style="color: #2e7d32; font-size: 1.25rem; width: 24px;"></i><div><p style="font-weight: 600; margin-bottom: 0.25rem;" data-key="address_label">Dirección</p><p style="color: #64748b;">C/ del Cobalt, 62-64, 08907, L'Hospitalet de Llobregat, Barcelona</p></div></div>
+                        <div style="display: flex; gap: 1rem;"><i class="fas fa-clock" style="color: #2e7d32; font-size: 1.25rem; width: 24px;"></i><div><p style="font-weight: 600; margin-bottom: 0.25rem;" data-key="hours_label">Horario de Atención</p><p style="color: #64748b;" data-key="hours_text">Lunes a Sábado: 08:30h a 20:30h (Horario continuo)</p></div></div>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="https://wa.me/34635699485" style="display: inline-flex; align-items: center; gap: 0.5rem; background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%); color: white; padding: 1rem 2.5rem; border-radius: 9999px; font-weight: 700; text-decoration: none; transition: all 0.3s; box-shadow: 0 10px 20px -5px rgba(46,125,50,0.3);" target="_blank">
+                    <span data-key="quote_button">Solicitar Cotización</span> <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- FOOTER SECTION - GLASS PREMIUM -->
+<footer class="footer-glass">
+    <div class="footer-container">
+        <div class="footer-grid">
+            <div class="footer-logo">
+                <img src="images/team/logo.gif" alt="Metal Day Logo" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 200 50\'%3E%3Ctext x=\'0\' y=\'35\' font-family=\'Playfair Display\' font-size=\'28\' font-weight=\'900\' fill=\'white\'%3EMETAL DAY%3C/text%3E%3Ctext x=\'0\' y=\'48\' font-family=\'Montserrat\' font-size=\'10\' fill=\'%232e7d32\'%3ES.A.%3C/text%3E%3C/svg%3E'">
+                <p class="footer-tagline"><i class="fas fa-leaf"></i> <span data-key="footer_tagline_1">Cuidamos del planeta y del futuro de nuestros hijos</span></p>
+                <p class="footer-tagline" style="margin-top:0.5rem;"><span data-key="footer_tagline_2">Recicladores profesionales de metales en Barcelona</span></p>
+            </div>
+            <div class="footer-links">
+                <h4 data-key="footer_quick_links">Enlaces Rápidos</h4>
+                <ul>
+                    <li><a href="essahome.html" data-key="nav_inicio">Inicio</a></li>
+                    <li><a href="essamaterial.html" data-key="nav_materiales">Materiales</a></li>
+                    <li><a href="essacatalog.html" data-key="nav_catalogo">Catálogo</a></li>
+                    <li><a href="essaimport.html" data-key="nav_import">Import/Export</a></li>
+                    <li><a href="essaaboutus.html" data-key="nav_nosotros">Nosotros</a></li>
+                    <li><a href="essacontact.html" data-key="nav_contacto">Contacto</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4 data-key="footer_contact">Contacto</h4>
+                <div class="contact-item"><i class="fas fa-phone"></i><a href="tel:+34681925090">+34 681 92 50 90</a></div>
+                <div class="contact-item"><i class="fas fa-phone"></i><a href="tel:+34699799170">+34 699 79 91 70</a></div>
+                <div class="contact-item"><i class="fas fa-envelope"></i><a href="mailto:info@metalday.es">info@metalday.es</a></div>
+                <div class="contact-item"><i class="fas fa-map-pin"></i><span>C/ del Cobalt, 62-64, 08940 L'Hospitalet de Llobregat, Barcelona</span></div>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 METAL DAY S.A. <span data-key="footer_copyright">Todos los derechos reservados.</span></p>
+        </div>
+    </div>
+</footer>
+
+<!-- Floating WhatsApp Button -->
+<a href="https://wa.me/34635699485" class="whatsapp-float" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+<script>
+    // ============================================
+    // LANGUAGE FUNCTIONS
+    // ============================================
+    function toggleLanguageDropdown(event) {
+        event.stopPropagation();
+        const dropdown = document.getElementById('langDropdown');
+        dropdown.classList.toggle('show');
+    }
+
+    function selectLanguage(element, langCode) {
+        const flag = element.getAttribute('data-flag');
+        const name = element.getAttribute('data-name');
+        
+        document.getElementById('selectedFlag').textContent = flag;
+        document.getElementById('selectedLanguage').textContent = name;
+        document.getElementById('mobileSelectedFlag').textContent = flag;
+        document.getElementById('mobileSelectedLanguage').textContent = name;
+        
+        const allItems = document.querySelectorAll('.lang-item');
+        allItems.forEach(item => {
+            item.classList.remove('active');
+            const checkIcon = item.querySelector('.check-icon');
+            if (checkIcon) checkIcon.remove();
+        });
+        
+        element.classList.add('active');
+        const checkIcon = document.createElement('i');
+        checkIcon.className = 'fas fa-check check-icon';
+        element.appendChild(checkIcon);
+        
+        document.getElementById('langDropdown').classList.remove('show');
+        
+        localStorage.setItem('metalday_language', langCode);
+        applyLanguage(langCode);
+    }
+
+    function toggleMobileMenu() {
+        const menu = document.getElementById('mobileNav');
+        menu.classList.toggle('active');
+    }
+
+    function applyLanguage(lang) {
+        currentLang = lang.toLowerCase();
+        const t = translations[currentLang];
+        if (!t) return;
+        document.querySelectorAll('[data-key]').forEach(el => {
+            const key = el.dataset.key;
+            if (t[key]) el.textContent = t[key];
+        });
+        updateCertificates();
+        updateDestinations();
+    }
+
+    // ============================================
+    // PRICE TICKER
+    // ============================================
+    const metals = [
+        { symbol: "CU", name: "Cobre", price: "€8.50", change: "+2.3", changeType: "up" },
+        { symbol: "AL", name: "Aluminio", price: "€1.80", change: "+1.1", changeType: "up" },
+        { symbol: "BR", name: "Latón", price: "€5.20", change: "+0.8", changeType: "up" },
+        { symbol: "FE", name: "Hierro", price: "€0.28", change: "-0.5", changeType: "down" },
+        { symbol: "SS", name: "Acero Inox", price: "€1.40", change: "+1.5", changeType: "up" },
+        { symbol: "PB", name: "Plomo", price: "€1.80", change: "+0.3", changeType: "up" },
+        { symbol: "ZN", name: "Zinc", price: "€2.45", change: "+0.7", changeType: "up" },
+        { symbol: "NI", name: "Níquel", price: "€15.30", change: "-1.2", changeType: "down" },
+        { symbol: "SN", name: "Estaño", price: "€24.50", change: "+1.8", changeType: "up" },
+        { symbol: "TI", name: "Titanio", price: "€8.90", change: "+0.4", changeType: "up" }
+    ];
+
+    function createTickerItems() {
+        let itemsHtml = '';
+        const allMetals = [...metals, ...metals];
+        
+        allMetals.forEach((metal, index) => {
+            itemsHtml += `
+                <div class="ticker-chip">
+                    <span class="ticker-symbol">${metal.symbol}</span>
+                    <span class="ticker-price">${metal.price}</span>
+                    <span class="ticker-change ${metal.changeType}">${metal.change > 0 ? '+' : ''}${metal.change}%</span>
+                </div>
+            `;
+            if (index < allMetals.length - 1) {
+                itemsHtml += `<span class="ticker-sep">●</span>`;
+            }
+        });
+        
+        return itemsHtml;
+    }
+
+    // ============================================
+    // TRANSLATIONS
+    // ============================================
+    const translations = {
+        es: { 
+            nav_inicio: "Inicio", nav_materiales: "Materiales", nav_catalogo: "Catálogo", nav_import: "Import/Export", nav_nosotros: "Nosotros", nav_contacto: "Contacto",
+            hero_title: "Importación y Exportación", hero_subtitle: "Operando desde 1998 con autorización oficial", slogan: '"Cuidamos del planeta y del futuro de nuestros hijos"', 
+            stat_tons: "Toneladas/año", stat_countries: "Países destino", stat_years: "Años experiencia", stat_port: "Puerto BCN", 
+            auth_title: "Códigos de Autorización", auth_subtitle: "Verifique nuestras credenciales oficiales", verified: "Verificado", 
+            auth1_label: "Gestor de residuos autorizado", auth2_label: "Productor de residuos autorizado", auth3_label: "Código Nima de Empresa", 
+            cert_title: "Certificaciones Oficiales", cert_subtitle: "Entidades que avalan nuestra operación", 
+            dest_title: "Destinos de Exportación", dest_subtitle: "Presencia global en los principales mercados",
+            logistics_badge: "VENTAJA ESTRATÉGICA",
+            logistics_heading: "Ventaja Logística",
+            logistics_desc: "Nuestra ubicación estratégica a solo 15 minutos del Puerto de Barcelona nos permite ofrecer tiempos de respuesta rápidos y costes logísticos optimizados.",
+            logistics_card1_title: "Acceso directo al puerto",
+            logistics_card1_sub: "15 minutos de distancia",
+            logistics_card2_title: "Instalaciones de 5,000 m²",
+            logistics_card2_sub: "Tres naves unificadas",
+            logistics_card3_title: "Capacidad de 2,000+ toneladas/año",
+            logistics_card3_sub: "Para operaciones de gran volumen",
+            port_badge: "Puerto de Barcelona",
+            contact_badge: "CONTACTO COMERCIAL",
+            contact_heading: "¿Necesita importar o exportar metales?",
+            contact_subtitle: "Contáctenos para discutir sus necesidades. Nuestro equipo comercial le atenderá con la mayor profesionalidad.",
+            phone_card_title: "Teléfonos de Contacto",
+            phone_label_1: "Atención al Cliente",
+            phone_label_2: "Comercio Internacional",
+            phone_label_3: "DG/CEO",
+            phone_label_4: "MD",
+            info_card_title: "Información General",
+            email_label: "Email",
+            address_label: "Dirección",
+            hours_label: "Horario de Atención",
+            hours_text: "Lunes a Sábado: 08:30h a 20:30h (Horario continuo)",
+            quote_button: "Solicitar Cotización",
+            cert_view_certificate: "Ver Certificado →",
+            cert_view_profile: "Ver Perfil →",
+            footer_tagline_1: "Cuidamos del planeta y del futuro de nuestros hijos",
+            footer_tagline_2: "Recicladores profesionales de metales en Barcelona",
+            footer_quick_links: "Enlaces Rápidos",
+            footer_contact: "Contacto",
+            footer_copyright: "Todos los derechos reservados."
+        },
+        ca: { 
+            nav_inicio: "Inici", nav_materiales: "Materials", nav_catalogo: "Catàleg", nav_import: "Import/Export", nav_nosotros: "Nosaltres", nav_contacto: "Contacte",
+            hero_title: "Importació i Exportació", hero_subtitle: "Operant des de 1998 amb autorització oficial", slogan: '"Cuidem del planeta i del futur dels nostres fills"', 
+            stat_tons: "Tones/any", stat_countries: "Països destinació", stat_years: "Anys experiència", stat_port: "Port BCN", 
+            auth_title: "Codis d'Autorització", auth_subtitle: "Verifique les nostres credencials oficials", verified: "Verificat", 
+            auth1_label: "Gestor de residus autoritzat", auth2_label: "Productor de residus autoritzat", auth3_label: "Codi Nima d'Empresa", 
+            cert_title: "Certificacions Oficials", cert_subtitle: "Entitats que avalen la nostra operació", 
+            dest_title: "Destins d'Exportació", dest_subtitle: "Presència global als principals mercats",
+            logistics_badge: "AVANTATGE ESTRATÈGICA",
+            logistics_heading: "Avantatge Logístic",
+            logistics_desc: "La nostra ubicació estratègica a només 15 minuts del Port de Barcelona ens permet oferir temps de resposta ràpids i costos logístics optimitzats.",
+            logistics_card1_title: "Accés directe al port",
+            logistics_card1_sub: "15 minuts de distància",
+            logistics_card2_title: "Instal·lacions de 5.000 m²",
+            logistics_card2_sub: "Tres naus unificades",
+            logistics_card3_title: "Capacitat de 2.000+ tones/any",
+            logistics_card3_sub: "Per a operacions de gran volum",
+            port_badge: "Port de Barcelona",
+            contact_badge: "CONTACTE COMERCIAL",
+            contact_heading: "Necessiteu importar o exportar metalls?",
+            contact_subtitle: "Contacteu-nos per discutir les vostres necessitats. El nostre equip comercial us atendrà amb la màxima professionalitat.",
+            phone_card_title: "Telèfons de Contacte",
+            phone_label_1: "Atenció al Client",
+            phone_label_2: "Comerç Internacional",
+            phone_label_3: "DG/CEO",
+            phone_label_4: "MD",
+            info_card_title: "Informació General",
+            email_label: "Correu electrònic",
+            address_label: "Adreça",
+            hours_label: "Horari d'Atenció",
+            hours_text: "Dilluns a Dissabte: 08:30h a 20:30h (Horari continu)",
+            quote_button: "Sol·licitar Pressupost",
+            cert_view_certificate: "Veure Certificat →",
+            cert_view_profile: "Veure Perfil →",
+            footer_tagline_1: "Cuidem del planeta i del futur dels nostres fills",
+            footer_tagline_2: "Recicladors professionals de metalls a Barcelona",
+            footer_quick_links: "Enllaços Ràpids",
+            footer_contact: "Contacte",
+            footer_copyright: "Tots els drets reservats."
+        },
+        en: { 
+            nav_inicio: "Home", nav_materiales: "Materials", nav_catalogo: "Catalog", nav_import: "Import/Export", nav_nosotros: "About Us", nav_contacto: "Contact",
+            hero_title: "Import and Export", hero_subtitle: "Operating since 1998 with official authorization", slogan: '"We care for the planet and the future of our children"', 
+            stat_tons: "Tons/year", stat_countries: "Destination countries", stat_years: "Years experience", stat_port: "Port BCN", 
+            auth_title: "Authorization Codes", auth_subtitle: "Verify our official credentials", verified: "Verified", 
+            auth1_label: "Authorized Waste Manager", auth2_label: "Authorized Waste Producer", auth3_label: "Company Nima Code", 
+            cert_title: "Official Certifications", cert_subtitle: "Entities that endorse our operation", 
+            dest_title: "Export Destinations", dest_subtitle: "Global presence in major markets",
+            logistics_badge: "STRATEGIC ADVANTAGE",
+            logistics_heading: "Logistics Advantage",
+            logistics_desc: "Our strategic location just 15 minutes from the Port of Barcelona allows us to offer fast response times and optimized logistics costs.",
+            logistics_card1_title: "Direct port access",
+            logistics_card1_sub: "15 minutes away",
+            logistics_card2_title: "5,000 m² Facilities",
+            logistics_card2_sub: "Three unified warehouses",
+            logistics_card3_title: "2,000+ tons/year capacity",
+            logistics_card3_sub: "For large volume operations",
+            port_badge: "Port of Barcelona",
+            contact_badge: "COMMERCIAL CONTACT",
+            contact_heading: "Need to import or export metals?",
+            contact_subtitle: "Contact us to discuss your needs. Our commercial team will assist you with the utmost professionalism.",
+            phone_card_title: "Contact Phones",
+            phone_label_1: "Customer Service",
+            phone_label_2: "International Trade",
+            phone_label_3: "DG/CEO",
+            phone_label_4: "MD",
+            info_card_title: "General Information",
+            email_label: "Email",
+            address_label: "Address",
+            hours_label: "Business Hours",
+            hours_text: "Monday to Saturday: 08:30h to 20:30h (Continuous hours)",
+            quote_button: "Request Quote",
+            cert_view_certificate: "View Certificate →",
+            cert_view_profile: "View Profile →",
+            footer_tagline_1: "We care for the planet and the future of our children",
+            footer_tagline_2: "Professional metal recyclers in Barcelona",
+            footer_quick_links: "Quick Links",
+            footer_contact: "Contact",
+            footer_copyright: "All rights reserved."
+        }
+    };
+
+    const certificates = [
+        { name: "Generalitat de Catalunya", nameCa: "Generalitat de Catalunya", nameEn: "Government of Catalonia", link: null, img: "images/certificate/generalitat.png" },
+        { name: "Cámara de Comercio de Barcelona", nameCa: "Cambra de Comerç de Barcelona", nameEn: "Barcelona Chamber of Commerce", link: null, img: "images/certificate/cambra-comerc (2).png" },
+        { name: "Agència de Residus de Catalunya", nameCa: "Agència de Residus de Catalunya", nameEn: "Waste Agency of Catalonia", link: null, img: "images/certificate/agencia-residus.png" },
+        { name: "Ajuntament de L Hospitalet", nameCa: "Ajuntament de L Hospitalet", nameEn: "L Hospitalet City Council", link: null, img: "images/certificate/ajuntament-hospitalet.png" },
+        { name: "Gremi de Recuperació de Catalunya", nameCa: "Gremi de Recuperació de Catalunya", nameEn: "Recovery Guild of Catalonia", link: null, img: "images/certificate/gremi-recuperacio.png" },
+        { name: "Ministerio de Industria", nameCa: "Ministeri d'Indústria", nameEn: "Ministry of Industry", link: null, img: "images/certificate/ministerio-industria.jpg" },
+        { name: "SDR - Sistema Documental de Residus", nameCa: "SDR - Sistema Documental de Residus", nameEn: "SDR - Waste Documentary System", link: null, img: "images/certificate/sdr.png" },
+        { name: "Xarxa Industrial i Negocis", nameCa: "Xarxa Industrial i Negocis", nameEn: "Xarxa Industrial i Negocis", link: "https://xarxaindustrial.net/es/proveedor/r/metal-day/", img: "images/certificate/xarxa-industrial.png" },
+        { name: "Metal Day Logo", nameCa: "Metal Day Logo", nameEn: "Metal Day Logo", link: null, img: "images/certificate/metal-day-logo.jpg" }
+    ];
+
+    const destinations = ["Pakistán", "EAU", "India", "Turquía", "Egipto", "China"];
+    const flags = { "Pakistán": "🇵🇰", "EAU": "🇦🇪", "India": "🇮🇳", "Turquía": "🇹🇷", "Egipto": "🇪🇬", "China": "🇨🇳" };
+
+    let currentLang = "es";
+
+    function updateCertificates() {
+        const grid = document.getElementById('certificatesGrid');
+        if (!grid) return;
+        const t = translations[currentLang];
+        const viewCertText = t.cert_view_certificate || 'Ver Certificado →';
+        const viewProfileText = t.cert_view_profile || 'Ver Perfil →';
+        const verifiedText = t.verified || 'Verificado';
+        
+        grid.innerHTML = certificates.map(cert => {
+            let name = currentLang === 'ca' ? cert.nameCa : currentLang === 'en' ? cert.nameEn : cert.name;
+            let imgPath = cert.img;
+            let link = cert.link;
+            let onClickAttr = link ? `onclick="window.open('${link}', '_blank')"` : `onclick="openModal('${imgPath}', '${name}')"`;
+            return `<div class="cert-card" ${onClickAttr} style="cursor:pointer">
+                        <div class="cert-image"><img src="${imgPath}" alt="${name}" onerror="this.src='https://placehold.co/100x80/2e7d32/white?text=${encodeURIComponent(name.split(' ')[0])}'"></div>
+                        <div class="cert-info"><div class="cert-title">${name}</div><div class="cert-badge">${verifiedText}</div>${link ? `<a href="${link}" target="_blank" class="cert-link" onclick="event.stopPropagation()">${viewProfileText}</a>` : `<span class="cert-link">${viewCertText}</span>`}</div>
+                    </div>`;
+        }).join('');
+    }
+
+    function updateDestinations() {
+        const grid = document.getElementById('destinationsGrid');
+        if (!grid) return;
+        grid.innerHTML = destinations.map(d => `<div class="dest-card"><div class="dest-flag">${flags[d]}</div><div class="dest-name">${d}</div></div>`).join('');
+    }
+
+    function openModal(imgSrc, certName) {
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        if (modal && modalImg) {
+            modal.style.display = "flex";
+            modalImg.src = imgSrc;
+            modalImg.alt = certName;
+        }
+    }
+
+    function closeModal() {
+        document.getElementById('imageModal').style.display = "none";
+    }
+
+    // ============================================
+    // INITIALIZATION
+    // ============================================
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('tickerTrack').innerHTML = createTickerItems();
+        
+        const savedLang = localStorage.getItem('metalday_language') || 'ES';
+        const langItem = document.querySelector(`.lang-item[data-lang="${savedLang}"]`);
+        if (langItem) {
+            selectLanguage(langItem, savedLang);
+        }
+        
+        updateCertificates();
+        updateDestinations();
+    });
+
+    document.addEventListener('click', function(event) {
+        if (!event.target.closest('.lang-selector')) {
+            document.getElementById('langDropdown').classList.remove('show');
+        }
+    });
+</script>
+</body>
+</html>

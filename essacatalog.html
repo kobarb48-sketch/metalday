@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Metal Day S.A. - Catálogo de Materiales</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Montserrat', sans-serif; background: #ffffff; color: #1a1a1a; line-height: 1.6; }
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+        
+        /* ============================================
+           HEADER DESIGN (GLASS PREMIUM)
+        ============================================ */
+        .header-glass {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(74,222,128,0.2);
+            padding: 0.75rem 1rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1280px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .nav-left, .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-left a, .nav-right a {
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-left a:hover, .nav-right a:hover,
+        .nav-left a.active, .nav-right a.active {
+            color: #4ade80;
+        }
+
+        .logo-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-img:hover {
+            transform: scale(1.02);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+
+        .nav-links-mobile {
+            display: none;
+            width: 100%;
+            flex-direction: column;
+            gap: 0.5rem;
+            padding: 1rem 0;
+            order: 3;
+        }
+
+        .nav-links-mobile.active {
+            display: flex;
+        }
+
+        .nav-links-mobile a {
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 0.5rem 0;
+            transition: color 0.3s;
+        }
+
+        .nav-links-mobile a:hover,
+        .nav-links-mobile a.active {
+            color: #4ade80;
+        }
+
+        .lang-selector {
+            position: relative;
+            z-index: 1001;
+        }
+
+        .lang-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(46,125,50,0.15);
+            border: 1px solid rgba(74,222,128,0.3);
+            border-radius: 2rem;
+            padding: 0.4rem 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn:hover {
+            background: rgba(46,125,50,0.3);
+            border-color: #4ade80;
+        }
+
+        .lang-flag { font-size: 1.1rem; }
+        .lang-name { color: white; font-size: 0.8rem; font-weight: 500; }
+        .lang-arrow { color: #4ade80; font-size: 0.7rem; }
+
+        .lang-dropdown-modern {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 0.5rem;
+            background: #1a1a1a;
+            border: 1px solid rgba(74,222,128,0.3);
+            border-radius: 1rem;
+            min-width: 160px;
+            z-index: 1002;
+            display: none;
+            overflow: hidden;
+            box-shadow: 0 15px 35px -10px rgba(0,0,0,0.5);
+        }
+
+        .lang-dropdown-modern.show {
+            display: block;
+            animation: slideDown 0.25s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .lang-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.7rem 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .lang-item:last-child { border-bottom: none; }
+        .lang-item:hover { background: rgba(74,222,128,0.1); }
+        .lang-item.active { background: rgba(46,125,50,0.2); }
+        .lang-item.active .lang-item-name { color: #4ade80; }
+        .lang-item-flag { font-size: 1.2rem; }
+        .lang-item-name { color: #9ca3af; font-size: 0.85rem; font-weight: 500; }
+        .check-icon { margin-left: auto; color: #4ade80; font-size: 0.8rem; }
+
+        .whatsapp-icon {
+            width: 36px;
+            height: 36px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .whatsapp-icon i { color: white; font-size: 1.2rem; }
+        .whatsapp-icon:hover { transform: scale(1.1); }
+
+        /* ============================================
+           PRICE TICKER
+        ============================================ */
+        .ticker-premium {
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            border-top: 1px solid rgba(74,222,128,0.2);
+            border-bottom: 1px solid rgba(74,222,128,0.2);
+            padding: 0.75rem 0;
+            overflow: hidden;
+            position: fixed;
+            top: 70px;
+            left: 0;
+            right: 0;
+            z-index: 999;
+        }
+
+        .ticker-track-premium {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            animation: scrollPremium 25s linear infinite;
+            padding-left: 2rem;
+        }
+
+        .ticker-premium:hover .ticker-track-premium {
+            animation-play-state: paused;
+        }
+
+        @keyframes scrollPremium {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .ticker-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: rgba(46,125,50,0.12);
+            padding: 0.45rem 1.2rem;
+            border-radius: 2rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(74,222,128,0.15);
+        }
+
+        .ticker-chip:hover {
+            background: rgba(46,125,50,0.3);
+            border-color: rgba(74,222,128,0.4);
+            transform: translateY(-2px);
+        }
+
+        .ticker-symbol { color: #4ade80; font-weight: 800; font-size: 0.9rem; }
+        .ticker-price { color: white; font-weight: 700; font-size: 0.95rem; }
+        .ticker-change {
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.2rem 0.5rem;
+            border-radius: 1rem;
+        }
+        .ticker-change.up { color: #4ade80; background: rgba(74,222,128,0.12); }
+        .ticker-change.down { color: #f87171; background: rgba(248,113,113,0.12); }
+        .ticker-sep { color: #2e7d32; font-size: 0.4rem; opacity: 0.6; }
+
+        /* ============================================
+           MAIN CONTENT & PAGE SPECIFIC STYLES
+        ============================================ */
+        .main-content { margin-top: 110px; }
+        section { padding: 4rem 2rem; }
+        .container { max-width: 1280px; margin: 0 auto; }
+        
+        /* Hero - Matching Import Page */
+        .hero { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0d2e0f 100%); text-align: center; border-radius: 0 0 2rem 2rem; margin-bottom: 2rem; padding: 3rem 2rem; width: 100%; position: relative; left: 0; right: 0; }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 1rem; color: white; }
+        .hero p { font-size: 1.25rem; color: #cbd5e1; max-width: 600px; margin: 0 auto; }
+        
+        /* Category Cards */
+        .space-y-6 { display: flex; flex-direction: column; gap: 1.5rem; max-width: 1280px; margin: 0 auto; padding: 0 1rem; }
+        
+        .category-card { background: white; border-radius: 0.75rem; border: 2px solid; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .category-copper { border-color: #B87333; }
+        .category-aluminum { border-color: #9CA3AF; }
+        .category-ferrous { border-color: #1A2B3C; }
+        .category-specialty { border-color: #2E7D32; }
+        
+        .category-button { width: 100%; padding: 1.25rem 1.5rem; display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: all 0.3s; border: none; background: white; }
+        .category-copper .category-button { background: linear-gradient(90deg, rgba(184,115,51,0.1) 0%, transparent 100%); }
+        .category-aluminum .category-button { background: linear-gradient(90deg, rgba(156,163,175,0.1) 0%, transparent 100%); }
+        .category-ferrous .category-button { background: linear-gradient(90deg, rgba(26,43,60,0.1) 0%, transparent 100%); }
+        .category-specialty .category-button { background: linear-gradient(90deg, rgba(46,125,50,0.1) 0%, transparent 100%); }
+        .category-button:hover { background: linear-gradient(90deg, rgba(0,0,0,0.05) 0%, transparent 100%); }
+        
+        .category-left { display: flex; align-items: center; gap: 1rem; text-align: left; }
+        .category-icon { width: 3.5rem; height: 3.5rem; border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; }
+        .copper-icon { background: #B87333; }
+        .aluminum-icon { background: #9CA3AF; }
+        .ferrous-icon { background: #1A2B3C; }
+        .specialty-icon { background: #2E7D32; }
+        .category-icon i { color: white; font-size: 1.5rem; }
+        
+        .category-title { font-size: 1.25rem; font-weight: 700; color: #1A2B3C; }
+        .category-desc { font-size: 0.875rem; color: #6B7280; margin-top: 0.25rem; }
+        
+        .chevron { transition: transform 0.3s ease; color: #B87333; font-size: 1.5rem; }
+        .category-aluminum .chevron { color: #9CA3AF; }
+        .category-ferrous .chevron { color: #1A2B3C; }
+        .category-specialty .chevron { color: #2E7D32; }
+        .chevron.rotated { transform: rotate(180deg); }
+        
+        .dropdown-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; }
+        .dropdown-content.active { max-height: 2000px; }
+        
+        .content-inner { padding: 1.5rem; }
+        
+        .subcategory { margin-bottom: 1.5rem; }
+        .subcategory:last-child { margin-bottom: 0; }
+        .subcategory-title { font-size: 1.1rem; font-weight: 700; color: #1A2B3C; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+        .subcategory-title i { font-size: 0.5rem; color: #2E7D32; }
+        
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0.75rem; margin-left: 1.5rem; }
+        .product-item { background: #F9FAFB; border-radius: 0.5rem; padding: 0.75rem 1rem; transition: all 0.3s; border-left: 4px solid; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+        .copper-product { border-left-color: #B87333; }
+        .aluminum-product { border-left-color: #9CA3AF; }
+        .ferrous-product { border-left-color: #1A2B3C; }
+        .specialty-product { border-left-color: #2E7D32; }
+        .product-item:hover { transform: translateX(5px); background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .product-name { font-weight: 600; font-size: 0.9rem; }
+        .product-code { font-size: 0.7rem; color: #6B7280; margin-top: 0.25rem; }
+        .product-price { font-weight: 700; color: #2E7D32; font-size: 0.85rem; }
+        .product-price::before { content: "~ "; }
+        .consult { color: #6B7280; }
+        .consult::before { content: ""; }
+        
+        .cta-section { margin-top: 3rem; text-align: center; }
+        .cta-text { color: #6B7280; margin-bottom: 1rem; }
+        .whatsapp-btn-large { display: inline-flex; align-items: center; gap: 0.5rem; background: #2E7D32; color: white; padding: 1rem 2rem; border-radius: 0.5rem; font-weight: 700; text-decoration: none; transition: all 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .whatsapp-btn-large:hover { background: #1B5E20; transform: scale(1.05); }
+
+        /* ============================================
+           FOOTER DESIGN - GLASS PREMIUM
+        ============================================ */
+        .footer-glass {
+            background: rgba(10, 10, 10, 0.95);
+            border-top: 1px solid rgba(74,222,128,0.2);
+            padding: 3rem 2rem 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .footer-container { max-width: 1280px; margin: 0 auto; }
+        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1.5fr; gap: 2rem; margin-bottom: 2rem; }
+        .footer-logo img { height: 50px; width: auto; margin-bottom: 1rem; }
+        .footer-tagline { color: #9ca3af; font-size: 0.85rem; line-height: 1.6; }
+        .footer-tagline i { color: #4ade80; margin-right: 0.5rem; }
+        .footer-links h4, .footer-contact h4 { color: white; font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem; }
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 0.6rem; }
+        .footer-links a { color: #9ca3af; text-decoration: none; font-size: 0.85rem; transition: all 0.3s; }
+        .footer-links a:hover { color: #4ade80; transform: translateX(3px); display: inline-block; }
+        .contact-item { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.8rem; color: #9ca3af; font-size: 0.85rem; }
+        .contact-item i { width: 24px; color: #4ade80; font-size: 0.9rem; }
+        .contact-item a { color: #9ca3af; text-decoration: none; }
+        .contact-item a:hover { color: #4ade80; }
+        .social-icons { display: flex; gap: 1rem; margin-top: 1rem; }
+        .social-icons a { width: 36px; height: 36px; background: rgba(255,255,255,0.05); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s; color: #9ca3af; text-decoration: none; }
+        .social-icons a:hover { background: #2e7d32; color: white; transform: translateY(-3px); }
+        .footer-bottom { text-align: center; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.05); color: #6b7280; font-size: 0.75rem; }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 55px;
+            height: 55px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 5px 20px rgba(37,211,102,0.4);
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        .whatsapp-float i { color: white; font-size: 1.8rem; }
+        .whatsapp-float:hover { transform: scale(1.1); }
+
+        /* ============================================
+           RESPONSIVE
+        ============================================ */
+        @media (max-width: 768px) {
+            .nav-left, .nav-right { display: none; }
+            .mobile-menu-btn { display: block; }
+            .nav-container { flex-wrap: wrap; }
+            .logo-wrapper { margin: 0 auto; }
+            .logo-img { height: 45px; }
+            .ticker-chip { padding: 0.3rem 0.8rem; gap: 0.4rem; }
+            .ticker-symbol { font-size: 0.75rem; }
+            .ticker-price { font-size: 0.8rem; }
+            .ticker-change { font-size: 0.6rem; }
+            .footer-grid { grid-template-columns: 1fr; text-align: center; }
+            .footer-links ul { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }
+            .footer-links li { margin-bottom: 0; }
+            .contact-item { justify-content: center; }
+            .social-icons { justify-content: center; }
+            .whatsapp-float { bottom: 1rem; right: 1rem; width: 45px; height: 45px; }
+            .whatsapp-float i { font-size: 1.4rem; }
+            .hero h1 { font-size: 2rem; }
+            .hero p { font-size: 1rem; }
+            section { padding: 2rem 1rem; }
+            .category-left { gap: 0.75rem; }
+            .category-icon { width: 2.5rem; height: 2.5rem; }
+            .category-icon i { font-size: 1rem; }
+            .category-title { font-size: 1rem; }
+            .category-desc { font-size: 0.7rem; }
+            .products-grid { grid-template-columns: 1fr; margin-left: 0; }
+            .product-item { flex-direction: column; text-align: center; }
+            .product-price { margin-top: 0.5rem; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER SECTION -->
+    <header class="header-glass">
+        <div class="nav-container">
+            <div class="nav-left">
+                <a href="essahome.html" data-key="nav_inicio">Inicio</a>
+                <a href="essamaterial.html" data-key="nav_materiales">Materiales</a>
+                <a href="essacatalog.html" class="active" data-key="nav_catalogo">Catálogo</a>
+            </div>
+            
+            <div class="logo-wrapper">
+                <img class="logo-img" src="images/team/logo.gif" alt="Metal Day Logo" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 200 50\'%3E%3Ctext x=\'0\' y=\'35\' font-family=\'Playfair Display\' font-size=\'28\' font-weight=\'900\' fill=\'white\'%3EMETAL DAY%3C/text%3E%3Ctext x=\'0\' y=\'48\' font-family=\'Montserrat\' font-size=\'10\' fill=\'%232e7d32\'%3ES.A.%3C/text%3E%3C/svg%3E'">
+            </div>
+            
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+            
+            <div class="nav-right">
+                <a href="essaimport.html" data-key="nav_import">Import/Export</a>
+                <a href="essaaboutus.html" data-key="nav_nosotros">Nosotros</a>
+                <a href="essacontact.html" data-key="nav_contacto">Contacto</a>
+                
+                <div class="lang-selector">
+                    <div class="lang-btn" onclick="toggleLanguageDropdown(event)">
+                        <span class="lang-flag" id="selectedFlag">🇪🇸</span>
+                        <span class="lang-name" id="selectedLanguage">Español</span>
+                        <i class="fas fa-chevron-down lang-arrow"></i>
+                    </div>
+                    <div class="lang-dropdown-modern" id="langDropdown">
+                        <div class="lang-item active" data-lang="ES" data-flag="🇪🇸" data-name="Español" onclick="selectLanguage(this, 'ES')">
+                            <span class="lang-item-flag">🇪🇸</span>
+                            <span class="lang-item-name">Español</span>
+                            <i class="fas fa-check check-icon"></i>
+                        </div>
+                        <div class="lang-item" data-lang="CA" data-flag="🏴󠁥󠁳󠁣󠁴󠁿" data-name="Català" onclick="selectLanguage(this, 'CA')">
+                            <span class="lang-item-flag">🏴󠁥󠁳󠁣󠁴󠁿</span>
+                            <span class="lang-item-name">Català</span>
+                        </div>
+                        <div class="lang-item" data-lang="EN" data-flag="🇬🇧" data-name="English" onclick="selectLanguage(this, 'EN')">
+                            <span class="lang-item-flag">🇬🇧</span>
+                            <span class="lang-item-name">English</span>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="https://wa.me/34635699485" class="whatsapp-icon" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            
+            <div class="nav-links-mobile" id="mobileNav">
+                <a href="essahome.html" data-key="nav_inicio">Inicio</a>
+                <a href="essamaterial.html" data-key="nav_materiales">Materiales</a>
+                <a href="essacatalog.html" class="active" data-key="nav_catalogo">Catálogo</a>
+                <a href="essaimport.html" data-key="nav_import">Import/Export</a>
+                <a href="essaaboutus.html" data-key="nav_nosotros">Nosotros</a>
+                <a href="essacontact.html" data-key="nav_contacto">Contacto</a>
+                <div style="display:flex;align-items:center;gap:1rem;margin-top:1rem;">
+                    <div class="lang-selector">
+                        <div class="lang-btn" onclick="toggleLanguageDropdown(event)">
+                            <span class="lang-flag" id="mobileSelectedFlag">🇪🇸</span>
+                            <span class="lang-name" id="mobileSelectedLanguage">Español</span>
+                            <i class="fas fa-chevron-down lang-arrow"></i>
+                        </div>
+                    </div>
+                    <a href="https://wa.me/34635699485" class="whatsapp-icon" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- PRICE TICKER SECTION -->
+    <div class="ticker-premium">
+        <div class="ticker-track-premium" id="tickerTrack"></div>
+    </div>
+
+    <!-- ORIGINAL MIDDLE CONTENT - UNCHANGED -->
+    <main class="main-content">
+        <div class="hero">
+            <h1 data-key="catalog_title">Catálogo de Materiales</h1>
+            <p data-key="catalog_subtitle">Seleccione una categoría para ver los productos disponibles con sus códigos y precios</p>
+        </div>
+
+        <div class="space-y-6">
+            <!-- 1. COPPER FAMILY -->
+            <div class="category-card category-copper">
+                <button class="category-button" onclick="toggleCategory('copper')">
+                    <div class="category-left">
+                        <div class="category-icon copper-icon"><i class="fas fa-coins"></i></div>
+                        <div>
+                            <h2 class="category-title" data-key="cat1_title">1. Copper Family (Cobre)</h2>
+                            <p class="category-desc" data-key="cat1_desc">Pure copper metals and alloys</p>
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down chevron" id="chevron-copper"></i>
+                </button>
+                <div class="dropdown-content" id="dropdown-copper">
+                    <div class="content-inner">
+                        <div class="subcategory">
+                            <div class="subcategory-title"><i class="fas fa-circle"></i> <span data-key="cat1_sub1">Pure Copper</span></div>
+                            <div class="products-grid">
+                                <div class="product-item copper-product"><div><div class="product-name" data-key="product_copper_milberry">COBRE MILBERRY SOLO HILOS SIN NADA</div><div class="product-code"><span data-key="code_label">Code:</span> 10066</div></div><div class="product-price">€8.60/kg</div></div>
+                                <div class="product-item copper-product"><div><div class="product-name" data-key="product_copper_tubes">COBRE DE TUBOS VARIOS TIPOS SIN NADA</div><div class="product-code"><span data-key="code_label">Code:</span> 10071</div></div><div class="product-price">€8.20/kg</div></div>
+                                <div class="product-item copper-product"><div><div class="product-name" data-key="product_copper_radiator">RADIADOR COBRE Y ALUMINIO SIN HIERRO</div><div class="product-code"><span data-key="code_label">Code:</span> 10101</div></div><div class="product-price">€3.80/kg</div></div>
+                            </div>
+                        </div>
+                        <div class="subcategory">
+                            <div class="subcategory-title"><i class="fas fa-circle"></i> <span data-key="cat1_sub2">Brass</span></div>
+                            <div class="products-grid">
+                                <div class="product-item copper-product"><div><div class="product-name" data-key="product_brass_commercial">LATON COMERCIAL SIN FLEXO, SIN NADA</div><div class="product-code"><span data-key="code_label">Code:</span> 10081</div></div><div class="product-price">€4.90/kg</div></div>
+                            </div>
+                        </div>
+                        <div class="subcategory">
+                            <div class="subcategory-title"><i class="fas fa-circle"></i> <span data-key="cat1_sub3">Cables</span></div>
+                            <div class="products-grid">
+                                <div class="product-item copper-product"><div><div class="product-name" data-key="product_cable_220v">CABLE PVC 220V MANGUERA 1.5-16mm LIMPIO</div><div class="product-code"><span data-key="code_label">Code:</span> 10021</div></div><div class="product-price">€2.50/kg</div></div>
+                                <div class="product-item copper-product"><div><div class="product-name" data-key="product_cable_380v">CABLE PVC 380V MANGUERA GORDA 25-150mm LIMPIO</div><div class="product-code"><span data-key="code_label">Code:</span> 10026</div></div><div class="product-price">€2.70/kg</div></div>
+                                <div class="product-item copper-product"><div><div class="product-name" data-key="product_cable_unipolar">CABLE PVC UNIPOLAR FINO 1.5-10mm LIMPIO</div><div class="product-code"><span data-key="code_label">Code:</span> 10016</div></div><div class="product-price">€3.20/kg</div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. ALUMINUM FAMILY -->
+            <div class="category-card category-aluminum">
+                <button class="category-button" onclick="toggleCategory('aluminum')">
+                    <div class="category-left">
+                        <div class="category-icon aluminum-icon"><i class="fas fa-layer-group"></i></div>
+                        <div>
+                            <h2 class="category-title" data-key="cat2_title">2. Aluminum Family (Aluminio)</h2>
+                            <p class="category-desc" data-key="cat2_desc">Aluminum profiles and scrap</p>
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down chevron" id="chevron-aluminum"></i>
+                </button>
+                <div class="dropdown-content" id="dropdown-aluminum">
+                    <div class="content-inner">
+                        <div class="products-grid">
+                            <div class="product-item aluminum-product"><div><div class="product-name" data-key="product_aluminum_raw">Raw / Clean Profile</div><div class="product-code"><span data-key="code_label">Code:</span> 10086</div></div><div class="product-price">€1.65/kg</div></div>
+                            <div class="product-item aluminum-product"><div><div class="product-name" data-key="product_aluminum_dirty">Dirty Profile</div><div class="product-code"><span data-key="code_label">Code:</span> 10087</div></div><div class="product-price">€1.38/kg</div></div>
+                            <div class="product-item aluminum-product"><div><div class="product-name" data-key="product_aluminum_carter">Aluminum Carter / First</div><div class="product-code"><span data-key="code_label">Code:</span> 10046</div></div><div class="product-price">€1.47/kg</div></div>
+                            <div class="product-item aluminum-product"><div><div class="product-name" data-key="product_aluminum_first_cut">Aluminum First Cut</div><div class="product-code"><span data-key="code_label">Code:</span> 10421</div></div><div class="product-price consult" data-key="consult">Consultar</div></div>
+                            <div class="product-item aluminum-product"><div><div class="product-name" data-key="product_aluminum_pot">Aluminum Pot / Can or Pot</div><div class="product-code"><span data-key="code_label">Code:</span> 10056</div></div><div class="product-price">€1.10/kg</div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. FERROUS FAMILY -->
+            <div class="category-card category-ferrous">
+                <button class="category-button" onclick="toggleCategory('ferrous')">
+                    <div class="category-left">
+                        <div class="category-icon ferrous-icon"><i class="fas fa-industry"></i></div>
+                        <div>
+                            <h2 class="category-title" data-key="cat3_title">3. Ferrous Family (Hierro y Acero)</h2>
+                            <p class="category-desc" data-key="cat3_desc">Ferrous metals and stainless steel</p>
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down chevron" id="chevron-ferrous"></i>
+                </button>
+                <div class="dropdown-content" id="dropdown-ferrous">
+                    <div class="content-inner">
+                        <div class="subcategory">
+                            <div class="subcategory-title"><i class="fas fa-circle"></i> <span data-key="cat3_sub1">Stainless Steel</span></div>
+                            <div class="products-grid">
+                                <div class="product-item ferrous-product"><div><div class="product-name" data-key="product_stainless">Stainless Steel 304, 316</div><div class="product-code"><span data-key="code_label">Code:</span> 10001</div></div><div class="product-price">€1.29/kg</div></div>
+                            </div>
+                        </div>
+                        <div class="subcategory">
+                            <div class="subcategory-title"><i class="fas fa-circle"></i> <span data-key="cat3_sub2">Iron</span></div>
+                            <div class="products-grid">
+                                <div class="product-item ferrous-product"><div><div class="product-name" data-key="product_iron_industrial">HIERRO SOLO INDUSTRIAL PESADO Y VIGAS</div><div class="product-code"><span data-key="code_label">Code:</span> 10216</div></div><div class="product-price">€0.19/kg</div></div>
+                                <div class="product-item ferrous-product"><div><div class="product-name" data-key="product_iron_mixed_clean">HIERRO MIXTO LIMPIO PRIMERA</div><div class="product-code"><span data-key="code_label">Code:</span> 10217</div></div><div class="product-price">€0.17/kg</div></div>
+                                <div class="product-item ferrous-product"><div><div class="product-name" data-key="product_iron_loose">HIERRO SOLO FLOJO MELE SEGUNDA</div><div class="product-code"><span data-key="code_label">Code:</span> 10215</div></div><div class="product-price">€0.14/kg</div></div>
+                                <div class="product-item ferrous-product"><div><div class="product-name" data-key="product_iron_mixed_bad">HIERRO MIXTO MALO SILLAS</div><div class="product-code"><span data-key="code_label">Code:</span> 10218</div></div><div class="product-price">€0.11/kg</div></div>
+                                <div class="product-item ferrous-product"><div><div class="product-name" data-key="product_iron_sheet_a">HIERRO CHAPAJO LAVADORA Y LAVABAJILLA (A)</div><div class="product-code"><span data-key="code_label">Code:</span> 10221</div></div><div class="product-price">€0.11/kg</div></div>
+                                <div class="product-item ferrous-product"><div><div class="product-name" data-key="product_iron_sheet_c">HIERRO CHAPAJO MALO RAEE (C)</div><div class="product-code"><span data-key="code_label">Code:</span> 10223</div></div><div class="product-price">€0.05/kg</div></div>
+                            </div>
+                        </div>
+                        <div class="subcategory">
+                            <div class="subcategory-title"><i class="fas fa-circle"></i> <span data-key="cat3_sub3">Specials</span></div>
+                            <div class="products-grid">
+                                <div class="product-item ferrous-product"><div><div class="product-name" data-key="product_titanium">Titanium</div><div class="product-code"><span data-key="consult">Consultar</span></div></div><div class="product-price consult" data-key="consult">Consultar</div></div>
+                                <div class="product-item ferrous-product"><div><div class="product-name" data-key="product_cast_iron">Cast Iron</div><div class="product-code"><span data-key="consult">Consultar</span></div></div><div class="product-price consult" data-key="consult">Consultar</div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. SPECIALTY & WASTE CATEGORIES -->
+            <div class="category-card category-specialty">
+                <button class="category-button" onclick="toggleCategory('specialty')">
+                    <div class="category-left">
+                        <div class="category-icon specialty-icon"><i class="fas fa-recycle"></i></div>
+                        <div>
+                            <h2 class="category-title" data-key="cat4_title">4. Specialty & Waste Categories</h2>
+                            <p class="category-desc" data-key="cat4_desc">Special materials and waste</p>
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down chevron" id="chevron-specialty"></i>
+                </button>
+                <div class="dropdown-content" id="dropdown-specialty">
+                    <div class="content-inner">
+                        <div class="products-grid">
+                            <div class="product-item specialty-product"><div><div class="product-name" data-key="product_lead">Lead Family</div><div class="product-code"><span data-key="code_label">Code:</span> 10096</div></div><div class="product-price">€1.66/kg</div></div>
+                            <div class="product-item specialty-product"><div><div class="product-name" data-key="product_batteries">Batteries Family</div><div class="product-code"><span data-key="code_label">Code:</span> 10131</div></div><div class="product-price">€0.74/kg</div></div>
+                            <div class="product-item specialty-product"><div><div class="product-name" data-key="product_radiators">Radiators</div><div class="product-code"><span data-key="code_label">Code:</span> 10101</div></div><div class="product-price">€2.31/kg</div></div>
+                            <div class="product-item specialty-product"><div><div class="product-name" data-key="product_wheels">Unleaded Aluminum Wheels</div><div class="product-code"><span data-key="code_label">Code:</span> 10231</div></div><div class="product-price">€1.20/kg</div></div>
+                            <div class="product-item specialty-product"><div><div class="product-name" data-key="product_devices">All types of devices and computers</div><div class="product-code"><span data-key="code_label">Code:</span> 10191</div></div><div class="product-price consult" data-key="consult">Consultar</div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <p class="cta-text" data-key="cta_text">¿No encuentra su material? Contáctenos para una evaluación personalizada</p>
+            <a href="https://wa.me/34635699485" target="_blank" class="whatsapp-btn-large">
+                <i class="fab fa-whatsapp"></i> <span data-key="cta_button">Solicitar Cotización</span>
+            </a>
+        </div>
+    </main>
+
+    <!-- FOOTER SECTION - GLASS PREMIUM -->
+    <footer class="footer-glass">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-logo">
+                    <img src="images/team/logo.gif" alt="Metal Day Logo" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 200 50\'%3E%3Ctext x=\'0\' y=\'35\' font-family=\'Playfair Display\' font-size=\'28\' font-weight=\'900\' fill=\'white\'%3EMETAL DAY%3C/text%3E%3Ctext x=\'0\' y=\'48\' font-family=\'Montserrat\' font-size=\'10\' fill=\'%232e7d32\'%3ES.A.%3C/text%3E%3C/svg%3E'">
+                    <p class="footer-tagline"><i class="fas fa-leaf"></i> <span data-key="footer_tagline_1">Cuidamos del planeta y del futuro de nuestros hijos</span></p>
+                    <p class="footer-tagline"><span data-key="footer_tagline_2">Recicladores profesionales de metales en Barcelona</span></p>
+                </div>
+
+                <div class="footer-links">
+                    <h4 data-key="footer_quick_links">Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="essahome.html" data-key="nav_inicio">Inicio</a></li>
+                        <li><a href="essamaterial.html" data-key="nav_materiales">Materiales</a></li>
+                        <li><a href="essacatalog.html" data-key="nav_catalogo">Catálogo</a></li>
+                        <li><a href="essaimport.html" data-key="nav_import">Import/Export</a></li>
+                        <li><a href="essaaboutus.html" data-key="nav_nosotros">Nosotros</a></li>
+                        <li><a href="essacontact.html" data-key="nav_contacto">Contacto</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-contact">
+                    <h4 data-key="footer_contact">Contacto</h4>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <a href="tel:+34681925090">+34 681 92 50 90</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <a href="tel:+34699799170">+34 699 79 91 70</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:info@metalday.es">info@metalday.es</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-pin"></i>
+                        <span>C/ del Cobalt, 62-64, 08940 L'Hospitalet de Llobregat, Barcelona</span>
+                    </div>
+                    
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 METAL DAY S.A. <span data-key="footer_copyright">Todos los derechos reservados.</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/34635699485" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // ============================================
+        // TRANSLATIONS OBJECT
+        // ============================================
+        const translations = {
+            es: {
+                nav_inicio: "Inicio",
+                nav_materiales: "Materiales",
+                nav_catalogo: "Catálogo",
+                nav_import: "Import/Export",
+                nav_nosotros: "Nosotros",
+                nav_contacto: "Contacto",
+                catalog_title: "Catálogo de Materiales",
+                catalog_subtitle: "Seleccione una categoría para ver los productos disponibles con sus códigos y precios",
+                cat1_title: "1. Familia del Cobre",
+                cat1_desc: "Metales de cobre puro y aleaciones",
+                cat1_sub1: "Cobre Puro",
+                cat1_sub2: "Latón",
+                cat1_sub3: "Cables",
+                product_copper_milberry: "COBRE MILBERRY SOLO HILOS SIN NADA",
+                product_copper_tubes: "COBRE DE TUBOS VARIOS TIPOS SIN NADA",
+                product_copper_radiator: "RADIADOR COBRE Y ALUMINIO SIN HIERRO",
+                product_brass_commercial: "LATÓN COMERCIAL SIN FLEXO, SIN NADA",
+                product_cable_220v: "CABLE PVC 220V MANGUERA 1.5-16mm LIMPIO",
+                product_cable_380v: "CABLE PVC 380V MANGUERA GORDA 25-150mm LIMPIO",
+                product_cable_unipolar: "CABLE PVC UNIPOLAR FINO 1.5-10mm LIMPIO",
+                cat2_title: "2. Familia del Aluminio",
+                cat2_desc: "Perfiles de aluminio y chatarra",
+                product_aluminum_raw: "Perfil Crudo / Limpio",
+                product_aluminum_dirty: "Perfil Sucio",
+                product_aluminum_carter: "Aluminio Carter / Primera",
+                product_aluminum_first_cut: "Aluminio Primer Corte",
+                product_aluminum_pot: "Aluminio Olla / Lata u Olla",
+                cat3_title: "3. Familia Férrica (Hierro y Acero)",
+                cat3_desc: "Metales férricos y acero inoxidable",
+                cat3_sub1: "Acero Inoxidable",
+                cat3_sub2: "Hierro",
+                cat3_sub3: "Especiales",
+                product_stainless: "Acero Inoxidable 304, 316",
+                product_iron_industrial: "HIERRO SOLO INDUSTRIAL PESADO Y VIGAS",
+                product_iron_mixed_clean: "HIERRO MIXTO LIMPIO PRIMERA",
+                product_iron_loose: "HIERRO SOLO FLOJO MELE SEGUNDA",
+                product_iron_mixed_bad: "HIERRO MIXTO MALO SILLAS",
+                product_iron_sheet_a: "HIERRO CHAPAJO LAVADORA Y LAVABAJILLA (A)",
+                product_iron_sheet_c: "HIERRO CHAPAJO MALO RAEE (C)",
+                product_titanium: "Titanio",
+                product_cast_iron: "Hierro Fundido",
+                cat4_title: "4. Categorías Especiales y Residuos",
+                cat4_desc: "Materiales especiales y residuos",
+                product_lead: "Familia del Plomo",
+                product_batteries: "Familia de Baterías",
+                product_radiators: "Radiadores",
+                product_wheels: "Llantas de Aluminio sin Plomo",
+                product_devices: "Todo tipo de aparatos y ordenadores",
+                consult: "Consultar",
+                code_label: "Código:",
+                cta_text: "¿No encuentra su material? Contáctenos para una evaluación personalizada",
+                cta_button: "Solicitar Cotización",
+                footer_tagline_1: "Cuidamos del planeta y del futuro de nuestros hijos",
+                footer_tagline_2: "Recicladores profesionales de metales en Barcelona",
+                footer_quick_links: "Enlaces Rápidos",
+                footer_contact: "Contacto",
+                footer_copyright: "Todos los derechos reservados."
+            },
+            ca: {
+                nav_inicio: "Inici",
+                nav_materiales: "Materials",
+                nav_catalogo: "Catàleg",
+                nav_import: "Import/Export",
+                nav_nosotros: "Nosaltres",
+                nav_contacto: "Contacte",
+                catalog_title: "Catàleg de Materials",
+                catalog_subtitle: "Seleccioneu una categoria per veure els productes disponibles amb els seus codis i preus",
+                cat1_title: "1. Família del Coure",
+                cat1_desc: "Metalls de coure pur i aliatges",
+                cat1_sub1: "Coure Pur",
+                cat1_sub2: "Llautó",
+                cat1_sub3: "Cables",
+                product_copper_milberry: "COURE MILBERRY NOMÉS FILS SENSE RES",
+                product_copper_tubes: "COURE DE TUBS DIVERSOS TIPUS SENSE RES",
+                product_copper_radiator: "RADIADOR COURE I ALUMINI SENSE FERRO",
+                product_brass_commercial: "LLAUTÓ COMERCIAL SENSE FLEXO, SENSE RES",
+                product_cable_220v: "CABLE PVC 220V MÀNEGA 1.5-16mm NET",
+                product_cable_380v: "CABLE PVC 380V MÀNEGA GRUIXUDA 25-150mm NET",
+                product_cable_unipolar: "CABLE PVC UNIPOLAR FI 1.5-10mm NET",
+                cat2_title: "2. Família de l'Alumini",
+                cat2_desc: "Perfils d'alumini i ferralla",
+                product_aluminum_raw: "Perfil Cru / Net",
+                product_aluminum_dirty: "Perfil Brut",
+                product_aluminum_carter: "Alumini Carter / Primera",
+                product_aluminum_first_cut: "Alumini Primer Tall",
+                product_aluminum_pot: "Alumini Olla / Llauna o Olla",
+                cat3_title: "3. Família Fèrrica (Ferro i Acer)",
+                cat3_desc: "Metalls fèrrics i acer inoxidable",
+                cat3_sub1: "Acer Inoxidable",
+                cat3_sub2: "Ferro",
+                cat3_sub3: "Especials",
+                product_stainless: "Acer Inoxidable 304, 316",
+                product_iron_industrial: "FERRO NOMÉS INDUSTRIAL PESAT I BIGUES",
+                product_iron_mixed_clean: "FERRO MIXT NET PRIMERA",
+                product_iron_loose: "FERRO NOMÉS FLUIX MELE SEGONA",
+                product_iron_mixed_bad: "FERRO MIXT DOLENT CADIRES",
+                product_iron_sheet_a: "FERRO PLANXA RENTADORA I RENTAVAIXELLA (A)",
+                product_iron_sheet_c: "FERRO PLANXA DOLENT RAEE (C)",
+                product_titanium: "Titani",
+                product_cast_iron: "Ferro Colat",
+                cat4_title: "4. Categories Especials i Residus",
+                cat4_desc: "Materials especials i residus",
+                product_lead: "Família del Plom",
+                product_batteries: "Família de Bateries",
+                product_radiators: "Radiadors",
+                product_wheels: "Llandes d'Alumini sense Plom",
+                product_devices: "Tot tipus d'aparells i ordinadors",
+                consult: "Consultar",
+                code_label: "Codi:",
+                cta_text: "No trobeu el vostre material? Contacteu-nos per a una avaluació personalitzada",
+                cta_button: "Sol·licitar Pressupost",
+                footer_tagline_1: "Cuidem del planeta i del futur dels nostres fills",
+                footer_tagline_2: "Recicladors professionals de metalls a Barcelona",
+                footer_quick_links: "Enllaços Ràpids",
+                footer_contact: "Contacte",
+                footer_copyright: "Tots els drets reservats."
+            },
+            en: {
+                nav_inicio: "Home",
+                nav_materiales: "Materials",
+                nav_catalogo: "Catalog",
+                nav_import: "Import/Export",
+                nav_nosotros: "About Us",
+                nav_contacto: "Contact",
+                catalog_title: "Materials Catalog",
+                catalog_subtitle: "Select a category to view available products with their codes and prices",
+                cat1_title: "1. Copper Family",
+                cat1_desc: "Pure copper metals and alloys",
+                cat1_sub1: "Pure Copper",
+                cat1_sub2: "Brass",
+                cat1_sub3: "Cables",
+                product_copper_milberry: "MILLBERRY COPPER WIRE ONLY",
+                product_copper_tubes: "COPPER TUBES VARIOUS TYPES",
+                product_copper_radiator: "COPPER AND ALUMINUM RADIATOR WITHOUT IRON",
+                product_brass_commercial: "COMMERCIAL BRASS WITHOUT FLEX",
+                product_cable_220v: "PVC CABLE 220V HOSE 1.5-16mm CLEAN",
+                product_cable_380v: "PVC CABLE 380V THICK HOSE 25-150mm CLEAN",
+                product_cable_unipolar: "PVC CABLE UNIPOLAR THIN 1.5-10mm CLEAN",
+                cat2_title: "2. Aluminum Family",
+                cat2_desc: "Aluminum profiles and scrap",
+                product_aluminum_raw: "Raw / Clean Profile",
+                product_aluminum_dirty: "Dirty Profile",
+                product_aluminum_carter: "Aluminum Carter / First",
+                product_aluminum_first_cut: "Aluminum First Cut",
+                product_aluminum_pot: "Aluminum Pot / Can or Pot",
+                cat3_title: "3. Ferrous Family (Iron and Steel)",
+                cat3_desc: "Ferrous metals and stainless steel",
+                cat3_sub1: "Stainless Steel",
+                cat3_sub2: "Iron",
+                cat3_sub3: "Specials",
+                product_stainless: "Stainless Steel 304, 316",
+                product_iron_industrial: "HEAVY INDUSTRIAL IRON AND BEAMS",
+                product_iron_mixed_clean: "CLEAN MIXED IRON FIRST GRADE",
+                product_iron_loose: "LOOSE IRON MELE SECOND GRADE",
+                product_iron_mixed_bad: "BAD MIXED IRON CHAIRS",
+                product_iron_sheet_a: "SHEET IRON WASHER AND DISHWASHER (A)",
+                product_iron_sheet_c: "BAD SHEET IRON WEEE (C)",
+                product_titanium: "Titanium",
+                product_cast_iron: "Cast Iron",
+                cat4_title: "4. Specialty & Waste Categories",
+                cat4_desc: "Special materials and waste",
+                product_lead: "Lead Family",
+                product_batteries: "Batteries Family",
+                product_radiators: "Radiators",
+                product_wheels: "Unleaded Aluminum Wheels",
+                product_devices: "All types of devices and computers",
+                consult: "Inquire",
+                code_label: "Code:",
+                cta_text: "Can't find your material? Contact us for a personalized evaluation",
+                cta_button: "Request Quote",
+                footer_tagline_1: "We care for the planet and the future of our children",
+                footer_tagline_2: "Professional metal recyclers in Barcelona",
+                footer_quick_links: "Quick Links",
+                footer_contact: "Contact",
+                footer_copyright: "All rights reserved."
+            }
+        };
+
+        // ============================================
+        // APPLY LANGUAGE FUNCTION
+        // ============================================
+        function applyLanguage(lang) {
+            const t = translations[lang.toLowerCase()];
+            if (!t) return;
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.dataset.key;
+                if (t[key]) el.textContent = t[key];
+            });
+        }
+
+        // ============================================
+        // LANGUAGE FUNCTIONS (MODIFIED)
+        // ============================================
+        function toggleLanguageDropdown(event) {
+            event.stopPropagation();
+            const dropdown = document.getElementById('langDropdown');
+            dropdown.classList.toggle('show');
+        }
+
+        function selectLanguage(element, langCode) {
+            const flag = element.getAttribute('data-flag');
+            const name = element.getAttribute('data-name');
+            
+            document.getElementById('selectedFlag').textContent = flag;
+            document.getElementById('selectedLanguage').textContent = name;
+            document.getElementById('mobileSelectedFlag').textContent = flag;
+            document.getElementById('mobileSelectedLanguage').textContent = name;
+            
+            const allItems = document.querySelectorAll('.lang-item');
+            allItems.forEach(item => {
+                item.classList.remove('active');
+                const checkIcon = item.querySelector('.check-icon');
+                if (checkIcon) checkIcon.remove();
+            });
+            
+            element.classList.add('active');
+            const checkIcon = document.createElement('i');
+            checkIcon.className = 'fas fa-check check-icon';
+            element.appendChild(checkIcon);
+            
+            document.getElementById('langDropdown').classList.remove('show');
+            
+            localStorage.setItem('metalday_language', langCode);
+            
+            // Apply translations
+            applyLanguage(langCode);
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileNav');
+            menu.classList.toggle('active');
+        }
+
+        // ============================================
+        // PRICE TICKER
+        // ============================================
+        const metals = [
+            { symbol: "CU", name: "Cobre", price: "€8.50", change: "+2.3", changeType: "up" },
+            { symbol: "AL", name: "Aluminio", price: "€1.80", change: "+1.1", changeType: "up" },
+            { symbol: "BR", name: "Latón", price: "€5.20", change: "+0.8", changeType: "up" },
+            { symbol: "FE", name: "Hierro", price: "€0.28", change: "-0.5", changeType: "down" },
+            { symbol: "SS", name: "Acero Inox", price: "€1.40", change: "+1.5", changeType: "up" },
+            { symbol: "PB", name: "Plomo", price: "€1.80", change: "+0.3", changeType: "up" },
+            { symbol: "ZN", name: "Zinc", price: "€2.45", change: "+0.7", changeType: "up" },
+            { symbol: "NI", name: "Níquel", price: "€15.30", change: "-1.2", changeType: "down" },
+            { symbol: "SN", name: "Estaño", price: "€24.50", change: "+1.8", changeType: "up" },
+            { symbol: "TI", name: "Titanio", price: "€8.90", change: "+0.4", changeType: "up" }
+        ];
+
+        function createTickerItems() {
+            let itemsHtml = '';
+            const allMetals = [...metals, ...metals];
+            
+            allMetals.forEach((metal, index) => {
+                itemsHtml += `
+                    <div class="ticker-chip">
+                        <span class="ticker-symbol">${metal.symbol}</span>
+                        <span class="ticker-price">${metal.price}</span>
+                        <span class="ticker-change ${metal.changeType}">${metal.change > 0 ? '+' : ''}${metal.change}%</span>
+                    </div>
+                `;
+                if (index < allMetals.length - 1) {
+                    itemsHtml += `<span class="ticker-sep">●</span>`;
+                }
+            });
+            
+            return itemsHtml;
+        }
+
+        // ============================================
+        // CATEGORY TOGGLE (ORIGINAL FROM essacatalog)
+        // ============================================
+        function toggleCategory(category) {
+            const dropdown = document.getElementById(`dropdown-${category}`);
+            const chevron = document.getElementById(`chevron-${category}`);
+            
+            dropdown.classList.toggle('active');
+            chevron.classList.toggle('rotated');
+        }
+
+        // ============================================
+        // INITIALIZATION
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('tickerTrack').innerHTML = createTickerItems();
+            
+            const savedLang = localStorage.getItem('metalday_language') || 'ES';
+            const langItem = document.querySelector(`.lang-item[data-lang="${savedLang}"]`);
+            if (langItem) {
+                selectLanguage(langItem, savedLang);
+            }
+        });
+
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.lang-selector')) {
+                document.getElementById('langDropdown').classList.remove('show');
+            }
+        });
+    </script>
+</body>
+</html>

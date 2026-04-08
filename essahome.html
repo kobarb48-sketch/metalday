@@ -1,0 +1,852 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Metal Day S.A. - Reciclaje de Metales</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Montserrat', sans-serif; background: #ffffff; color: #1a1a1a; line-height: 1.6; }
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+        
+        /* ============================================
+           HEADER DESIGN (GLASS PREMIUM)
+        ============================================ */
+        .header-glass {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(74,222,128,0.2);
+            padding: 0.75rem 1rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1280px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .nav-left, .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-left a, .nav-right a {
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-left a:hover, .nav-right a:hover,
+        .nav-left a.active, .nav-right a.active {
+            color: #4ade80;
+        }
+
+        .logo-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-img:hover {
+            transform: scale(1.02);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+
+        .nav-links-mobile {
+            display: none;
+            width: 100%;
+            flex-direction: column;
+            gap: 0.5rem;
+            padding: 1rem 0;
+            order: 3;
+        }
+
+        .nav-links-mobile.active {
+            display: flex;
+        }
+
+        .nav-links-mobile a {
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 0.5rem 0;
+            transition: color 0.3s;
+        }
+
+        .nav-links-mobile a:hover,
+        .nav-links-mobile a.active {
+            color: #4ade80;
+        }
+
+        .lang-selector {
+            position: relative;
+            z-index: 1001;
+        }
+
+        .lang-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(46,125,50,0.15);
+            border: 1px solid rgba(74,222,128,0.3);
+            border-radius: 2rem;
+            padding: 0.4rem 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn:hover {
+            background: rgba(46,125,50,0.3);
+            border-color: #4ade80;
+        }
+
+        .lang-flag { font-size: 1.1rem; }
+        .lang-name { color: white; font-size: 0.8rem; font-weight: 500; }
+        .lang-arrow { color: #4ade80; font-size: 0.7rem; }
+
+        .lang-dropdown-modern {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 0.5rem;
+            background: #1a1a1a;
+            border: 1px solid rgba(74,222,128,0.3);
+            border-radius: 1rem;
+            min-width: 160px;
+            z-index: 1002;
+            display: none;
+            overflow: hidden;
+            box-shadow: 0 15px 35px -10px rgba(0,0,0,0.5);
+        }
+
+        .lang-dropdown-modern.show {
+            display: block;
+            animation: slideDown 0.25s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .lang-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.7rem 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .lang-item:last-child { border-bottom: none; }
+        .lang-item:hover { background: rgba(74,222,128,0.1); }
+        .lang-item.active { background: rgba(46,125,50,0.2); }
+        .lang-item.active .lang-item-name { color: #4ade80; }
+        .lang-item-flag { font-size: 1.2rem; }
+        .lang-item-name { color: #9ca3af; font-size: 0.85rem; font-weight: 500; }
+        .check-icon { margin-left: auto; color: #4ade80; font-size: 0.8rem; }
+
+        .whatsapp-icon {
+            width: 36px;
+            height: 36px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .whatsapp-icon i { color: white; font-size: 1.2rem; }
+        .whatsapp-icon:hover { transform: scale(1.1); }
+
+        /* ============================================
+           PRICE TICKER
+        ============================================ */
+        .ticker-premium {
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            border-top: 1px solid rgba(74,222,128,0.2);
+            border-bottom: 1px solid rgba(74,222,128,0.2);
+            padding: 0.75rem 0;
+            overflow: hidden;
+            position: fixed;
+            top: 70px;
+            left: 0;
+            right: 0;
+            z-index: 999;
+        }
+
+        .ticker-track-premium {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            animation: scrollPremium 25s linear infinite;
+            padding-left: 2rem;
+        }
+
+        .ticker-premium:hover .ticker-track-premium {
+            animation-play-state: paused;
+        }
+
+        @keyframes scrollPremium {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .ticker-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: rgba(46,125,50,0.12);
+            padding: 0.45rem 1.2rem;
+            border-radius: 2rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(74,222,128,0.15);
+        }
+
+        .ticker-chip:hover {
+            background: rgba(46,125,50,0.3);
+            border-color: rgba(74,222,128,0.4);
+            transform: translateY(-2px);
+        }
+
+        .ticker-symbol { color: #4ade80; font-weight: 800; font-size: 0.9rem; }
+        .ticker-price { color: white; font-weight: 700; font-size: 0.95rem; }
+        .ticker-change {
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.2rem 0.5rem;
+            border-radius: 1rem;
+        }
+        .ticker-change.up { color: #4ade80; background: rgba(74,222,128,0.12); }
+        .ticker-change.down { color: #f87171; background: rgba(248,113,113,0.12); }
+        .ticker-sep { color: #2e7d32; font-size: 0.4rem; opacity: 0.6; }
+
+        /* ============================================
+           MAIN CONTENT & PAGE SPECIFIC STYLES
+        ============================================ */
+        .main-content { margin-top: 110px; }
+        section { padding: 4rem 2rem; }
+        .container { max-width: 1280px; margin: 0 auto; }
+        
+        .hero-video { position: relative; height: 70vh; overflow: hidden; }
+        .hero-video video { width: 100%; height: 100%; object-fit: cover; }
+        .hero-video-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.5); }
+        
+        .hero-text { background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #0d2e0f 100%); color: white; text-align: center; padding: 4rem 2rem; }
+        .hero-text h1 { font-size: 3rem; margin-bottom: 1rem; }
+        .hero-text p { font-size: 1.25rem; color: #cbd5e1; margin-bottom: 2rem; }
+        .hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .btn-primary { background: #2e7d32; color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 700; text-decoration: none; transition: all 0.3s; display: inline-block; }
+        .btn-primary:hover { background: #1b5e20; transform: scale(1.05); }
+        .btn-secondary { background: white; color: black; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 700; text-decoration: none; transition: all 0.3s; display: inline-block; }
+        .btn-secondary:hover { background: #f3f4f6; transform: scale(1.05); }
+        
+        .usp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-bottom: 2rem; }
+        .usp-card { background: white; border-radius: 0.75rem; padding: 1.5rem; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: all 0.3s; border: 1px solid #e5e7eb; }
+        .usp-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1); border-color: #2e7d32; }
+        .usp-icon { width: 4rem; height: 4rem; background: #2e7d32; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; }
+        .usp-icon i { font-size: 1.5rem; color: white; }
+        .usp-card h3 { margin-bottom: 0.5rem; }
+        
+        .slider-section { background: #f9fafb; }
+        .slider-header { text-align: center; margin-bottom: 2rem; }
+        .slider-header h2 { font-size: 2rem; margin-bottom: 0.5rem; }
+        .slider-container { position: relative; padding: 0 2rem; }
+        .slider-track { display: flex; transition: transform 0.5s ease; }
+        .slider-slide { flex-shrink: 0; width: 25%; padding: 0 0.75rem; }
+        .product-card { background: white; border-radius: 0.75rem; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: all 0.3s; border: 1px solid #e5e7eb; cursor: pointer; }
+        .product-card:hover { transform: translateY(-5px); border-color: #2e7d32; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1); }
+        .product-image { height: 180px; overflow: hidden; }
+        .product-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+        .product-card:hover .product-image img { transform: scale(1.1); }
+        .product-info { padding: 1rem; }
+        .product-title { font-weight: 700; margin-bottom: 0.25rem; }
+        .product-code { font-size: 0.7rem; color: #6b7280; margin-bottom: 0.5rem; }
+        .product-price { font-weight: 700; color: #2e7d32; }
+        .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); background: white; border: none; width: 2.5rem; height: 2.5rem; border-radius: 50%; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.1); z-index: 10; transition: all 0.3s; }
+        .slider-btn:hover { background: #2e7d32; color: white; }
+        .slider-prev { left: 0; }
+        .slider-next { right: 0; }
+        .slider-dots { display: flex; justify-content: center; gap: 0.5rem; margin-top: 1.5rem; }
+        .dot { width: 0.5rem; height: 0.5rem; border-radius: 50%; background: #d1d5db; cursor: pointer; transition: all 0.3s; }
+        .dot.active { background: black; width: 1rem; }
+        .view-all { text-align: center; margin-top: 2rem; }
+        .view-all-btn { background: black; color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 700; text-decoration: none; display: inline-block; transition: all 0.3s; }
+        .view-all-btn:hover { background: #1f2937; transform: scale(1.05); }
+
+        /* ============================================
+           FOOTER DESIGN - GLASS PREMIUM
+        ============================================ */
+        .footer-glass {
+            background: rgba(10, 10, 10, 0.95);
+            border-top: 1px solid rgba(74,222,128,0.2);
+            padding: 3rem 2rem 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .footer-container { max-width: 1280px; margin: 0 auto; }
+        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1.5fr; gap: 2rem; margin-bottom: 2rem; }
+        .footer-logo img { height: 50px; width: auto; margin-bottom: 1rem; }
+        .footer-tagline { color: #9ca3af; font-size: 0.85rem; line-height: 1.6; }
+        .footer-tagline i { color: #4ade80; margin-right: 0.5rem; }
+        .footer-links h4, .footer-contact h4 { color: white; font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem; }
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 0.6rem; }
+        .footer-links a { color: #9ca3af; text-decoration: none; font-size: 0.85rem; transition: all 0.3s; }
+        .footer-links a:hover { color: #4ade80; transform: translateX(3px); display: inline-block; }
+        .contact-item { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.8rem; color: #9ca3af; font-size: 0.85rem; }
+        .contact-item i { width: 24px; color: #4ade80; font-size: 0.9rem; }
+        .contact-item a { color: #9ca3af; text-decoration: none; }
+        .contact-item a:hover { color: #4ade80; }
+        .social-icons { display: flex; gap: 1rem; margin-top: 1rem; }
+        .social-icons a { width: 36px; height: 36px; background: rgba(255,255,255,0.05); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s; color: #9ca3af; text-decoration: none; }
+        .social-icons a:hover { background: #2e7d32; color: white; transform: translateY(-3px); }
+        .footer-bottom { text-align: center; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.05); color: #6b7280; font-size: 0.75rem; }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 55px;
+            height: 55px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 5px 20px rgba(37,211,102,0.4);
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        .whatsapp-float i { color: white; font-size: 1.8rem; }
+        .whatsapp-float:hover { transform: scale(1.1); }
+
+        /* ============================================
+           RESPONSIVE
+        ============================================ */
+        @media (max-width: 768px) {
+            .nav-left, .nav-right { display: none; }
+            .mobile-menu-btn { display: block; }
+            .nav-container { flex-wrap: wrap; }
+            .logo-wrapper { margin: 0 auto; }
+            .logo-img { height: 45px; }
+            .ticker-chip { padding: 0.3rem 0.8rem; gap: 0.4rem; }
+            .ticker-symbol { font-size: 0.75rem; }
+            .ticker-price { font-size: 0.8rem; }
+            .ticker-change { font-size: 0.6rem; }
+            .footer-grid { grid-template-columns: 1fr; text-align: center; }
+            .footer-links ul { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }
+            .footer-links li { margin-bottom: 0; }
+            .contact-item { justify-content: center; }
+            .social-icons { justify-content: center; }
+            .whatsapp-float { bottom: 1rem; right: 1rem; width: 45px; height: 45px; }
+            .whatsapp-float i { font-size: 1.4rem; }
+            .hero-text h1 { font-size: 2rem; }
+            section { padding: 2rem 1rem; }
+            .usp-grid { grid-template-columns: 1fr; }
+            .slider-slide { width: 100%; }
+            .slider-btn { width: 2rem; height: 2rem; }
+        }
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .slider-slide { width: 50%; }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER SECTION -->
+    <header class="header-glass">
+        <div class="nav-container">
+            <div class="nav-left">
+                <a href="essahome.html" class="active" data-key="nav_inicio">Inicio</a>
+                <a href="essamaterial.html" data-key="nav_materiales">Materiales</a>
+                <a href="essacatalog.html" data-key="nav_catalogo">Catálogo</a>
+            </div>
+            
+            <div class="logo-wrapper">
+                <img class="logo-img" src="images/team/logo.gif" alt="Metal Day Logo" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 200 50\'%3E%3Ctext x=\'0\' y=\'35\' font-family=\'Playfair Display\' font-size=\'28\' font-weight=\'900\' fill=\'white\'%3EMETAL DAY%3C/text%3E%3Ctext x=\'0\' y=\'48\' font-family=\'Montserrat\' font-size=\'10\' fill=\'%232e7d32\'%3ES.A.%3C/text%3E%3C/svg%3E'">
+            </div>
+            
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+            
+            <div class="nav-right">
+                <a href="essaimport.html" data-key="nav_import">Import/Export</a>
+                <a href="essaaboutus.html" data-key="nav_nosotros">Nosotros</a>
+                <a href="essacontact.html" data-key="nav_contacto">Contacto</a>
+                
+                <div class="lang-selector">
+                    <div class="lang-btn" onclick="toggleLanguageDropdown(event)">
+                        <span class="lang-flag" id="selectedFlag">🇪🇸</span>
+                        <span class="lang-name" id="selectedLanguage">Español</span>
+                        <i class="fas fa-chevron-down lang-arrow"></i>
+                    </div>
+                    <div class="lang-dropdown-modern" id="langDropdown">
+                        <div class="lang-item active" data-lang="ES" data-flag="🇪🇸" data-name="Español" onclick="selectLanguage(this, 'ES')">
+                            <span class="lang-item-flag">🇪🇸</span>
+                            <span class="lang-item-name">Español</span>
+                            <i class="fas fa-check check-icon"></i>
+                        </div>
+                        <div class="lang-item" data-lang="CA" data-flag="🏴󠁥󠁳󠁣󠁴󠁿" data-name="Català" onclick="selectLanguage(this, 'CA')">
+                            <span class="lang-item-flag">🏴󠁥󠁳󠁣󠁴󠁿</span>
+                            <span class="lang-item-name">Català</span>
+                        </div>
+                        <div class="lang-item" data-lang="EN" data-flag="🇬🇧" data-name="English" onclick="selectLanguage(this, 'EN')">
+                            <span class="lang-item-flag">🇬🇧</span>
+                            <span class="lang-item-name">English</span>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="https://wa.me/34635699485" class="whatsapp-icon" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            
+            <div class="nav-links-mobile" id="mobileNav">
+                <a href="essahome.html" class="active" data-key="nav_inicio">Inicio</a>
+                <a href="essamaterial.html" data-key="nav_materiales">Materiales</a>
+                <a href="essacatalog.html" data-key="nav_catalogo">Catálogo</a>
+                <a href="essaimport.html" data-key="nav_import">Import/Export</a>
+                <a href="essaaboutus.html" data-key="nav_nosotros">Nosotros</a>
+                <a href="essacontact.html" data-key="nav_contacto">Contacto</a>
+                <div style="display:flex;align-items:center;gap:1rem;margin-top:1rem;">
+                    <div class="lang-selector">
+                        <div class="lang-btn" onclick="toggleLanguageDropdown(event)">
+                            <span class="lang-flag" id="mobileSelectedFlag">🇪🇸</span>
+                            <span class="lang-name" id="mobileSelectedLanguage">Español</span>
+                            <i class="fas fa-chevron-down lang-arrow"></i>
+                        </div>
+                    </div>
+                    <a href="https://wa.me/34635699485" class="whatsapp-icon" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- PRICE TICKER SECTION -->
+    <div class="ticker-premium">
+        <div class="ticker-track-premium" id="tickerTrack"></div>
+    </div>
+
+    <!-- ORIGINAL MIDDLE CONTENT - UNCHANGED -->
+    <main class="main-content">
+        <div class="hero-video">
+            <video autoplay muted loop playsinline>
+                <source src="hero-video.mp4" type="video/mp4">
+            </video>
+            <div class="hero-video-overlay"></div>
+        </div>
+        
+        <div class="hero-text">
+            <div class="container">
+                <h1 data-key="hero_title">Gestión Profesional de Metales de Desecho</h1>
+                <p data-key="hero_subtitle">Líder en reciclaje de metales en Barcelona</p>
+                <div class="hero-buttons">
+                    <a href="essamaterial.html" class="btn-primary" data-key="hero_btn_sell">Vende tu Chatarra</a>
+                    <a href="essacontact.html" class="btn-secondary" data-key="hero_btn_buy">Compra al Por Mayor</a>
+                </div>
+            </div>
+        </div>
+        
+        <section>
+            <div class="container usp-grid">
+                <div class="usp-card"><div class="usp-icon"><i class="fas fa-dollar-sign"></i></div><h3 data-key="usp1_title">Pago Inmediato</h3><p data-key="usp1_desc">Reciba su dinero al instante</p></div>
+                <div class="usp-card"><div class="usp-icon"><i class="fas fa-ship"></i></div><h3 data-key="usp2_title">Exportación Global</h3><p data-key="usp2_desc">Vía Puerto de Barcelona</p></div>
+                <div class="usp-card"><div class="usp-icon"><i class="fas fa-award"></i></div><h3 data-key="usp3_title">Recicladores Certificados</h3><p data-key="usp3_desc">Miembro del Gremi ARC</p></div>
+            </div>
+        </section>
+        
+        <section class="slider-section">
+            <div class="container">
+                <div class="slider-header">
+                    <h2 data-key="featured_title">Materiales Destacados</h2>
+                    <p data-key="featured_subtitle">Los materiales más demandados con los mejores precios</p>
+                </div>
+                <div class="slider-container">
+                    <button class="slider-btn slider-prev" onclick="prevSlide()">❮</button>
+                    <div class="slider-track" id="sliderTrack"></div>
+                    <button class="slider-btn slider-next" onclick="nextSlide()">❯</button>
+                </div>
+                <div class="slider-dots" id="sliderDots"></div>
+                <div class="view-all">
+                    <a href="essamaterial.html" class="view-all-btn" data-key="view_all_btn">Ver Todos los Materiales →</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER SECTION - GLASS PREMIUM -->
+    <footer class="footer-glass">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-logo">
+                    <img src="images/team/logo.gif" alt="Metal Day Logo" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 200 50\'%3E%3Ctext x=\'0\' y=\'35\' font-family=\'Playfair Display\' font-size=\'28\' font-weight=\'900\' fill=\'white\'%3EMETAL DAY%3C/text%3E%3Ctext x=\'0\' y=\'48\' font-family=\'Montserrat\' font-size=\'10\' fill=\'%232e7d32\'%3ES.A.%3C/text%3E%3C/svg%3E'">
+                    <p class="footer-tagline"><i class="fas fa-leaf"></i> <span data-key="footer_tagline_1">Cuidamos del planeta y del futuro de nuestros hijos</span></p>
+                    <p class="footer-tagline"><span data-key="footer_tagline_2">Recicladores profesionales de metales en Barcelona</span></p>
+                </div>
+
+                <div class="footer-links">
+                    <h4 data-key="footer_quick_links">Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="essahome.html" data-key="nav_inicio">Inicio</a></li>
+                        <li><a href="essamaterial.html" data-key="nav_materiales">Materiales</a></li>
+                        <li><a href="essacatalog.html" data-key="nav_catalogo">Catálogo</a></li>
+                        <li><a href="essaimport.html" data-key="nav_import">Import/Export</a></li>
+                        <li><a href="essaaboutus.html" data-key="nav_nosotros">Nosotros</a></li>
+                        <li><a href="essacontact.html" data-key="nav_contacto">Contacto</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-contact">
+                    <h4 data-key="footer_contact">Contacto</h4>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <a href="tel:+34681925090">+34 681 92 50 90</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <a href="tel:+34699799170">+34 699 79 91 70</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:info@metalday.es">info@metalday.es</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-pin"></i>
+                        <span>C/ del Cobalt, 62-64, 08940 L'Hospitalet de Llobregat, Barcelona</span>
+                    </div>
+                    
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 METAL DAY S.A. <span data-key="footer_copyright">Todos los derechos reservados.</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/34635699485" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // ============================================
+        // LANGUAGE FUNCTIONS
+        // ============================================
+        let currentLang = 'es';
+
+        const translations = {
+            es: {
+                nav_inicio: "Inicio", nav_materiales: "Materiales", nav_catalogo: "Catálogo", nav_import: "Import/Export", nav_nosotros: "Nosotros", nav_contacto: "Contacto",
+                hero_title: "Gestión Profesional de Metales de Desecho", hero_subtitle: "Líder en reciclaje de metales en Barcelona",
+                hero_btn_sell: "Vende tu Chatarra", hero_btn_buy: "Compra al Por Mayor",
+                usp1_title: "Pago Inmediato", usp1_desc: "Reciba su dinero al instante",
+                usp2_title: "Exportación Global", usp2_desc: "Vía Puerto de Barcelona",
+                usp3_title: "Recicladores Certificados", usp3_desc: "Miembro del Gremi ARC",
+                featured_title: "Materiales Destacados", featured_subtitle: "Los materiales más demandados con los mejores precios",
+                code_label: "Código:", consult: "Consultar", view_all_btn: "Ver Todos los Materiales →",
+                product_copper_milberry: "COBRE MILBERRY SOLO HILOS", product_copper_tubes: "COBRE DE TUBOS VARIOS TIPOS",
+                product_brass_commercial: "LATON COMERCIAL SIN FLEXO", product_copper_radiator: "RADIADOR COBRE Y ALUMINIO",
+                product_cable_220v: "CABLE PVC 220V MANGUERA", product_iron_industrial: "HIERRO SOLO INDUSTRIAL PESADO",
+                product_iron_mixed_clean: "HIERRO MIXTO LIMPIO PRIMERA", product_aluminum_raw: "PERFIL CRUDO / LIMPIO",
+                footer_tagline_1: "Cuidamos del planeta y del futuro de nuestros hijos", footer_tagline_2: "Recicladores profesionales de metales en Barcelona",
+                footer_quick_links: "Enlaces Rápidos", footer_contact: "Contacto", footer_copyright: "Todos los derechos reservados."
+            },
+            ca: {
+                nav_inicio: "Inici", nav_materiales: "Materials", nav_catalogo: "Catàleg", nav_import: "Import/Export", nav_nosotros: "Nosaltres", nav_contacto: "Contacte",
+                hero_title: "Gestió Professional de Metalls de Deixalla", hero_subtitle: "Líder en reciclatge de metalls a Barcelona",
+                hero_btn_sell: "Ven la teva Ferralla", hero_btn_buy: "Compra a l'Engròs",
+                usp1_title: "Pagament Immediat", usp1_desc: "Rebeu els vostres diners a l'instant",
+                usp2_title: "Exportació Global", usp2_desc: "Via Port de Barcelona",
+                usp3_title: "Recicladors Certificats", usp3_desc: "Membre del Gremi ARC",
+                featured_title: "Materials Destacats", featured_subtitle: "Els materials més demandats amb els millors preus",
+                code_label: "Codi:", consult: "Consultar", view_all_btn: "Veure Tots els Materials →",
+                product_copper_milberry: "COURE MILBERRY NOMÉS FILS", product_copper_tubes: "COURE DE TUBS DIVERSOS TIPUS",
+                product_brass_commercial: "LLAUTÓ COMERCIAL SENSE FLEXO", product_copper_radiator: "RADIADOR COURE I ALUMINI",
+                product_cable_220v: "CABLE PVC 220V MÀNEGA", product_iron_industrial: "FERRO NOMÉS INDUSTRIAL PESAT",
+                product_iron_mixed_clean: "FERRO MIXT NET PRIMERA", product_aluminum_raw: "PERFIL CRU / NET",
+                footer_tagline_1: "Cuidem del planeta i del futur dels nostres fills", footer_tagline_2: "Recicladors professionals de metalls a Barcelona",
+                footer_quick_links: "Enllaços Ràpids", footer_contact: "Contacte", footer_copyright: "Tots els drets reservats."
+            },
+            en: {
+                nav_inicio: "Home", nav_materiales: "Materials", nav_catalogo: "Catalog", nav_import: "Import/Export", nav_nosotros: "About Us", nav_contacto: "Contact",
+                hero_title: "Professional Scrap Metal Management", hero_subtitle: "Leader in metal recycling in Barcelona",
+                hero_btn_sell: "Sell Your Scrap", hero_btn_buy: "Wholesale Purchase",
+                usp1_title: "Immediate Payment", usp1_desc: "Receive your money instantly",
+                usp2_title: "Global Export", usp2_desc: "Via Port of Barcelona",
+                usp3_title: "Certified Recyclers", usp3_desc: "Member of Gremi ARC",
+                featured_title: "Featured Materials", featured_subtitle: "The most demanded materials with the best prices",
+                code_label: "Code:", consult: "Inquire", view_all_btn: "View All Materials →",
+                product_copper_milberry: "MILLBERRY COPPER WIRE ONLY", product_copper_tubes: "COPPER TUBES VARIOUS TYPES",
+                product_brass_commercial: "COMMERCIAL BRASS WITHOUT FLEX", product_copper_radiator: "COPPER AND ALUMINUM RADIATOR",
+                product_cable_220v: "PVC CABLE 220V HOSE", product_iron_industrial: "HEAVY INDUSTRIAL IRON ONLY",
+                product_iron_mixed_clean: "CLEAN MIXED IRON FIRST GRADE", product_aluminum_raw: "RAW / CLEAN PROFILE",
+                footer_tagline_1: "We care for the planet and the future of our children", footer_tagline_2: "Professional metal recyclers in Barcelona",
+                footer_quick_links: "Quick Links", footer_contact: "Contact", footer_copyright: "All rights reserved."
+            }
+        };
+
+        function applyLanguage(lang) {
+            currentLang = lang.toLowerCase();
+            const t = translations[currentLang];
+            if (!t) return;
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.dataset.key;
+                if (t[key]) el.textContent = t[key];
+            });
+            renderSlider();
+        }
+
+        function toggleLanguageDropdown(event) {
+            event.stopPropagation();
+            const dropdown = document.getElementById('langDropdown');
+            dropdown.classList.toggle('show');
+        }
+
+        function selectLanguage(element, langCode) {
+            const flag = element.getAttribute('data-flag');
+            const name = element.getAttribute('data-name');
+            
+            document.getElementById('selectedFlag').textContent = flag;
+            document.getElementById('selectedLanguage').textContent = name;
+            document.getElementById('mobileSelectedFlag').textContent = flag;
+            document.getElementById('mobileSelectedLanguage').textContent = name;
+            
+            const allItems = document.querySelectorAll('.lang-item');
+            allItems.forEach(item => {
+                item.classList.remove('active');
+                const checkIcon = item.querySelector('.check-icon');
+                if (checkIcon) checkIcon.remove();
+            });
+            
+            element.classList.add('active');
+            const checkIcon = document.createElement('i');
+            checkIcon.className = 'fas fa-check check-icon';
+            element.appendChild(checkIcon);
+            
+            document.getElementById('langDropdown').classList.remove('show');
+            
+            localStorage.setItem('metalday_language', langCode);
+            applyLanguage(langCode);
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileNav');
+            menu.classList.toggle('active');
+        }
+
+        // ============================================
+        // PRICE TICKER
+        // ============================================
+        const metals = [
+            { symbol: "CU", name: "Cobre", price: "€8.50", change: "+2.3", changeType: "up" },
+            { symbol: "AL", name: "Aluminio", price: "€1.80", change: "+1.1", changeType: "up" },
+            { symbol: "BR", name: "Latón", price: "€5.20", change: "+0.8", changeType: "up" },
+            { symbol: "FE", name: "Hierro", price: "€0.28", change: "-0.5", changeType: "down" },
+            { symbol: "SS", name: "Acero Inox", price: "€1.40", change: "+1.5", changeType: "up" },
+            { symbol: "PB", name: "Plomo", price: "€1.80", change: "+0.3", changeType: "up" },
+            { symbol: "ZN", name: "Zinc", price: "€2.45", change: "+0.7", changeType: "up" },
+            { symbol: "NI", name: "Níquel", price: "€15.30", change: "-1.2", changeType: "down" },
+            { symbol: "SN", name: "Estaño", price: "€24.50", change: "+1.8", changeType: "up" },
+            { symbol: "TI", name: "Titanio", price: "€8.90", change: "+0.4", changeType: "up" }
+        ];
+
+        function createTickerItems() {
+            let itemsHtml = '';
+            const allMetals = [...metals, ...metals];
+            
+            allMetals.forEach((metal, index) => {
+                itemsHtml += `
+                    <div class="ticker-chip">
+                        <span class="ticker-symbol">${metal.symbol}</span>
+                        <span class="ticker-price">${metal.price}</span>
+                        <span class="ticker-change ${metal.changeType}">${metal.change > 0 ? '+' : ''}${metal.change}%</span>
+                    </div>
+                `;
+                if (index < allMetals.length - 1) {
+                    itemsHtml += `<span class="ticker-sep">●</span>`;
+                }
+            });
+            
+            return itemsHtml;
+        }
+
+        // ============================================
+        // PRODUCT SLIDER (ORIGINAL)
+        // ============================================
+        const featuredProducts = [
+            { key: "product_copper_milberry", code: "10066", price: "€8.60/kg", image: "images/image1.jpg" },
+            { key: "product_copper_tubes", code: "10071", price: "€8.20/kg", image: "images/image2.jpg" },
+            { key: "product_brass_commercial", code: "10081", price: "€4.90/kg", image: "images/image7.jpg" },
+            { key: "product_copper_radiator", code: "10101", price: "€3.80/kg", image: "images/image22.jpg" },
+            { key: "product_cable_220v", code: "10021", price: "€2.50/kg", image: "images/image8.jpg" },
+            { key: "product_iron_industrial", code: "10216", price: "€0.19/kg", image: "images/image17.jpg" },
+            { key: "product_iron_mixed_clean", code: "10217", price: "€0.17/kg", image: "images/image18.jpg" },
+            { key: "product_aluminum_raw", code: "10086", price: "Consultar", image: "images/image3.jpg" }
+        ];
+        
+        let currentIndex = 0;
+        let slidesPerView = 4;
+        let slideInterval;
+        const track = document.getElementById('sliderTrack');
+        const dotsContainer = document.getElementById('sliderDots');
+        
+        function updateSlidesPerView() {
+            if (window.innerWidth < 768) slidesPerView = 1;
+            else if (window.innerWidth < 1024) slidesPerView = 2;
+            else slidesPerView = 4;
+            renderSlider();
+        }
+        
+        function renderSlider() {
+            if (!track) return;
+            const t = translations[currentLang] || translations.es;
+            const codeLabel = t.code_label || 'Código:';
+            const consultText = t.consult || 'Consultar';
+            
+            track.innerHTML = featuredProducts.map(product => {
+                const productName = t[product.key] || product.key;
+                const displayPrice = product.price === 'Consultar' ? consultText : product.price;
+                return `
+                    <div class="slider-slide">
+                        <div class="product-card" onclick="window.location.href='essamaterial.html'">
+                            <div class="product-image"><img src="${product.image}" alt="${productName}" onerror="this.src='https://placehold.co/300x180/2e7d32/white?text=${encodeURIComponent(productName.split(' ')[0])}'"></div>
+                            <div class="product-info">
+                                <div class="product-title">${productName}</div>
+                                <div class="product-code">${codeLabel} ${product.code}</div>
+                                <div class="product-price">${displayPrice}</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            updateSlider();
+            updateDots();
+        }
+        
+        function updateSlider() {
+            if (!track) return;
+            const percent = (currentIndex * 100) / slidesPerView;
+            track.style.transform = `translateX(-${percent}%)`;
+            updateDots();
+        }
+        
+        function updateDots() {
+            if (!dotsContainer) return;
+            const totalDots = Math.ceil(featuredProducts.length / slidesPerView);
+            dotsContainer.innerHTML = '';
+            for (let i = 0; i < totalDots; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'dot' + (i === currentIndex ? ' active' : '');
+                dot.onclick = () => { currentIndex = i; updateSlider(); resetAutoSlide(); };
+                dotsContainer.appendChild(dot);
+            }
+        }
+        
+        function nextSlide() {
+            const maxIndex = Math.ceil(featuredProducts.length / slidesPerView) - 1;
+            if (currentIndex < maxIndex) {
+                currentIndex++;
+                updateSlider();
+                resetAutoSlide();
+            }
+        }
+        
+        function prevSlide() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateSlider();
+                resetAutoSlide();
+            }
+        }
+        
+        function startAutoSlide() {
+            if (slideInterval) clearInterval(slideInterval);
+            const speed = window.innerWidth < 768 ? 2500 : 5000;
+            slideInterval = setInterval(() => {
+                const maxIndex = Math.ceil(featuredProducts.length / slidesPerView) - 1;
+                if (currentIndex < maxIndex) {
+                    currentIndex++;
+                    updateSlider();
+                } else {
+                    currentIndex = 0;
+                    updateSlider();
+                }
+            }, speed);
+        }
+        
+        function resetAutoSlide() {
+            if (slideInterval) clearInterval(slideInterval);
+            startAutoSlide();
+        }
+        
+        window.addEventListener('resize', () => {
+            updateSlidesPerView();
+            startAutoSlide();
+        });
+
+        // ============================================
+        // INITIALIZATION
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('tickerTrack').innerHTML = createTickerItems();
+            updateSlidesPerView();
+            startAutoSlide();
+            
+            const savedLang = localStorage.getItem('metalday_language') || 'ES';
+            const langItem = document.querySelector(`.lang-item[data-lang="${savedLang}"]`);
+            if (langItem) {
+                selectLanguage(langItem, savedLang);
+            } else {
+                applyLanguage('es');
+            }
+        });
+
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.lang-selector')) {
+                document.getElementById('langDropdown').classList.remove('show');
+            }
+        });
+    </script>
+</body>
+</html>
+```
