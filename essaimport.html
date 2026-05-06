@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -10,7 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Montserrat', sans-serif; background: #ffffff; color: #1a1a1a; line-height: 1.6; overflow-x: hidden; }
+        body { font-family: 'Montserrat', sans-serif; background: #ffffff; color: #1a1a1a; line-height: 1.6; overflow-x: hidden; width: 100%; max-width: 100vw; }
         h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
         
         /* ============================================
@@ -64,7 +65,7 @@
         }
 
         .logo-img {
-            height: 50px;
+            height: 60px;
             width: auto;
             transition: transform 0.3s ease;
         }
@@ -89,6 +90,9 @@
             gap: 0.5rem;
             padding: 1rem 0;
             order: 3;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(12px);
+            z-index: 999;
         }
 
         .nav-links-mobile.active {
@@ -266,7 +270,7 @@
         /* ============================================
            MAIN CONTENT & PAGE SPECIFIC STYLES
         ============================================ */
-        .main-content { margin-top: 110px; }
+        .main-content { margin-top: 110px; overflow-x: hidden; }
         section { padding: 5rem 2rem; }
         .container { max-width: 1280px; margin: 0 auto; }
         
@@ -320,6 +324,7 @@
         .dest-card { background: #f8fafc; border-radius: 1rem; padding: 1.5rem; text-align: center; transition: all 0.3s; cursor: pointer; }
         .dest-card:hover { background: #2e7d32; transform: translateY(-5px); }
         .dest-card:hover .dest-name { color: white; }
+        .dest-card:hover p { color: white !important; }
         .dest-flag { font-size: 3rem; margin-bottom: 0.5rem; }
         .dest-name { font-weight: 600; transition: color 0.3s; }
         
@@ -385,7 +390,7 @@
             .mobile-menu-btn { display: block; }
             .nav-container { flex-wrap: wrap; }
             .logo-wrapper { margin: 0 auto; }
-            .logo-img { height: 45px; }
+            .logo-img { height: 50px; }
             .ticker-chip { padding: 0.3rem 0.8rem; gap: 0.4rem; }
             .ticker-symbol { font-size: 0.75rem; }
             .ticker-price { font-size: 0.8rem; }
@@ -400,10 +405,89 @@
             .hero h1 { font-size: 2rem; }
             section { padding: 3rem 1rem; }
             .certs-grid { grid-template-columns: 1fr; }
-            .destinations-grid { grid-template-columns: repeat(2, 1fr); }
+            .destinations-grid { grid-template-columns: 1fr !important; gap: 1rem !important; }
+            .dest-card { padding: 1.25rem !important; text-align: left !important; display: flex !important; flex-direction: row !important; align-items: flex-start !important; gap: 1rem !important; }
+            .dest-flag { font-size: 2rem !important; margin-bottom: 0 !important; flex-shrink: 0 !important; }
+            .dest-card p { font-size: 0.65rem !important; line-height: 1.4 !important; word-break: break-word !important; }
             .stats-grid { grid-template-columns: 1fr; }
             .auth-codes { grid-template-columns: 1fr; }
-            .logistics-grid { grid-template-columns: 1fr; }
+            .logistics-grid { grid-template-columns: 1fr; gap: 2rem !important; }
+            
+            /* Mobile language dropdown positioning */
+            .lang-dropdown-modern {
+                right: 0;
+                left: auto;
+                max-width: 90vw;
+            }
+            .nav-links-mobile .lang-selector {
+                position: relative;
+            }
+            #langDropdownMobile {
+                position: absolute;
+                top: 100%;
+                right: 0;
+                left: auto;
+                margin-top: 0.5rem;
+            }
+
+            /* Stats cards fixes */
+            .stat-card {
+                padding: 1rem !important;
+                margin: 0 0.5rem !important;
+            }
+            .stat-number {
+                font-size: 2rem !important;
+            }
+            .stat-label {
+                font-size: 0.8rem !important;
+            }
+            .stat-card p {
+                font-size: 0.75rem !important;
+                line-height: 1.4 !important;
+                color: #6b7280 !important;
+                margin-top: 0.75rem !important;
+            }
+
+            /* Logistics heading fix */
+            .logistics-grid > div:first-child > h2 {
+                font-size: 1.75rem !important;
+            }
+            .logistics-grid > div:first-child > p {
+                font-size: 0.85rem !important;
+            }
+            .logistics-grid img {
+                max-width: 100% !important;
+                height: auto !important;
+            }
+            .logistics-grid > div:last-child > div:last-child {
+                position: static !important;
+                margin: 1rem auto 0 !important;
+                text-align: center !important;
+                width: fit-content !important;
+            }
+
+            /* Contact section fixes */
+            section[style*="background: #f8fafc;"] .container > div[style*="grid-template-columns: 1fr 1fr;"] {
+                grid-template-columns: 1fr !important;
+            }
+            section[style*="background: #f8fafc;"] .container > div[style*="grid-template-columns: 1fr 1fr;"] > div:first-child div[style*="justify-content: space-between;"] {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+            }
+            section[style*="background: #f8fafc;"] .container > div[style*="grid-template-columns: 1fr 1fr;"] > div:first-child a {
+                margin-left: 34px !important;
+                font-size: 0.8rem !important;
+                word-break: break-all !important;
+            }
+            section[style*="background: #f8fafc;"] .container > div[style*="grid-template-columns: 1fr 1fr;"] > div:last-child p {
+                font-size: 0.8rem !important;
+                word-break: break-word !important;
+            }
+
+            /* General cleanup - overflow fixes */
+            .main-content, section, .container {
+                overflow-x: hidden !important;
+            }
         }
         @media (max-width: 1024px) { 
             .certs-grid { grid-template-columns: repeat(2, 1fr); } 
@@ -437,7 +521,7 @@
         </div>
         
         <div class="logo-wrapper">
-            <img class="logo-img" src="images/team/logo.gif" alt="Metal Day Logo" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 200 50\'%3E%3Ctext x=\'0\' y=\'35\' font-family=\'Playfair Display\' font-size=\'28\' font-weight=\'900\' fill=\'white\'%3EMETAL DAY%3C/text%3E%3Ctext x=\'0\' y=\'48\' font-family=\'Montserrat\' font-size=\'10\' fill=\'%232e7d32\'%3ES.A.%3C/text%3E%3C/svg%3E'">
+            <a href="essahome.html"><img class="logo-img" src="images/team/logo.gif" alt="Metal Day Logo" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 200 50\'%3E%3Ctext x=\'0\' y=\'35\' font-family=\'Playfair Display\' font-size=\'28\' font-weight=\'900\' fill=\'white\'%3EMETAL DAY%3C/text%3E%3Ctext x=\'0\' y=\'48\' font-family=\'Montserrat\' font-size=\'10\' fill=\'%232e7d32\'%3ES.A.%3C/text%3E%3C/svg%3E'"></a>
         </div>
         
         <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
@@ -482,10 +566,25 @@
             <a href="essacontact.html" data-key="nav_contacto">Contacto</a>
             <div style="display:flex;align-items:center;gap:1rem;margin-top:1rem;">
                 <div class="lang-selector">
-                    <div class="lang-btn" onclick="toggleLanguageDropdown(event)">
+                    <div class="lang-btn" onclick="toggleLanguageDropdownMobile(event)">
                         <span class="lang-flag" id="mobileSelectedFlag">🇪🇸</span>
                         <span class="lang-name" id="mobileSelectedLanguage">Español</span>
                         <i class="fas fa-chevron-down lang-arrow"></i>
+                    </div>
+                    <div class="lang-dropdown-modern" id="langDropdownMobile">
+                        <div class="lang-item active" data-lang="ES" data-flag="🇪🇸" data-name="Español" onclick="selectLanguageMobile(this, 'ES')">
+                            <span class="lang-item-flag">🇪🇸</span>
+                            <span class="lang-item-name">Español</span>
+                            <i class="fas fa-check check-icon"></i>
+                        </div>
+                        <div class="lang-item" data-lang="CA" data-flag="🏴󠁥󠁳󠁣󠁴󠁿" data-name="Català" onclick="selectLanguageMobile(this, 'CA')">
+                            <span class="lang-item-flag">🏴󠁥󠁳󠁣󠁴󠁿</span>
+                            <span class="lang-item-name">Català</span>
+                        </div>
+                        <div class="lang-item" data-lang="EN" data-flag="🇬🇧" data-name="English" onclick="selectLanguageMobile(this, 'EN')">
+                            <span class="lang-item-flag">🇬🇧</span>
+                            <span class="lang-item-name">English</span>
+                        </div>
                     </div>
                 </div>
                 <a href="https://wa.me/34635699485" class="whatsapp-icon" target="_blank"><i class="fab fa-whatsapp"></i></a>
@@ -512,10 +611,10 @@
     <section class="stats">
         <div class="container">
             <div class="stats-grid">
-                <div class="stat-card"><div class="stat-icon"><i class="fas fa-ship fa-2x" style="color:white"></i></div><div class="stat-number">2,000+</div><div class="stat-label" data-key="stat_tons">Toneladas/año</div></div>
-                <div class="stat-card"><div class="stat-icon"><i class="fas fa-globe fa-2x" style="color:white"></i></div><div class="stat-number">6+</div><div class="stat-label" data-key="stat_countries">Países destino</div></div>
-                <div class="stat-card"><div class="stat-icon"><i class="fas fa-chart-line fa-2x" style="color:white"></i></div><div class="stat-number">25+</div><div class="stat-label" data-key="stat_years">Años experiencia</div></div>
-                <div class="stat-card"><div class="stat-icon"><i class="fas fa-map-pin fa-2x" style="color:white"></i></div><div class="stat-number">15min</div><div class="stat-label" data-key="stat_port">Puerto BCN</div></div>
+                <div class="stat-card"><div class="stat-icon"><i class="fas fa-ship fa-2x" style="color:white"></i></div><div class="stat-number">2,000+</div><div class="stat-label" data-key="stat_tons">Toneladas/año</div><p data-key="stat_desc_1" style="font-size: 0.8rem; color: #6b7280; margin-top: 0.75rem; line-height: 1.4;">Our high-capacity facility handles massive volumes with precision and care. We ensure a steady supply chain for projects of any scale, year-round.</p></div>
+                <div class="stat-card"><div class="stat-icon"><i class="fas fa-globe fa-2x" style="color:white"></i></div><div class="stat-number">6+</div><div class="stat-label" data-key="stat_countries">Países destino</div><p data-key="stat_desc_2" style="font-size: 0.8rem; color: #6b7280; margin-top: 0.75rem; line-height: 1.4;">Our reach extends far beyond L'Hospitalet to serve a growing global market. We navigate international regulations to deliver quality metal solutions wherever you are.</p></div>
+                <div class="stat-card"><div class="stat-icon"><i class="fas fa-chart-line fa-2x" style="color:white"></i></div><div class="stat-number">25+</div><div class="stat-label" data-key="stat_years">Años experiencia</div><p data-key="stat_desc_3" style="font-size: 0.8rem; color: #6b7280; margin-top: 0.75rem; line-height: 1.4;">Decades of industry leadership have refined our technical mastery and reliability. We combine traditional expertise with modern innovation to solve complex metalwork challenges.</p></div>
+                <div class="stat-card"><div class="stat-icon"><i class="fas fa-map-pin fa-2x" style="color:white"></i></div><div class="stat-number">15min</div><div class="stat-label" data-key="stat_port">Puerto BCN</div><p data-key="stat_desc_4" style="font-size: 0.8rem; color: #6b7280; margin-top: 0.75rem; line-height: 1.4;">Located at the gateway of the Mediterranean, we offer unparalleled logistical speed. Our proximity to the Port of Barcelona means faster exports and significantly reduced lead times.</p></div>
             </div>
         </div>
     </section>
@@ -524,9 +623,9 @@
         <div class="container">
             <div class="section-header"><h2 data-key="auth_title">Códigos de Autorización</h2><p data-key="auth_subtitle">Verifique nuestras credenciales oficiales</p></div>
             <div class="auth-codes">
-                <div class="auth-card"><div class="auth-badge" data-key="verified">Verificado</div><div class="auth-label" data-key="auth1_label">Gestor de residuos autorizado</div><div class="auth-code">E-1590.15</div></div>
-                <div class="auth-card"><div class="auth-badge" data-key="verified">Verificado</div><div class="auth-label" data-key="auth2_label">Productor de residuos autorizado</div><div class="auth-code">P-65714.1</div></div>
-                <div class="auth-card"><div class="auth-badge" data-key="verified">Verificado</div><div class="auth-label" data-key="auth3_label">Código Nima de Empresa</div><div class="auth-code">800619394</div></div>
+                <div class="auth-card"><div class="auth-label" data-key="auth1_label">Gestor de residuos autorizado</div><div class="auth-code">E-1590.15</div></div>
+                <div class="auth-card"><div class="auth-label" data-key="auth2_label">Productor de residuos autorizado</div><div class="auth-code">P-65714.1</div></div>
+                <div class="auth-card"><div class="auth-label" data-key="auth3_label">Código Nima de Empresa</div><div class="auth-code">800619394</div></div>
             </div>
         </div>
     </section>
@@ -642,7 +741,7 @@
     <div class="footer-container">
         <div class="footer-grid">
             <div class="footer-logo">
-                <img src="images/team/logo.gif" alt="Metal Day Logo" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 200 50\'%3E%3Ctext x=\'0\' y=\'35\' font-family=\'Playfair Display\' font-size=\'28\' font-weight=\'900\' fill=\'white\'%3EMETAL DAY%3C/text%3E%3Ctext x=\'0\' y=\'48\' font-family=\'Montserrat\' font-size=\'10\' fill=\'%232e7d32\'%3ES.A.%3C/text%3E%3C/svg%3E'">
+                <a href="essahome.html"><img src="images/team/logo.gif" alt="Metal Day Logo" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 200 50\'%3E%3Ctext x=\'0\' y=\'35\' font-family=\'Playfair Display\' font-size=\'28\' font-weight=\'900\' fill=\'white\'%3EMETAL DAY%3C/text%3E%3Ctext x=\'0\' y=\'48\' font-family=\'Montserrat\' font-size=\'10\' fill=\'%232e7d32\'%3ES.A.%3C/text%3E%3C/svg%3E'"></a>
                 <p class="footer-tagline"><i class="fas fa-leaf"></i> <span data-key="footer_tagline_1">Cuidamos del planeta y del futuro de nuestros hijos</span></p>
                 <p class="footer-tagline" style="margin-top:0.5rem;"><span data-key="footer_tagline_2">Recicladores profesionales de metales en Barcelona</span></p>
             </div>
@@ -689,9 +788,33 @@
         event.stopPropagation();
         const dropdown = document.getElementById('langDropdown');
         dropdown.classList.toggle('show');
+        const mobileDropdown = document.getElementById('langDropdownMobile');
+        if (mobileDropdown) mobileDropdown.classList.remove('show');
+    }
+
+    function toggleLanguageDropdownMobile(event) {
+        event.stopPropagation();
+        const dropdown = document.getElementById('langDropdownMobile');
+        dropdown.classList.toggle('show');
+        const desktopDropdown = document.getElementById('langDropdown');
+        if (desktopDropdown) desktopDropdown.classList.remove('show');
     }
 
     function selectLanguage(element, langCode) {
+        updateLanguageUI(element, langCode);
+        document.getElementById('langDropdown').classList.remove('show');
+        localStorage.setItem('metalday_language', langCode);
+        applyLanguage(langCode);
+    }
+
+    function selectLanguageMobile(element, langCode) {
+        updateLanguageUI(element, langCode);
+        document.getElementById('langDropdownMobile').classList.remove('show');
+        localStorage.setItem('metalday_language', langCode);
+        applyLanguage(langCode);
+    }
+
+    function updateLanguageUI(element, langCode) {
         const flag = element.getAttribute('data-flag');
         const name = element.getAttribute('data-name');
         
@@ -700,22 +823,27 @@
         document.getElementById('mobileSelectedFlag').textContent = flag;
         document.getElementById('mobileSelectedLanguage').textContent = name;
         
-        const allItems = document.querySelectorAll('.lang-item');
-        allItems.forEach(item => {
+        document.querySelectorAll('.lang-item').forEach(item => {
             item.classList.remove('active');
             const checkIcon = item.querySelector('.check-icon');
             if (checkIcon) checkIcon.remove();
         });
         
-        element.classList.add('active');
-        const checkIcon = document.createElement('i');
-        checkIcon.className = 'fas fa-check check-icon';
-        element.appendChild(checkIcon);
+        const desktopItem = document.querySelector(`#langDropdown .lang-item[data-lang="${langCode}"]`);
+        const mobileItem = document.querySelector(`#langDropdownMobile .lang-item[data-lang="${langCode}"]`);
         
-        document.getElementById('langDropdown').classList.remove('show');
-        
-        localStorage.setItem('metalday_language', langCode);
-        applyLanguage(langCode);
+        if (desktopItem) {
+            desktopItem.classList.add('active');
+            const check = document.createElement('i');
+            check.className = 'fas fa-check check-icon';
+            desktopItem.appendChild(check);
+        }
+        if (mobileItem) {
+            mobileItem.classList.add('active');
+            const check = document.createElement('i');
+            check.className = 'fas fa-check check-icon';
+            mobileItem.appendChild(check);
+        }
     }
 
     function toggleMobileMenu() {
@@ -778,11 +906,21 @@
         es: { 
             nav_inicio: "Inicio", nav_materiales: "Materiales", nav_catalogo: "Catálogo", nav_import: "Import/Export", nav_nosotros: "Nosotros", nav_contacto: "Contacto",
             hero_title: "Importación y Exportación", hero_subtitle: "Operando desde 1998 con autorización oficial", slogan: '"Cuidamos del planeta y del futuro de nuestros hijos"', 
-            stat_tons: "Toneladas/año", stat_countries: "Países destino", stat_years: "Años experiencia", stat_port: "Puerto BCN", 
+            stat_tons: "Toneladas/año", stat_countries: "Países destino", stat_years: "Años experiencia", stat_port: "Puerto BCN",
+            stat_desc_1: "Nuestra instalación de alta capacidad maneja volúmenes masivos con precisión y cuidado. Garantizamos una cadena de suministro estable para proyectos de cualquier escala, durante todo el año.",
+            stat_desc_2: "Nuestro alcance se extiende más allá de L'Hospitalet para servir a un mercado global en crecimiento. Navegamos por las regulaciones internacionales para ofrecer soluciones metálicas de calidad dondequiera que esté.",
+            stat_desc_3: "Décadas de liderazgo en la industria han refinado nuestro dominio técnico y fiabilidad. Combinamos experiencia tradicional con innovación moderna para resolver desafíos complejos de metalistería.",
+            stat_desc_4: "Situados en la puerta de entrada al Mediterráneo, ofrecemos una velocidad logística inigualable. Nuestra proximidad al Puerto de Barcelona significa exportaciones más rápidas y plazos de entrega significativamente reducidos.",
             auth_title: "Códigos de Autorización", auth_subtitle: "Verifique nuestras credenciales oficiales", verified: "Verificado", 
             auth1_label: "Gestor de residuos autorizado", auth2_label: "Productor de residuos autorizado", auth3_label: "Código Nima de Empresa", 
             cert_title: "Certificaciones Oficiales", cert_subtitle: "Entidades que avalan nuestra operación", 
             dest_title: "Destinos de Exportación", dest_subtitle: "Presencia global en los principales mercados",
+            dest_pk_name: "Pakistán", dest_pk_desc: "Logística Directa: Aprovechando rutas de envío optimizadas desde Barcelona a Karachi y Qasim. Enfoque de Mercado: Suministro de metal de alta calidad para apoyar los sectores de infraestructura y manufactura en rápido crecimiento de Pakistán.",
+            dest_ae_name: "EAU", dest_ae_desc: "Estándares Premium: Entrega de materiales especializados que cumplen con los rigurosos estándares arquitectónicos e industriales de Dubái y Abu Dabi. Tránsito Rápido: Gestión eficiente de contenedores que garantiza una entrega rápida en el corazón de los centros comerciales del Golfo.",
+            dest_in_name: "India", dest_in_desc: "Capacidad a Granel: Gestión de exportaciones a gran escala a los principales puertos industriales de India como Nhava Sheva y Mundra. Garantía de Calidad: Asegurando una pureza constante del material para satisfacer las altas demandas de la industria pesada y automotriz india.",
+            dest_tr_name: "Turquía", dest_tr_desc: "Conexión Mediterránea: Utilizando nuestra ubicación estratégica para ofrecer transporte marítimo rentable y rápido a través del Mediterráneo. Suministro Fiable: Un socio de confianza para los fabricantes turcos, ofreciendo volúmenes flexibles y entrega justo a tiempo.",
+            dest_eg_name: "Egipto", dest_eg_desc: "Comercio Estratégico: Uniendo Europa y el Norte de África con protocolos de exportación dedicados para el mercado egipcio. Manejo Experto: Navegando por las aduanas y documentación regional para garantizar un despacho sin problemas en Alejandría y Port Said.",
+            dest_cn_name: "China", dest_cn_desc: "Integración Global: Coordinando envíos de alto volumen al mayor centro de manufactura del mundo con precisión. Dominio del Cumplimiento: Estricta adhesión a los estándares internacionales de calidad y regulaciones de importación chinas para materias primas metálicas.",
             logistics_badge: "VENTAJA ESTRATÉGICA",
             logistics_heading: "Ventaja Logística",
             logistics_desc: "Nuestra ubicación estratégica a solo 15 minutos del Puerto de Barcelona nos permite ofrecer tiempos de respuesta rápidos y costes logísticos optimizados.",
@@ -818,11 +956,21 @@
         ca: { 
             nav_inicio: "Inici", nav_materiales: "Materials", nav_catalogo: "Catàleg", nav_import: "Import/Export", nav_nosotros: "Nosaltres", nav_contacto: "Contacte",
             hero_title: "Importació i Exportació", hero_subtitle: "Operant des de 1998 amb autorització oficial", slogan: '"Cuidem del planeta i del futur dels nostres fills"', 
-            stat_tons: "Tones/any", stat_countries: "Països destinació", stat_years: "Anys experiència", stat_port: "Port BCN", 
+            stat_tons: "Tones/any", stat_countries: "Països destinació", stat_years: "Anys experiència", stat_port: "Port BCN",
+            stat_desc_1: "La nostra instal·lació d'alta capacitat gestiona volums massius amb precisió i cura. Garantim una cadena de subministrament estable per a projectes de qualsevol escala, durant tot l'any.",
+            stat_desc_2: "El nostre abast s'estén més enllà de L'Hospitalet per servir un mercat global en creixement. Naveguem per les regulacions internacionals per oferir solucions metàl·liques de qualitat allà on siguis.",
+            stat_desc_3: "Dècades de lideratge en la indústria han refinat el nostre domini tècnic i fiabilitat. Combinem experiència tradicional amb innovació moderna per resoldre desafiaments complexos de metal·listeria.",
+            stat_desc_4: "Situats a la porta d'entrada al Mediterrani, oferim una velocitat logística inigualable. La nostra proximitat al Port de Barcelona significa exportacions més ràpides i terminis de lliurament significativament reduïts.",
             auth_title: "Codis d'Autorització", auth_subtitle: "Verifique les nostres credencials oficials", verified: "Verificat", 
             auth1_label: "Gestor de residus autoritzat", auth2_label: "Productor de residus autoritzat", auth3_label: "Codi Nima d'Empresa", 
             cert_title: "Certificacions Oficials", cert_subtitle: "Entitats que avalen la nostra operació", 
             dest_title: "Destins d'Exportació", dest_subtitle: "Presència global als principals mercats",
+            dest_pk_name: "Pakistan", dest_pk_desc: "Logística Directa: Aprofitant rutes d'enviament optimitzades des de Barcelona a Karachi i Qasim. Enfocament de Mercat: Subministrament de metall d'alta qualitat per donar suport als sectors d'infraestructura i manufactura en ràpid creixement del Pakistan.",
+            dest_ae_name: "EAU", dest_ae_desc: "Estàndards Premium: Lliurament de materials especialitzats que compleixen amb els rigorosos estàndards arquitectònics i industrials de Dubai i Abu Dhabi. Trànsit Ràpid: Gestió eficient de contenidors que garanteix un lliurament ràpid al cor dels centres comercials del Golf.",
+            dest_in_name: "Índia", dest_in_desc: "Capacitat a Granel: Gestió d'exportacions a gran escala als principals ports industrials de l'Índia com Nhava Sheva i Mundra. Garantia de Qualitat: Assegurant una puresa constant del material per satisfer les altes demandes de la indústria pesant i automotriu índia.",
+            dest_tr_name: "Turquia", dest_tr_desc: "Connexió Mediterrània: Utilitzant la nostra ubicació estratègica per oferir transport marítim rendible i ràpid a través del Mediterrani. Subministrament Fiable: Un soci de confiança per als fabricants turcs, oferint volums flexibles i lliurament just a temps.",
+            dest_eg_name: "Egipte", dest_eg_desc: "Comerç Estratègic: unint Europa i el Nord d'Àfrica amb protocols d'exportació dedicats per al mercat egipci. Maneig Expert: Navegant per les duanes i documentació regional per garantir un despatx sense problemes a Alexandria i Port Said.",
+            dest_cn_name: "Xina", dest_cn_desc: "Integració Global: Coordinant enviaments d'alt volum al major centre de manufactura del món amb precisió. Domini del Compliment: Estricta adhesió als estàndards internacionals de qualitat i regulacions d'importació xineses per a matèries primeres metàl·liques.",
             logistics_badge: "AVANTATGE ESTRATÈGICA",
             logistics_heading: "Avantatge Logístic",
             logistics_desc: "La nostra ubicació estratègica a només 15 minuts del Port de Barcelona ens permet oferir temps de resposta ràpids i costos logístics optimitzats.",
@@ -858,11 +1006,21 @@
         en: { 
             nav_inicio: "Home", nav_materiales: "Materials", nav_catalogo: "Catalog", nav_import: "Import/Export", nav_nosotros: "About Us", nav_contacto: "Contact",
             hero_title: "Import and Export", hero_subtitle: "Operating since 1998 with official authorization", slogan: '"We care for the planet and the future of our children"', 
-            stat_tons: "Tons/year", stat_countries: "Destination countries", stat_years: "Years experience", stat_port: "Port BCN", 
+            stat_tons: "Tons/year", stat_countries: "Destination countries", stat_years: "Years experience", stat_port: "Port BCN",
+            stat_desc_1: "Our high-capacity facility handles massive volumes with precision and care. We ensure a steady supply chain for projects of any scale, year-round.",
+            stat_desc_2: "Our reach extends far beyond L'Hospitalet to serve a growing global market. We navigate international regulations to deliver quality metal solutions wherever you are.",
+            stat_desc_3: "Decades of industry leadership have refined our technical mastery and reliability. We combine traditional expertise with modern innovation to solve complex metalwork challenges.",
+            stat_desc_4: "Located at the gateway of the Mediterranean, we offer unparalleled logistical speed. Our proximity to the Port of Barcelona means faster exports and significantly reduced lead times.",
             auth_title: "Authorization Codes", auth_subtitle: "Verify our official credentials", verified: "Verified", 
             auth1_label: "Authorized Waste Manager", auth2_label: "Authorized Waste Producer", auth3_label: "Company Nima Code", 
             cert_title: "Official Certifications", cert_subtitle: "Entities that endorse our operation", 
             dest_title: "Export Destinations", dest_subtitle: "Global presence in major markets",
+            dest_pk_name: "Pakistan", dest_pk_desc: "Direct Logistics: Leveraging streamlined shipping routes from Barcelona to Karachi and Qasim. Market Focus: Providing high-grade metal supply to support Pakistan's rapidly growing infrastructure and manufacturing sectors.",
+            dest_ae_name: "UAE", dest_ae_desc: "Premium Standards: Delivering specialized materials that meet the rigorous architectural and industrial benchmarks of Dubai and Abu Dhabi. Fast Transit: Efficient container management ensuring rapid delivery to the heart of the Gulf's trade hubs.",
+            dest_in_name: "India", dest_in_desc: "Bulk Capacity: Managing large-scale exports to India's major industrial ports like Nhava Sheva and Mundra. Quality Assurance: Ensuring consistent material purity to meet the high demands of the Indian heavy industry and automotive sectors.",
+            dest_tr_name: "Turkey", dest_tr_desc: "Mediterranean Connection: Utilizing our strategic location to provide cost-effective and fast sea-freight across the Mediterranean. Reliable Supply: A trusted partner for Turkish manufacturers, offering flexible volumes and just-in-time delivery.",
+            dest_eg_name: "Egypt", dest_eg_desc: "Strategic Trade: Bridging Europe and North Africa with dedicated export protocols for the Egyptian market. Expert Handling: Navigating regional customs and documentation to ensure seamless clearance at Alexandria and Port Said.",
+            dest_cn_name: "China", dest_cn_desc: "Global Integration: Coordinating high-volume shipments to the world's largest manufacturing hub with precision. Compliance Mastery: Strict adherence to international quality standards and Chinese import regulations for metal commodities.",
             logistics_badge: "STRATEGIC ADVANTAGE",
             logistics_heading: "Logistics Advantage",
             logistics_desc: "Our strategic location just 15 minutes from the Port of Barcelona allows us to offer fast response times and optimized logistics costs.",
@@ -909,8 +1067,14 @@
         { name: "Metal Day Logo", nameCa: "Metal Day Logo", nameEn: "Metal Day Logo", link: null, img: "images/certificate/metal-day-logo.jpg" }
     ];
 
-    const destinations = ["Pakistán", "EAU", "India", "Turquía", "Egipto", "China"];
-    const flags = { "Pakistán": "🇵🇰", "EAU": "🇦🇪", "India": "🇮🇳", "Turquía": "🇹🇷", "Egipto": "🇪🇬", "China": "🇨🇳" };
+    const destinations = [
+        { code: "PK", nameKey: "dest_pk_name", descKey: "dest_pk_desc", flag: "🇵🇰" },
+        { code: "AE", nameKey: "dest_ae_name", descKey: "dest_ae_desc", flag: "🇦🇪" },
+        { code: "IN", nameKey: "dest_in_name", descKey: "dest_in_desc", flag: "🇮🇳" },
+        { code: "TR", nameKey: "dest_tr_name", descKey: "dest_tr_desc", flag: "🇹🇷" },
+        { code: "EG", nameKey: "dest_eg_name", descKey: "dest_eg_desc", flag: "🇪🇬" },
+        { code: "CN", nameKey: "dest_cn_name", descKey: "dest_cn_desc", flag: "🇨🇳" }
+    ];
 
     let currentLang = "es";
 
@@ -920,7 +1084,6 @@
         const t = translations[currentLang];
         const viewCertText = t.cert_view_certificate || 'Ver Certificado →';
         const viewProfileText = t.cert_view_profile || 'Ver Perfil →';
-        const verifiedText = t.verified || 'Verificado';
         
         grid.innerHTML = certificates.map(cert => {
             let name = currentLang === 'ca' ? cert.nameCa : currentLang === 'en' ? cert.nameEn : cert.name;
@@ -929,7 +1092,7 @@
             let onClickAttr = link ? `onclick="window.open('${link}', '_blank')"` : `onclick="openModal('${imgPath}', '${name}')"`;
             return `<div class="cert-card" ${onClickAttr} style="cursor:pointer">
                         <div class="cert-image"><img src="${imgPath}" alt="${name}" onerror="this.src='https://placehold.co/100x80/2e7d32/white?text=${encodeURIComponent(name.split(' ')[0])}'"></div>
-                        <div class="cert-info"><div class="cert-title">${name}</div><div class="cert-badge">${verifiedText}</div>${link ? `<a href="${link}" target="_blank" class="cert-link" onclick="event.stopPropagation()">${viewProfileText}</a>` : `<span class="cert-link">${viewCertText}</span>`}</div>
+                        <div class="cert-info"><div class="cert-title">${name}</div>${link ? `<a href="${link}" target="_blank" class="cert-link" onclick="event.stopPropagation()">${viewProfileText}</a>` : `<span class="cert-link">${viewCertText}</span>`}</div>
                     </div>`;
         }).join('');
     }
@@ -937,7 +1100,15 @@
     function updateDestinations() {
         const grid = document.getElementById('destinationsGrid');
         if (!grid) return;
-        grid.innerHTML = destinations.map(d => `<div class="dest-card"><div class="dest-flag">${flags[d]}</div><div class="dest-name">${d}</div></div>`).join('');
+        const t = translations[currentLang];
+        grid.innerHTML = destinations.map(d => `
+            <div class="dest-card">
+                <div class="dest-flag">${d.flag}</div>
+                <div style="font-weight: 700; font-size: 0.9rem; margin-bottom: 0.25rem;">${d.code}</div>
+                <div class="dest-name" style="font-weight: 600; margin-bottom: 0.5rem;">${t[d.nameKey] || d.nameKey}</div>
+                <p style="font-size: 0.7rem; color: #6b7280; line-height: 1.4; transition: color 0.3s;">${t[d.descKey] || d.descKey}</p>
+            </div>
+        `).join('');
     }
 
     function openModal(imgSrc, certName) {
@@ -963,7 +1134,10 @@
         const savedLang = localStorage.getItem('metalday_language') || 'ES';
         const langItem = document.querySelector(`.lang-item[data-lang="${savedLang}"]`);
         if (langItem) {
-            selectLanguage(langItem, savedLang);
+            updateLanguageUI(langItem, savedLang);
+            applyLanguage(savedLang);
+        } else {
+            applyLanguage('es');
         }
         
         updateCertificates();
@@ -973,8 +1147,12 @@
     document.addEventListener('click', function(event) {
         if (!event.target.closest('.lang-selector')) {
             document.getElementById('langDropdown').classList.remove('show');
+            if (document.getElementById('langDropdownMobile')) {
+                document.getElementById('langDropdownMobile').classList.remove('show');
+            }
         }
     });
 </script>
 </body>
 </html>
+```
